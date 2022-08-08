@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7E517800289EA23E00B5127D /* Table_for_YouApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5177FF289EA23E00B5127D /* Table_for_YouApp.swift */; };
-		7E517802289EA23E00B5127D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E517801289EA23E00B5127D /* ContentView.swift */; };
 		7E517804289EA24000B5127D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E517803289EA24000B5127D /* Assets.xcassets */; };
 		7E517807289EA24000B5127D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E517806289EA24000B5127D /* Preview Assets.xcassets */; };
 		7E819AA0289FDE8200B67BAA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7E819A9F289FDE8200B67BAA /* Algorithms */; };
@@ -17,15 +16,150 @@
 		7E819AA7289FE33900B67BAA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7E819AA6289FE33900B67BAA /* FirebaseFirestore */; };
 		7E819AA9289FE33900B67BAA /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7E819AA8289FE33900B67BAA /* FirebaseFirestoreSwift */; };
 		7E819AAB289FE51B00B67BAA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E819AAA289FE51B00B67BAA /* GoogleService-Info.plist */; };
+		7E819ACB28A187D100B67BAA /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AAF28A187D100B67BAA /* Room.swift */; };
+		7E819ACC28A187D100B67BAA /* TableUIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AB128A187D100B67BAA /* TableUIFunctions.swift */; };
+		7E819ACD28A187D100B67BAA /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AB228A187D100B67BAA /* Table.swift */; };
+		7E819ACE28A187D100B67BAA /* Weekday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AB528A187D100B67BAA /* Weekday.swift */; };
+		7E819ACF28A187D100B67BAA /* Hours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AB628A187D100B67BAA /* Hours.swift */; };
+		7E819AD028A187D100B67BAA /* OpeningHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AB728A187D100B67BAA /* OpeningHours.swift */; };
+		7E819AD128A187D100B67BAA /* YelpRestaurantStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AB828A187D100B67BAA /* YelpRestaurantStore.swift */; };
+		7E819AD228A187D100B67BAA /* YelpRestaurants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AB928A187D100B67BAA /* YelpRestaurants.swift */; };
+		7E819AD328A187D100B67BAA /* YelpFusionAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819ABA28A187D100B67BAA /* YelpFusionAPI.swift */; };
+		7E819AD428A187D100B67BAA /* GeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819ABC28A187D100B67BAA /* GeoPoint.swift */; };
+		7E819AD528A187D100B67BAA /* GeohashBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819ABE28A187D100B67BAA /* GeohashBox.swift */; };
+		7E819AD628A187D100B67BAA /* Geohash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819ABF28A187D100B67BAA /* Geohash.swift */; };
+		7E819AD728A187D100B67BAA /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC128A187D100B67BAA /* Date.swift */; };
+		7E819AD828A187D100B67BAA /* SCNetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC228A187D100B67BAA /* SCNetworkConnection.swift */; };
+		7E819AD928A187D100B67BAA /* MKPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC328A187D100B67BAA /* MKPointAnnotation.swift */; };
+		7E819ADA28A187D100B67BAA /* CLLocationCoordinate2D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC428A187D100B67BAA /* CLLocationCoordinate2D.swift */; };
+		7E819ADB28A187D100B67BAA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC528A187D100B67BAA /* String.swift */; };
+		7E819ADC28A187D100B67BAA /* MKDirections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC628A187D100B67BAA /* MKDirections.swift */; };
+		7E819ADD28A187D100B67BAA /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC728A187D100B67BAA /* UserDefaults.swift */; };
+		7E819ADE28A187D100B67BAA /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC828A187D100B67BAA /* Double.swift */; };
+		7E819ADF28A187D100B67BAA /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC928A187D100B67BAA /* Reservation.swift */; };
+		7E819AE028A187D100B67BAA /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819ACA28A187D100B67BAA /* Restaurant.swift */; };
+		7E819AE928A1883D00B67BAA /* RestaurantRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AE228A1883D00B67BAA /* RestaurantRepository.swift */; };
+		7E819AEA28A1883D00B67BAA /* FirestoreReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AE428A1883D00B67BAA /* FirestoreReferences.swift */; };
+		7E819AEB28A1883D00B67BAA /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AE628A1883D00B67BAA /* Auth.swift */; };
+		7E819AED28A1883D00B67BAA /* RoomRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AE828A1883D00B67BAA /* RoomRespository.swift */; };
+		7E819B2C28A188EE00B67BAA /* RestaurantSearchSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AF128A188EE00B67BAA /* RestaurantSearchSheet.swift */; };
+		7E819B2D28A188EE00B67BAA /* RestaurantSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AF228A188EE00B67BAA /* RestaurantSearchView.swift */; };
+		7E819B2E28A188EE00B67BAA /* RestaurantAnnotationsMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AF428A188EE00B67BAA /* RestaurantAnnotationsMapView.swift */; };
+		7E819B2F28A188EE00B67BAA /* RestaurantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AF528A188EE00B67BAA /* RestaurantAnnotation.swift */; };
+		7E819B3028A188EE00B67BAA /* RestaurantAnnotationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AF628A188EE00B67BAA /* RestaurantAnnotationViews.swift */; };
+		7E819B3128A188EE00B67BAA /* ShortRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AF928A188EE00B67BAA /* ShortRatingView.swift */; };
+		7E819B3228A188EE00B67BAA /* InsetScrollViewSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AFA28A188EE00B67BAA /* InsetScrollViewSection.swift */; };
+		7E819B3328A188EE00B67BAA /* ShortPriceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AFB28A188EE00B67BAA /* ShortPriceView.swift */; };
+		7E819B3428A188EE00B67BAA /* YelpRestaurantDetailRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AFD28A188EE00B67BAA /* YelpRestaurantDetailRowView.swift */; };
+		7E819B3528A188EE00B67BAA /* YelpRestaurantDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AFF28A188EE00B67BAA /* YelpRestaurantDetailSheet.swift */; };
+		7E819B3628A188EE00B67BAA /* OpeningHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0228A188EE00B67BAA /* OpeningHoursView.swift */; };
+		7E819B3728A188EE00B67BAA /* DayHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0328A188EE00B67BAA /* DayHoursView.swift */; };
+		7E819B3828A188EE00B67BAA /* OverviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0428A188EE00B67BAA /* OverviewRowView.swift */; };
+		7E819B3928A188EE00B67BAA /* CreditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0528A188EE00B67BAA /* CreditView.swift */; };
+		7E819B3A28A188EE00B67BAA /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0628A188EE00B67BAA /* ContactView.swift */; };
+		7E819B3B28A188EE00B67BAA /* MapAndAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0828A188EE00B67BAA /* MapAndAddressView.swift */; };
+		7E819B3C28A188EE00B67BAA /* RouteMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0928A188EE00B67BAA /* RouteMapView.swift */; };
+		7E819B3D28A188EE00B67BAA /* PhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0A28A188EE00B67BAA /* PhotosView.swift */; };
+		7E819B3E28A188EE00B67BAA /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0B28A188EE00B67BAA /* ReviewView.swift */; };
+		7E819B3F28A188EE00B67BAA /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0D28A188EE00B67BAA /* RoomView.swift */; };
+		7E819B4028A188EE00B67BAA /* RoomRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0E28A188EE00B67BAA /* RoomRowView.swift */; };
+		7E819B4128A188EE00B67BAA /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1028A188EE00B67BAA /* TableView.swift */; };
+		7E819B4228A188EE00B67BAA /* RoomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1128A188EE00B67BAA /* RoomListView.swift */; };
+		7E819B4328A188EE00B67BAA /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1528A188EE00B67BAA /* ReservationViewModel.swift */; };
+		7E819B4428A188EE00B67BAA /* ReservationConfirmingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1628A188EE00B67BAA /* ReservationConfirmingView.swift */; };
+		7E819B4528A188EE00B67BAA /* ReservationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1728A188EE00B67BAA /* ReservationInfoView.swift */; };
+		7E819B4628A188EE00B67BAA /* NewReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1828A188EE00B67BAA /* NewReservationView.swift */; };
+		7E819B4728A188EE00B67BAA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1A28A188EE00B67BAA /* Image.swift */; };
+		7E819B4828A188EE00B67BAA /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1B28A188EE00B67BAA /* UIApplication.swift */; };
+		7E819B4928A188EE00B67BAA /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1D28A188EE00B67BAA /* LocationFetcher.swift */; };
+		7E819B4A28A188EE00B67BAA /* SafeAreaBottomInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1F28A188EE00B67BAA /* SafeAreaBottomInset.swift */; };
+		7E819B4B28A188EE00B67BAA /* MagnificationGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2028A188EE00B67BAA /* MagnificationGesture.swift */; };
+		7E819B4C28A188EE00B67BAA /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2128A188EE00B67BAA /* BottomSheet.swift */; };
+		7E819B4D28A188EE00B67BAA /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2428A188EE00B67BAA /* LocationSearcher.swift */; };
+		7E819B4E28A188EE00B67BAA /* MKLocalSearchCompletionPlacemark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2528A188EE00B67BAA /* MKLocalSearchCompletionPlacemark.swift */; };
+		7E819B4F28A188EE00B67BAA /* LocationSearchSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2728A188EE00B67BAA /* LocationSearchSheet.swift */; };
+		7E819B5028A188EE00B67BAA /* LocationSearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2828A188EE00B67BAA /* LocationSearchButton.swift */; };
+		7E819B5128A188EE00B67BAA /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2928A188EE00B67BAA /* SearchField.swift */; };
+		7E819B5228A188EE00B67BAA /* HalfRoundedRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2A28A188EE00B67BAA /* HalfRoundedRectangle.swift */; };
+		7E819B5328A188EE00B67BAA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2B28A188EE00B67BAA /* ContentView.swift */; };
+		7E819B5628A1891400B67BAA /* YelpExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B5428A1891400B67BAA /* YelpExamples.swift */; };
+		7E819B5728A1891400B67BAA /* RestaurantExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B5528A1891400B67BAA /* RestaurantExamples.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7E5177FC289EA23E00B5127D /* Table for You.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Table for You.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5177FF289EA23E00B5127D /* Table_for_YouApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table_for_YouApp.swift; sourceTree = "<group>"; };
-		7E517801289EA23E00B5127D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7E517803289EA24000B5127D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E517806289EA24000B5127D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7E819AAA289FE51B00B67BAA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7E819AAF28A187D100B67BAA /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		7E819AB128A187D100B67BAA /* TableUIFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableUIFunctions.swift; sourceTree = "<group>"; };
+		7E819AB228A187D100B67BAA /* Table.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		7E819AB528A187D100B67BAA /* Weekday.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weekday.swift; sourceTree = "<group>"; };
+		7E819AB628A187D100B67BAA /* Hours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hours.swift; sourceTree = "<group>"; };
+		7E819AB728A187D100B67BAA /* OpeningHours.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningHours.swift; sourceTree = "<group>"; };
+		7E819AB828A187D100B67BAA /* YelpRestaurantStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpRestaurantStore.swift; sourceTree = "<group>"; };
+		7E819AB928A187D100B67BAA /* YelpRestaurants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpRestaurants.swift; sourceTree = "<group>"; };
+		7E819ABA28A187D100B67BAA /* YelpFusionAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpFusionAPI.swift; sourceTree = "<group>"; };
+		7E819ABC28A187D100B67BAA /* GeoPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeoPoint.swift; sourceTree = "<group>"; };
+		7E819ABE28A187D100B67BAA /* GeohashBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeohashBox.swift; sourceTree = "<group>"; };
+		7E819ABF28A187D100B67BAA /* Geohash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geohash.swift; sourceTree = "<group>"; };
+		7E819AC128A187D100B67BAA /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		7E819AC228A187D100B67BAA /* SCNetworkConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCNetworkConnection.swift; sourceTree = "<group>"; };
+		7E819AC328A187D100B67BAA /* MKPointAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKPointAnnotation.swift; sourceTree = "<group>"; };
+		7E819AC428A187D100B67BAA /* CLLocationCoordinate2D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2D.swift; sourceTree = "<group>"; };
+		7E819AC528A187D100B67BAA /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		7E819AC628A187D100B67BAA /* MKDirections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKDirections.swift; sourceTree = "<group>"; };
+		7E819AC728A187D100B67BAA /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
+		7E819AC828A187D100B67BAA /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		7E819AC928A187D100B67BAA /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		7E819ACA28A187D100B67BAA /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		7E819AE228A1883D00B67BAA /* RestaurantRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantRepository.swift; sourceTree = "<group>"; };
+		7E819AE428A1883D00B67BAA /* FirestoreReferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreReferences.swift; sourceTree = "<group>"; };
+		7E819AE628A1883D00B67BAA /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		7E819AE828A1883D00B67BAA /* RoomRespository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomRespository.swift; sourceTree = "<group>"; };
+		7E819AF128A188EE00B67BAA /* RestaurantSearchSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantSearchSheet.swift; sourceTree = "<group>"; };
+		7E819AF228A188EE00B67BAA /* RestaurantSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantSearchView.swift; sourceTree = "<group>"; };
+		7E819AF428A188EE00B67BAA /* RestaurantAnnotationsMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotationsMapView.swift; sourceTree = "<group>"; };
+		7E819AF528A188EE00B67BAA /* RestaurantAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotation.swift; sourceTree = "<group>"; };
+		7E819AF628A188EE00B67BAA /* RestaurantAnnotationViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantAnnotationViews.swift; sourceTree = "<group>"; };
+		7E819AF928A188EE00B67BAA /* ShortRatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortRatingView.swift; sourceTree = "<group>"; };
+		7E819AFA28A188EE00B67BAA /* InsetScrollViewSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetScrollViewSection.swift; sourceTree = "<group>"; };
+		7E819AFB28A188EE00B67BAA /* ShortPriceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortPriceView.swift; sourceTree = "<group>"; };
+		7E819AFD28A188EE00B67BAA /* YelpRestaurantDetailRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpRestaurantDetailRowView.swift; sourceTree = "<group>"; };
+		7E819AFF28A188EE00B67BAA /* YelpRestaurantDetailSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpRestaurantDetailSheet.swift; sourceTree = "<group>"; };
+		7E819B0228A188EE00B67BAA /* OpeningHoursView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningHoursView.swift; sourceTree = "<group>"; };
+		7E819B0328A188EE00B67BAA /* DayHoursView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayHoursView.swift; sourceTree = "<group>"; };
+		7E819B0428A188EE00B67BAA /* OverviewRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverviewRowView.swift; sourceTree = "<group>"; };
+		7E819B0528A188EE00B67BAA /* CreditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreditView.swift; sourceTree = "<group>"; };
+		7E819B0628A188EE00B67BAA /* ContactView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
+		7E819B0828A188EE00B67BAA /* MapAndAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAndAddressView.swift; sourceTree = "<group>"; };
+		7E819B0928A188EE00B67BAA /* RouteMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteMapView.swift; sourceTree = "<group>"; };
+		7E819B0A28A188EE00B67BAA /* PhotosView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosView.swift; sourceTree = "<group>"; };
+		7E819B0B28A188EE00B67BAA /* ReviewView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
+		7E819B0D28A188EE00B67BAA /* RoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
+		7E819B0E28A188EE00B67BAA /* RoomRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomRowView.swift; sourceTree = "<group>"; };
+		7E819B1028A188EE00B67BAA /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		7E819B1128A188EE00B67BAA /* RoomListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListView.swift; sourceTree = "<group>"; };
+		7E819B1528A188EE00B67BAA /* ReservationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
+		7E819B1628A188EE00B67BAA /* ReservationConfirmingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationConfirmingView.swift; sourceTree = "<group>"; };
+		7E819B1728A188EE00B67BAA /* ReservationInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationInfoView.swift; sourceTree = "<group>"; };
+		7E819B1828A188EE00B67BAA /* NewReservationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewReservationView.swift; sourceTree = "<group>"; };
+		7E819B1A28A188EE00B67BAA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		7E819B1B28A188EE00B67BAA /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		7E819B1D28A188EE00B67BAA /* LocationFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
+		7E819B1F28A188EE00B67BAA /* SafeAreaBottomInset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeAreaBottomInset.swift; sourceTree = "<group>"; };
+		7E819B2028A188EE00B67BAA /* MagnificationGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagnificationGesture.swift; sourceTree = "<group>"; };
+		7E819B2128A188EE00B67BAA /* BottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
+		7E819B2428A188EE00B67BAA /* LocationSearcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
+		7E819B2528A188EE00B67BAA /* MKLocalSearchCompletionPlacemark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKLocalSearchCompletionPlacemark.swift; sourceTree = "<group>"; };
+		7E819B2728A188EE00B67BAA /* LocationSearchSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchSheet.swift; sourceTree = "<group>"; };
+		7E819B2828A188EE00B67BAA /* LocationSearchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchButton.swift; sourceTree = "<group>"; };
+		7E819B2928A188EE00B67BAA /* SearchField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		7E819B2A28A188EE00B67BAA /* HalfRoundedRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfRoundedRectangle.swift; sourceTree = "<group>"; };
+		7E819B2B28A188EE00B67BAA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7E819B5428A1891400B67BAA /* YelpExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpExamples.swift; sourceTree = "<group>"; };
+		7E819B5528A1891400B67BAA /* RestaurantExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantExamples.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +197,10 @@
 		7E5177FE289EA23E00B5127D /* Table for You */ = {
 			isa = PBXGroup;
 			children = (
-				7E5177FF289EA23E00B5127D /* Table_for_YouApp.swift */,
-				7E517801289EA23E00B5127D /* ContentView.swift */,
+				7E819AAC28A1873500B67BAA /* App */,
+				7E819AAD28A187D100B67BAA /* Model */,
+				7E819AE128A1883D00B67BAA /* Firebase */,
+				7E819AEE28A188EE00B67BAA /* Views */,
 				7E517803289EA24000B5127D /* Assets.xcassets */,
 				7E819AAA289FE51B00B67BAA /* GoogleService-Info.plist */,
 				7E517805289EA24000B5127D /* Preview Content */,
@@ -76,8 +212,345 @@
 			isa = PBXGroup;
 			children = (
 				7E517806289EA24000B5127D /* Preview Assets.xcassets */,
+				7E819B5528A1891400B67BAA /* RestaurantExamples.swift */,
+				7E819B5428A1891400B67BAA /* YelpExamples.swift */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7E819AAC28A1873500B67BAA /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7E5177FF289EA23E00B5127D /* Table_for_YouApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7E819AAD28A187D100B67BAA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7E819ACA28A187D100B67BAA /* Restaurant.swift */,
+				7E819AC928A187D100B67BAA /* Reservation.swift */,
+				7E819AB328A187D100B67BAA /* Yelp */,
+				7E819AAE28A187D100B67BAA /* Room */,
+				7E819ABB28A187D100B67BAA /* GeoPoint */,
+				7E819AC028A187D100B67BAA /* Extensions */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7E819AAE28A187D100B67BAA /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AAF28A187D100B67BAA /* Room.swift */,
+				7E819AB028A187D100B67BAA /* Table */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		7E819AB028A187D100B67BAA /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AB128A187D100B67BAA /* TableUIFunctions.swift */,
+				7E819AB228A187D100B67BAA /* Table.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		7E819AB328A187D100B67BAA /* Yelp */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AB428A187D100B67BAA /* OpeningHours */,
+				7E819AB828A187D100B67BAA /* YelpRestaurantStore.swift */,
+				7E819AB928A187D100B67BAA /* YelpRestaurants.swift */,
+				7E819ABA28A187D100B67BAA /* YelpFusionAPI.swift */,
+			);
+			path = Yelp;
+			sourceTree = "<group>";
+		};
+		7E819AB428A187D100B67BAA /* OpeningHours */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AB528A187D100B67BAA /* Weekday.swift */,
+				7E819AB628A187D100B67BAA /* Hours.swift */,
+				7E819AB728A187D100B67BAA /* OpeningHours.swift */,
+			);
+			path = OpeningHours;
+			sourceTree = "<group>";
+		};
+		7E819ABB28A187D100B67BAA /* GeoPoint */ = {
+			isa = PBXGroup;
+			children = (
+				7E819ABC28A187D100B67BAA /* GeoPoint.swift */,
+				7E819ABD28A187D100B67BAA /* GeoHash */,
+			);
+			path = GeoPoint;
+			sourceTree = "<group>";
+		};
+		7E819ABD28A187D100B67BAA /* GeoHash */ = {
+			isa = PBXGroup;
+			children = (
+				7E819ABE28A187D100B67BAA /* GeohashBox.swift */,
+				7E819ABF28A187D100B67BAA /* Geohash.swift */,
+			);
+			path = GeoHash;
+			sourceTree = "<group>";
+		};
+		7E819AC028A187D100B67BAA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AC128A187D100B67BAA /* Date.swift */,
+				7E819AC228A187D100B67BAA /* SCNetworkConnection.swift */,
+				7E819AC328A187D100B67BAA /* MKPointAnnotation.swift */,
+				7E819AC428A187D100B67BAA /* CLLocationCoordinate2D.swift */,
+				7E819AC528A187D100B67BAA /* String.swift */,
+				7E819AC628A187D100B67BAA /* MKDirections.swift */,
+				7E819AC728A187D100B67BAA /* UserDefaults.swift */,
+				7E819AC828A187D100B67BAA /* Double.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7E819AE128A1883D00B67BAA /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AE228A1883D00B67BAA /* RestaurantRepository.swift */,
+				7E819AE828A1883D00B67BAA /* RoomRespository.swift */,
+				7E819AE328A1883D00B67BAA /* References */,
+				7E819AE528A1883D00B67BAA /* Extensions */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		7E819AE328A1883D00B67BAA /* References */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AE428A1883D00B67BAA /* FirestoreReferences.swift */,
+			);
+			path = References;
+			sourceTree = "<group>";
+		};
+		7E819AE528A1883D00B67BAA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AE628A1883D00B67BAA /* Auth.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7E819AEE28A188EE00B67BAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B2B28A188EE00B67BAA /* ContentView.swift */,
+				7E819AEF28A188EE00B67BAA /* RestaurantSearch */,
+				7E819AF728A188EE00B67BAA /* YelpRestaurant */,
+				7E819B0C28A188EE00B67BAA /* Room */,
+				7E819B1228A188EE00B67BAA /* Reservation */,
+				7E819B1C28A188EE00B67BAA /* General Components */,
+				7E819B1928A188EE00B67BAA /* Extensions */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7E819AEF28A188EE00B67BAA /* RestaurantSearch */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AF028A188EE00B67BAA /* SearchSheet */,
+				7E819AF228A188EE00B67BAA /* RestaurantSearchView.swift */,
+				7E819AF328A188EE00B67BAA /* Map */,
+			);
+			path = RestaurantSearch;
+			sourceTree = "<group>";
+		};
+		7E819AF028A188EE00B67BAA /* SearchSheet */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AF128A188EE00B67BAA /* RestaurantSearchSheet.swift */,
+			);
+			path = SearchSheet;
+			sourceTree = "<group>";
+		};
+		7E819AF328A188EE00B67BAA /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AF428A188EE00B67BAA /* RestaurantAnnotationsMapView.swift */,
+				7E819AF528A188EE00B67BAA /* RestaurantAnnotation.swift */,
+				7E819AF628A188EE00B67BAA /* RestaurantAnnotationViews.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		7E819AF728A188EE00B67BAA /* YelpRestaurant */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AF828A188EE00B67BAA /* Components */,
+				7E819AFC28A188EE00B67BAA /* Row */,
+				7E819AFE28A188EE00B67BAA /* Detail */,
+			);
+			path = YelpRestaurant;
+			sourceTree = "<group>";
+		};
+		7E819AF828A188EE00B67BAA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AF928A188EE00B67BAA /* ShortRatingView.swift */,
+				7E819AFA28A188EE00B67BAA /* InsetScrollViewSection.swift */,
+				7E819AFB28A188EE00B67BAA /* ShortPriceView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7E819AFC28A188EE00B67BAA /* Row */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AFD28A188EE00B67BAA /* YelpRestaurantDetailRowView.swift */,
+			);
+			path = Row;
+			sourceTree = "<group>";
+		};
+		7E819AFE28A188EE00B67BAA /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				7E819AFF28A188EE00B67BAA /* YelpRestaurantDetailSheet.swift */,
+				7E819B0028A188EE00B67BAA /* Components */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		7E819B0028A188EE00B67BAA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B0128A188EE00B67BAA /* OpeningHours */,
+				7E819B0428A188EE00B67BAA /* OverviewRowView.swift */,
+				7E819B0528A188EE00B67BAA /* CreditView.swift */,
+				7E819B0628A188EE00B67BAA /* ContactView.swift */,
+				7E819B0728A188EE00B67BAA /* Map */,
+				7E819B0A28A188EE00B67BAA /* PhotosView.swift */,
+				7E819B0B28A188EE00B67BAA /* ReviewView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7E819B0128A188EE00B67BAA /* OpeningHours */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B0228A188EE00B67BAA /* OpeningHoursView.swift */,
+				7E819B0328A188EE00B67BAA /* DayHoursView.swift */,
+			);
+			path = OpeningHours;
+			sourceTree = "<group>";
+		};
+		7E819B0728A188EE00B67BAA /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B0828A188EE00B67BAA /* MapAndAddressView.swift */,
+				7E819B0928A188EE00B67BAA /* RouteMapView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		7E819B0C28A188EE00B67BAA /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B0D28A188EE00B67BAA /* RoomView.swift */,
+				7E819B0E28A188EE00B67BAA /* RoomRowView.swift */,
+				7E819B0F28A188EE00B67BAA /* Components */,
+				7E819B1128A188EE00B67BAA /* RoomListView.swift */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		7E819B0F28A188EE00B67BAA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B1028A188EE00B67BAA /* TableView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7E819B1228A188EE00B67BAA /* Reservation */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B1328A188EE00B67BAA /* NewReservation */,
+			);
+			path = Reservation;
+			sourceTree = "<group>";
+		};
+		7E819B1328A188EE00B67BAA /* NewReservation */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B1428A188EE00B67BAA /* ViewModel */,
+				7E819B1628A188EE00B67BAA /* ReservationConfirmingView.swift */,
+				7E819B1728A188EE00B67BAA /* ReservationInfoView.swift */,
+				7E819B1828A188EE00B67BAA /* NewReservationView.swift */,
+			);
+			path = NewReservation;
+			sourceTree = "<group>";
+		};
+		7E819B1428A188EE00B67BAA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B1528A188EE00B67BAA /* ReservationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7E819B1928A188EE00B67BAA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B1A28A188EE00B67BAA /* Image.swift */,
+				7E819B1B28A188EE00B67BAA /* UIApplication.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7E819B1C28A188EE00B67BAA /* General Components */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B1D28A188EE00B67BAA /* LocationFetcher.swift */,
+				7E819B1E28A188EE00B67BAA /* Modifiers */,
+				7E819B2128A188EE00B67BAA /* BottomSheet.swift */,
+				7E819B2228A188EE00B67BAA /* LocationSearching */,
+				7E819B2928A188EE00B67BAA /* SearchField.swift */,
+				7E819B2A28A188EE00B67BAA /* HalfRoundedRectangle.swift */,
+			);
+			path = "General Components";
+			sourceTree = "<group>";
+		};
+		7E819B1E28A188EE00B67BAA /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B1F28A188EE00B67BAA /* SafeAreaBottomInset.swift */,
+				7E819B2028A188EE00B67BAA /* MagnificationGesture.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		7E819B2228A188EE00B67BAA /* LocationSearching */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B2328A188EE00B67BAA /* Model */,
+				7E819B2628A188EE00B67BAA /* Views */,
+			);
+			path = LocationSearching;
+			sourceTree = "<group>";
+		};
+		7E819B2328A188EE00B67BAA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B2428A188EE00B67BAA /* LocationSearcher.swift */,
+				7E819B2528A188EE00B67BAA /* MKLocalSearchCompletionPlacemark.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7E819B2628A188EE00B67BAA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7E819B2728A188EE00B67BAA /* LocationSearchSheet.swift */,
+				7E819B2828A188EE00B67BAA /* LocationSearchButton.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,8 +635,75 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E517802289EA23E00B5127D /* ContentView.swift in Sources */,
+				7E819B3B28A188EE00B67BAA /* MapAndAddressView.swift in Sources */,
+				7E819B3028A188EE00B67BAA /* RestaurantAnnotationViews.swift in Sources */,
+				7E819ADB28A187D100B67BAA /* String.swift in Sources */,
+				7E819AD228A187D100B67BAA /* YelpRestaurants.swift in Sources */,
+				7E819AD728A187D100B67BAA /* Date.swift in Sources */,
+				7E819B2C28A188EE00B67BAA /* RestaurantSearchSheet.swift in Sources */,
+				7E819B3328A188EE00B67BAA /* ShortPriceView.swift in Sources */,
+				7E819AD328A187D100B67BAA /* YelpFusionAPI.swift in Sources */,
+				7E819ACC28A187D100B67BAA /* TableUIFunctions.swift in Sources */,
+				7E819B5228A188EE00B67BAA /* HalfRoundedRectangle.swift in Sources */,
+				7E819B4228A188EE00B67BAA /* RoomListView.swift in Sources */,
+				7E819B4E28A188EE00B67BAA /* MKLocalSearchCompletionPlacemark.swift in Sources */,
+				7E819B3428A188EE00B67BAA /* YelpRestaurantDetailRowView.swift in Sources */,
+				7E819ADD28A187D100B67BAA /* UserDefaults.swift in Sources */,
+				7E819ADC28A187D100B67BAA /* MKDirections.swift in Sources */,
+				7E819AE928A1883D00B67BAA /* RestaurantRepository.swift in Sources */,
+				7E819AD828A187D100B67BAA /* SCNetworkConnection.swift in Sources */,
+				7E819B3928A188EE00B67BAA /* CreditView.swift in Sources */,
+				7E819ACD28A187D100B67BAA /* Table.swift in Sources */,
+				7E819B4B28A188EE00B67BAA /* MagnificationGesture.swift in Sources */,
+				7E819AD528A187D100B67BAA /* GeohashBox.swift in Sources */,
+				7E819B3728A188EE00B67BAA /* DayHoursView.swift in Sources */,
+				7E819B4028A188EE00B67BAA /* RoomRowView.swift in Sources */,
+				7E819B4928A188EE00B67BAA /* LocationFetcher.swift in Sources */,
+				7E819AD928A187D100B67BAA /* MKPointAnnotation.swift in Sources */,
+				7E819B4428A188EE00B67BAA /* ReservationConfirmingView.swift in Sources */,
+				7E819B3128A188EE00B67BAA /* ShortRatingView.swift in Sources */,
+				7E819B4A28A188EE00B67BAA /* SafeAreaBottomInset.swift in Sources */,
+				7E819AD628A187D100B67BAA /* Geohash.swift in Sources */,
+				7E819B4C28A188EE00B67BAA /* BottomSheet.swift in Sources */,
+				7E819AD128A187D100B67BAA /* YelpRestaurantStore.swift in Sources */,
+				7E819ACE28A187D100B67BAA /* Weekday.swift in Sources */,
+				7E819B3D28A188EE00B67BAA /* PhotosView.swift in Sources */,
+				7E819B4828A188EE00B67BAA /* UIApplication.swift in Sources */,
+				7E819B4628A188EE00B67BAA /* NewReservationView.swift in Sources */,
+				7E819AEA28A1883D00B67BAA /* FirestoreReferences.swift in Sources */,
+				7E819B3C28A188EE00B67BAA /* RouteMapView.swift in Sources */,
+				7E819B3828A188EE00B67BAA /* OverviewRowView.swift in Sources */,
+				7E819B3528A188EE00B67BAA /* YelpRestaurantDetailSheet.swift in Sources */,
+				7E819B3228A188EE00B67BAA /* InsetScrollViewSection.swift in Sources */,
+				7E819ADA28A187D100B67BAA /* CLLocationCoordinate2D.swift in Sources */,
+				7E819B4128A188EE00B67BAA /* TableView.swift in Sources */,
+				7E819AEB28A1883D00B67BAA /* Auth.swift in Sources */,
+				7E819B4D28A188EE00B67BAA /* LocationSearcher.swift in Sources */,
+				7E819ADF28A187D100B67BAA /* Reservation.swift in Sources */,
+				7E819AD428A187D100B67BAA /* GeoPoint.swift in Sources */,
+				7E819B4528A188EE00B67BAA /* ReservationInfoView.swift in Sources */,
+				7E819B3F28A188EE00B67BAA /* RoomView.swift in Sources */,
+				7E819B3E28A188EE00B67BAA /* ReviewView.swift in Sources */,
+				7E819B5128A188EE00B67BAA /* SearchField.swift in Sources */,
+				7E819B5628A1891400B67BAA /* YelpExamples.swift in Sources */,
+				7E819B5728A1891400B67BAA /* RestaurantExamples.swift in Sources */,
+				7E819B4328A188EE00B67BAA /* ReservationViewModel.swift in Sources */,
+				7E819B3628A188EE00B67BAA /* OpeningHoursView.swift in Sources */,
+				7E819B5028A188EE00B67BAA /* LocationSearchButton.swift in Sources */,
+				7E819ACF28A187D100B67BAA /* Hours.swift in Sources */,
 				7E517800289EA23E00B5127D /* Table_for_YouApp.swift in Sources */,
+				7E819AED28A1883D00B67BAA /* RoomRespository.swift in Sources */,
+				7E819B2F28A188EE00B67BAA /* RestaurantAnnotation.swift in Sources */,
+				7E819B5328A188EE00B67BAA /* ContentView.swift in Sources */,
+				7E819B2D28A188EE00B67BAA /* RestaurantSearchView.swift in Sources */,
+				7E819B4728A188EE00B67BAA /* Image.swift in Sources */,
+				7E819AE028A187D100B67BAA /* Restaurant.swift in Sources */,
+				7E819B3A28A188EE00B67BAA /* ContactView.swift in Sources */,
+				7E819AD028A187D100B67BAA /* OpeningHours.swift in Sources */,
+				7E819B4F28A188EE00B67BAA /* LocationSearchSheet.swift in Sources */,
+				7E819ADE28A187D100B67BAA /* Double.swift in Sources */,
+				7E819ACB28A187D100B67BAA /* Room.swift in Sources */,
+				7E819B2E28A188EE00B67BAA /* RestaurantAnnotationsMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
