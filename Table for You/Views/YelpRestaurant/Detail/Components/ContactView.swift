@@ -18,7 +18,7 @@ extension YelpRestaurantDetailSheet {
                                 .font(.subheadline)
                             
                             Text(displayPhone)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.accentColor)
                         }
                         
                         Spacer()

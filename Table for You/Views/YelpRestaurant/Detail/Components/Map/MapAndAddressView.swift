@@ -47,7 +47,7 @@ extension YelpRestaurantDetailSheet {
                         Spacer()
                         
                         Image(systemName: "arrow.triangle.turn.up.right.circle.fill")
-                            .foregroundStyle(.blue)
+                            .foregroundColor(.accentColor)
                             .font(.title2)
                     }
                     

@@ -62,7 +62,7 @@ struct LocationSearchSheet: View {
             submitOrDone()
         }
         .focused($searchFieldIsFocused)
-        .foregroundColor(viewModel.userLocationSelected ? .blue : .primary)
+        .foregroundColor(viewModel.userLocationSelected ? .accentColor : .primary)
         .task {
             searchFieldIsFocused = true
         }
@@ -85,7 +85,7 @@ struct LocationSearchSheet: View {
                         .bold()
                 }
             }
-            .foregroundColor(viewModel.locationServiceAvailable ? .blue : .secondary)
+            .foregroundColor(viewModel.locationServiceAvailable ? .accentColor : .secondary)
         }
         .disabled(!viewModel.locationServiceAvailable)
     }

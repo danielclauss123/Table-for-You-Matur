@@ -24,7 +24,7 @@ struct RoomView: View {
                         }
                     }
                     .frame(width: room.size.width * scale, height: room.size.height * scale)
-                    .border(Color.blue)
+                    .border(Color.accentColor)
                 }
                 .magnificationGesture(scale: $scale, maximumScale: 5, minimumScale: 0.2)
                 .task {

@@ -16,7 +16,7 @@ struct LocationSearchButton: View {
             Label(locationSearcher.locationText, systemImage: "location")
                 .symbolVariant(locationSearcher.coordinate == nil ? .slash : .none)
                 .font(.subheadline.bold())
-                .foregroundColor(locationSearcher.coordinate == nil ? .secondary : (locationSearcher.userLocationSelected ? .blue : .primary))
+                .foregroundColor(locationSearcher.coordinate == nil ? .secondary : (locationSearcher.userLocationSelected ? .accentColor : .primary))
         }
         .lineLimit(1)
         .sheet(isPresented: $showingLocationSearchSheet) {

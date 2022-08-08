@@ -4,6 +4,8 @@ import FirebaseAuth
 
 @main
 struct Table_for_YouApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
