@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E155D1B28A27AAC00ED9C79 /* ReservationConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E155D1A28A27AAC00ED9C79 /* ReservationConfirmationView.swift */; };
+		7E155D1D28A27C1800ED9C79 /* Reservation-Firestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E155D1C28A27C1800ED9C79 /* Reservation-Firestore.swift */; };
 		7E517800289EA23E00B5127D /* Table_for_YouApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5177FF289EA23E00B5127D /* Table_for_YouApp.swift */; };
 		7E517804289EA24000B5127D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E517803289EA24000B5127D /* Assets.xcassets */; };
 		7E517807289EA24000B5127D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E517806289EA24000B5127D /* Preview Assets.xcassets */; };
@@ -66,8 +68,6 @@
 		7E819B4128A188EE00B67BAA /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1028A188EE00B67BAA /* TableView.swift */; };
 		7E819B4228A188EE00B67BAA /* RoomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1128A188EE00B67BAA /* RoomListView.swift */; };
 		7E819B4328A188EE00B67BAA /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1528A188EE00B67BAA /* ReservationViewModel.swift */; };
-		7E819B4428A188EE00B67BAA /* ReservationConfirmingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1628A188EE00B67BAA /* ReservationConfirmingView.swift */; };
-		7E819B4528A188EE00B67BAA /* ReservationInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1728A188EE00B67BAA /* ReservationInfoView.swift */; };
 		7E819B4628A188EE00B67BAA /* NewReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1828A188EE00B67BAA /* NewReservationView.swift */; };
 		7E819B4728A188EE00B67BAA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1A28A188EE00B67BAA /* Image.swift */; };
 		7E819B4828A188EE00B67BAA /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1B28A188EE00B67BAA /* UIApplication.swift */; };
@@ -87,6 +87,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7E155D1A28A27AAC00ED9C79 /* ReservationConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationConfirmationView.swift; sourceTree = "<group>"; };
+		7E155D1C28A27C1800ED9C79 /* Reservation-Firestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reservation-Firestore.swift"; sourceTree = "<group>"; };
 		7E5177FC289EA23E00B5127D /* Table for You.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Table for You.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5177FF289EA23E00B5127D /* Table_for_YouApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table_for_YouApp.swift; sourceTree = "<group>"; };
 		7E517803289EA24000B5127D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -142,8 +144,6 @@
 		7E819B1028A188EE00B67BAA /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
 		7E819B1128A188EE00B67BAA /* RoomListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListView.swift; sourceTree = "<group>"; };
 		7E819B1528A188EE00B67BAA /* ReservationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
-		7E819B1628A188EE00B67BAA /* ReservationConfirmingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationConfirmingView.swift; sourceTree = "<group>"; };
-		7E819B1728A188EE00B67BAA /* ReservationInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationInfoView.swift; sourceTree = "<group>"; };
 		7E819B1828A188EE00B67BAA /* NewReservationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewReservationView.swift; sourceTree = "<group>"; };
 		7E819B1A28A188EE00B67BAA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		7E819B1B28A188EE00B67BAA /* UIApplication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
@@ -334,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				7E819AE628A1883D00B67BAA /* Auth.swift */,
+				7E155D1C28A27C1800ED9C79 /* Reservation-Firestore.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -344,7 +345,6 @@
 				7E819B2B28A188EE00B67BAA /* ContentView.swift */,
 				7E819AEF28A188EE00B67BAA /* RestaurantSearch */,
 				7E819AF728A188EE00B67BAA /* YelpRestaurant */,
-				7E819B0C28A188EE00B67BAA /* Room */,
 				7E819B1228A188EE00B67BAA /* Reservation */,
 				7E819B1C28A188EE00B67BAA /* General Components */,
 				7E819B1928A188EE00B67BAA /* Extensions */,
@@ -452,10 +452,10 @@
 		7E819B0C28A188EE00B67BAA /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				7E819B0D28A188EE00B67BAA /* RoomView.swift */,
-				7E819B0E28A188EE00B67BAA /* RoomRowView.swift */,
-				7E819B0F28A188EE00B67BAA /* Components */,
 				7E819B1128A188EE00B67BAA /* RoomListView.swift */,
+				7E819B0E28A188EE00B67BAA /* RoomRowView.swift */,
+				7E819B0D28A188EE00B67BAA /* RoomView.swift */,
+				7E819B0F28A188EE00B67BAA /* Components */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -472,6 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				7E819B1328A188EE00B67BAA /* NewReservation */,
+				7E819B0C28A188EE00B67BAA /* Room */,
 			);
 			path = Reservation;
 			sourceTree = "<group>";
@@ -479,10 +480,9 @@
 		7E819B1328A188EE00B67BAA /* NewReservation */ = {
 			isa = PBXGroup;
 			children = (
-				7E819B1428A188EE00B67BAA /* ViewModel */,
-				7E819B1628A188EE00B67BAA /* ReservationConfirmingView.swift */,
-				7E819B1728A188EE00B67BAA /* ReservationInfoView.swift */,
 				7E819B1828A188EE00B67BAA /* NewReservationView.swift */,
+				7E155D1A28A27AAC00ED9C79 /* ReservationConfirmationView.swift */,
+				7E819B1428A188EE00B67BAA /* ViewModel */,
 			);
 			path = NewReservation;
 			sourceTree = "<group>";
@@ -651,6 +651,7 @@
 				7E819ADD28A187D100B67BAA /* UserDefaults.swift in Sources */,
 				7E819ADC28A187D100B67BAA /* MKDirections.swift in Sources */,
 				7E819AE928A1883D00B67BAA /* RestaurantRepository.swift in Sources */,
+				7E155D1B28A27AAC00ED9C79 /* ReservationConfirmationView.swift in Sources */,
 				7E819AD828A187D100B67BAA /* SCNetworkConnection.swift in Sources */,
 				7E819B3928A188EE00B67BAA /* CreditView.swift in Sources */,
 				7E819ACD28A187D100B67BAA /* Table.swift in Sources */,
@@ -660,7 +661,6 @@
 				7E819B4028A188EE00B67BAA /* RoomRowView.swift in Sources */,
 				7E819B4928A188EE00B67BAA /* LocationFetcher.swift in Sources */,
 				7E819AD928A187D100B67BAA /* MKPointAnnotation.swift in Sources */,
-				7E819B4428A188EE00B67BAA /* ReservationConfirmingView.swift in Sources */,
 				7E819B3128A188EE00B67BAA /* ShortRatingView.swift in Sources */,
 				7E819B4A28A188EE00B67BAA /* SafeAreaBottomInset.swift in Sources */,
 				7E819AD628A187D100B67BAA /* Geohash.swift in Sources */,
@@ -681,7 +681,6 @@
 				7E819B4D28A188EE00B67BAA /* LocationSearcher.swift in Sources */,
 				7E819ADF28A187D100B67BAA /* Reservation.swift in Sources */,
 				7E819AD428A187D100B67BAA /* GeoPoint.swift in Sources */,
-				7E819B4528A188EE00B67BAA /* ReservationInfoView.swift in Sources */,
 				7E819B3F28A188EE00B67BAA /* RoomView.swift in Sources */,
 				7E819B3E28A188EE00B67BAA /* ReviewView.swift in Sources */,
 				7E819B5128A188EE00B67BAA /* SearchField.swift in Sources */,
@@ -691,6 +690,7 @@
 				7E819B3628A188EE00B67BAA /* OpeningHoursView.swift in Sources */,
 				7E819B5028A188EE00B67BAA /* LocationSearchButton.swift in Sources */,
 				7E819ACF28A187D100B67BAA /* Hours.swift in Sources */,
+				7E155D1D28A27C1800ED9C79 /* Reservation-Firestore.swift in Sources */,
 				7E517800289EA23E00B5127D /* Table_for_YouApp.swift in Sources */,
 				7E819AED28A1883D00B67BAA /* RoomRespository.swift in Sources */,
 				7E819B2F28A188EE00B67BAA /* RestaurantAnnotation.swift in Sources */,

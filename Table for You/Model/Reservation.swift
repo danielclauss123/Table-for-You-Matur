@@ -8,10 +8,11 @@ struct Reservation: Identifiable, Codable {
     var customerId: String
     var customerName: String
     
-    var date: Date
-    
+    var restaurantId: String
     var roomId: String
     var tableId: String
+    
+    var date: Date
 }
 
 // MARK: - Computed Properties

@@ -1,11 +1,12 @@
 import SwiftUI
 
 struct RoomView: View {
-    @EnvironmentObject var viewModel: ReservationViewModel
-    
     let room: Room
     
+    @ObservedObject var viewModel: ReservationViewModel
+    
     @State private var scale = 1.0
+    @State private var tableIsSelected = false
     
     // MARK: - Body
     var body: some View {
@@ -15,16 +16,25 @@ struct RoomView: View {
                     ZStack {
                         ForEach(room.tables) { table in
                             Button {
+                                viewModel.roomId = room.id.unwrapWithUUID()
+                                viewModel.tableId = table.id
                                 
+                                tableIsSelected = true
                             } label: {
                                 TableView(table: table)
-                                    .offset(table.offset)
-                                    .scaleEffect(scale)
                             }
+                            .offset(table.offset)
+                            .scaleEffect(scale)
                         }
+                        
+                        NavigationLink(isActive: $tableIsSelected) {
+                            ReservationConfirmationView(viewModel: viewModel)
+                        } label: {
+                            EmptyView()
+                        }
+
                     }
                     .frame(width: room.size.width * scale, height: room.size.height * scale)
-                    .border(Color.accentColor)
                 }
                 .magnificationGesture(scale: $scale, maximumScale: 5, minimumScale: 0.2)
                 .task {
@@ -47,7 +57,7 @@ struct RoomView: View {
 struct RoomView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RoomView(room: .examples[0])
+            RoomView(room: .examples[0], viewModel: .init(restaurant: .examples[0]))
         }
     }
 }

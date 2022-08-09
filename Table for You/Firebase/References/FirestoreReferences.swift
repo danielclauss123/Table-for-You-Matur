@@ -15,5 +15,5 @@ extension Firestore {
 
 /// The main collections in Firestore.
 enum FirestoreCollection: String {
-    case restaurants
+    case restaurants, reservations
 }

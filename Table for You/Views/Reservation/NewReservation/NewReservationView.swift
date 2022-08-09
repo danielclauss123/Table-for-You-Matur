@@ -19,12 +19,16 @@ struct NewReservationView: View {
                     DatePicker("Datum und Zeit Auswahl", selection: $viewModel.date, in: Date.now...)
                         .datePickerStyle(.graphical)
                 }
+                
+                Section {
+                    NavigationLink("Tisch auswählen", destination: RoomListView(restaurant: viewModel.restaurant, viewModel: viewModel))
+                        .font(.body.bold())
+                        .foregroundColor(.accentColor)
+                        .disabled(!viewModel.detailsAreValid)
+                }
             }
             .navigationTitle("Reservierung")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                NavigationLink("Weiter", destination: RoomListView(restaurant: viewModel.restaurant))
-            }
         }
     }
     

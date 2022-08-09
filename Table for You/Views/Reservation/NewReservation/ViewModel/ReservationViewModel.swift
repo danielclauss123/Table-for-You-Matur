@@ -13,34 +13,20 @@ class ReservationViewModel: ObservableObject {
     @Published var numberOfPeople = 2
     @Published var date = Date.now
     
-    @Published private(set) var roomId: String?
-    @Published private(set) var tableId: String?
+    @Published var roomId: String?
+    @Published var tableId: String?
     
     @Published var showingErrorAlert = false
     @Published var errorMessage: String?
     
     let restaurant: Restaurant
     
-    var reservationInfosAreValid: Bool {
-        !customerName.isEmpty && date > Date.now
-    }
-    
-    var reservationIsValid: Bool {
-        reservationInfosAreValid && roomId != nil && tableId != nil
+    var detailsAreValid: Bool {
+        !customerName.isEmpty && numberOfPeople >= 1 && numberOfPeople <= 20 && date > Date.now
     }
     
     init(restaurant: Restaurant) {
         self.restaurant = restaurant
-    }
-    
-    func selectTable(_ tableId: String, inRoom roomId: String) {
-        self.roomId = roomId
-        self.tableId = tableId
-    }
-    
-    func deselectTable() {
-        self.roomId = nil
-        self.tableId = nil
     }
     
     func uploadReservation() {
@@ -52,19 +38,25 @@ class ReservationViewModel: ObservableObject {
             return
         }
         
-        /*do {
-            /*let userId = try Auth.currentUser().uid
-            
-            /*let reservation = Reservation(id: UUID().uuidString, customerId: userId, restaurantId: restaurant.id ?? UUID().uuidString, customerName: customerName, numberOfPeople: numberOfPeople, date: date)*/
+        guard let roomId = roomId, let tableId = tableId else {
+            errorMessage = "Kein Tisch ausgewählt. Gehe zurück und wähle einen aus."
+            showingErrorAlert = true
+            return
+        }
+        
+        do {
+            let userId = try Auth.currentUser().uid
+
+            let reservation = Reservation(customerId: userId, customerName: customerName, restaurantId: restaurant.uuidUnwrappedId, roomId: roomId, tableId: tableId, date: date)
             
             try SCNetworkConnection.checkConnection()
             
-            //try reservation.setToFirestore()*/
+            try reservation.setToFirestore()
         } catch {
             print("Failed to upload reservation to firestore: \(error.localizedDescription)")
             
             errorMessage = "Hochladen der Reservierung ist fehlgeschlagen."
             showingErrorAlert = true
-        }*/
+        }
     }
 }

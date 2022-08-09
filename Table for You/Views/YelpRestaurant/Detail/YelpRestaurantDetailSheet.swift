@@ -78,8 +78,7 @@ struct YelpRestaurantDetailSheet: View {
                     .buttonStyle(.borderedProminent)
                     .sheet(isPresented: $showingReservationSheet) {
                         if let restaurant = restaurantRepository.restaurant(forYelpId: restaurant.id) {
-                            //NewReservationView(restaurant: restaurant)
-                            RoomListView(restaurant: restaurant)
+                            NewReservationView(restaurant: restaurant)
                         }
                     }
                     
