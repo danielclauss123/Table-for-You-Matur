@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RoomListView: View {
     @StateObject var roomRepository: RoomRepository
+    @StateObject var reservationRepository: ReservationRepository
     
     @ObservedObject var viewModel: ReservationViewModel
     
@@ -33,8 +34,20 @@ struct RoomListView: View {
     
     // MARK: - Room List
     var roomList: some View {
-        ForEach(roomRepository.searchedRooms) { room in
-            RoomRowView(room: room, viewModel: viewModel)
+        Group {
+            ForEach(roomRepository.searchedRooms) { room in
+                RoomRowView(room: room, viewModel: viewModel)
+            }
+            
+            Section("REservations") {
+                ForEach(reservationRepository.reservations) { reservation in
+                    VStack {
+                        Text(reservation.date, style: .date)
+                        Text(reservation.date, style: .time)
+                        Text(reservation.endDate, style: .time)
+                    }
+                }
+            }
         }
     }
     
@@ -42,6 +55,7 @@ struct RoomListView: View {
     init(restaurant: Restaurant, viewModel: ReservationViewModel) {
         self.viewModel = viewModel
         self._roomRepository = StateObject(wrappedValue: RoomRepository(restaurant: restaurant))
+        self._reservationRepository = StateObject(wrappedValue: ReservationRepository(restaurant: restaurant, date: viewModel.date))
     }
 }
 
