@@ -4,6 +4,7 @@ struct RoomView: View {
     let room: Room
     
     @ObservedObject var viewModel: ReservationViewModel
+    @ObservedObject var reservationRepository: ReservationRepository
     
     @State private var scale = 1.0
     @State private var tableIsSelected = false
@@ -23,6 +24,8 @@ struct RoomView: View {
                             } label: {
                                 TableView(table: table)
                             }
+                            .disabled((reservationRepository.reservations.first(where: { $0.tableId == table.id }) != nil))
+                            .overlay((reservationRepository.reservations.first(where: { $0.tableId == table.id }) != nil) ? Color.red : Color.clear)
                             .offset(table.offset)
                             .scaleEffect(scale)
                         }
@@ -42,7 +45,7 @@ struct RoomView: View {
                 }
             }
             
-            DatePicker("Datum und Zeit", selection: .constant(Date.now), displayedComponents: [.date, .hourAndMinute])
+            DatePicker("Datum und Zeit", selection: $viewModel.date, displayedComponents: [.date, .hourAndMinute])
                 .padding()
                 .background(.regularMaterial)
             
@@ -57,7 +60,7 @@ struct RoomView: View {
 struct RoomView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RoomView(room: .examples[0], viewModel: .init(restaurant: .examples[0]))
+            RoomView(room: .examples[0], viewModel: .init(restaurant: .examples[0]), reservationRepository: .example)
         }
     }
 }

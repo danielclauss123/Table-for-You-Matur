@@ -34,20 +34,8 @@ struct RoomListView: View {
     
     // MARK: - Room List
     var roomList: some View {
-        Group {
-            ForEach(roomRepository.searchedRooms) { room in
-                RoomRowView(room: room, viewModel: viewModel)
-            }
-            
-            Section("REservations") {
-                ForEach(reservationRepository.reservations) { reservation in
-                    VStack {
-                        Text(reservation.date, style: .date)
-                        Text(reservation.date, style: .time)
-                        Text(reservation.endDate, style: .time)
-                    }
-                }
-            }
+        ForEach(roomRepository.searchedRooms) { room in
+            RoomRowView(room: room, viewModel: viewModel, reservationRepository: reservationRepository)
         }
     }
     

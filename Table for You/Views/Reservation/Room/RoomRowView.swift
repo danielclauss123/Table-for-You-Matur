@@ -4,10 +4,11 @@ struct RoomRowView: View {
     let room: Room
     
     @ObservedObject var viewModel: ReservationViewModel
+    @ObservedObject var reservationRepository: ReservationRepository
     
     // MARK: - Body
     var body: some View {
-        NavigationLink(destination: RoomView(room: room, viewModel: viewModel)) {
+        NavigationLink(destination: RoomView(room: room, viewModel: viewModel, reservationRepository: reservationRepository)) {
             VStack(alignment: .leading) {
                 Text(room.name)
                     .font(.title2.bold())
@@ -24,7 +25,7 @@ struct RoomRowView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             List {
-                RoomRowView(room: Room.examples[0], viewModel: .init(restaurant: .examples[0]))
+                RoomRowView(room: Room.examples[0], viewModel: .init(restaurant: .examples[0]), reservationRepository: .example)
             }
         }
     }

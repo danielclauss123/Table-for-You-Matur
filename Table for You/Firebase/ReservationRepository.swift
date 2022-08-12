@@ -1,14 +1,15 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import Combine
-import CoreLocation
-import Algorithms
 
 @MainActor
 class ReservationRepository: ObservableObject {
     @Published var reservations = [Reservation]()
-    @Published var date: Date
+    @Published var date: Date {
+        didSet {
+            addFirestoreListener()
+        }
+    }
     
     @Published private(set) var loadingStatus = LoadingStatus.ready
     
@@ -68,4 +69,9 @@ class ReservationRepository: ObservableObject {
     enum LoadingStatus {
         case ready, loading, firestoreError(String)
     }
+}
+
+// MARK: - Example
+extension ReservationRepository {
+    static let example = ReservationRepository(restaurant: .examples[0], date: Date.now)
 }
