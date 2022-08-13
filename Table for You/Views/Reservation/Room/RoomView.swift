@@ -22,7 +22,7 @@ struct RoomView: View {
                                 
                                 tableIsSelected = true
                             } label: {
-                                TableView(table: table)
+                                TableView(table: table, seatFill: Color.accentColor, tableFill: Color.accentColor)
                             }
                             .disabled((reservationRepository.reservations.first(where: { $0.tableId == table.id }) != nil))
                             .overlay((reservationRepository.reservations.first(where: { $0.tableId == table.id }) != nil) ? Color.red : Color.clear)

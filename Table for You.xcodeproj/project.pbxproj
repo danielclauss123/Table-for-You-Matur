@@ -85,6 +85,7 @@
 		7E819B5628A1891400B67BAA /* YelpExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B5428A1891400B67BAA /* YelpExamples.swift */; };
 		7E819B5728A1891400B67BAA /* RestaurantExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B5528A1891400B67BAA /* RestaurantExamples.swift */; };
 		7EC033E728A3D484009F8AED /* ReservationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC033E628A3D484009F8AED /* ReservationRepository.swift */; };
+		7EC4F37428A7E8FB00603DD0 /* DynamicalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +163,7 @@
 		7E819B5428A1891400B67BAA /* YelpExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpExamples.swift; sourceTree = "<group>"; };
 		7E819B5528A1891400B67BAA /* RestaurantExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantExamples.swift; sourceTree = "<group>"; };
 		7EC033E628A3D484009F8AED /* ReservationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRepository.swift; sourceTree = "<group>"; };
+		7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicalStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -510,6 +512,7 @@
 		7E819B1C28A188EE00B67BAA /* General Components */ = {
 			isa = PBXGroup;
 			children = (
+				7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */,
 				7E819B1D28A188EE00B67BAA /* LocationFetcher.swift */,
 				7E819B1E28A188EE00B67BAA /* Modifiers */,
 				7E819B2128A188EE00B67BAA /* BottomSheet.swift */,
@@ -662,6 +665,7 @@
 				7E819B4B28A188EE00B67BAA /* MagnificationGesture.swift in Sources */,
 				7E819AD528A187D100B67BAA /* GeohashBox.swift in Sources */,
 				7E819B3728A188EE00B67BAA /* DayHoursView.swift in Sources */,
+				7EC4F37428A7E8FB00603DD0 /* DynamicalStack.swift in Sources */,
 				7E819B4028A188EE00B67BAA /* RoomRowView.swift in Sources */,
 				7E819B4928A188EE00B67BAA /* LocationFetcher.swift in Sources */,
 				7E819AD928A187D100B67BAA /* MKPointAnnotation.swift in Sources */,
