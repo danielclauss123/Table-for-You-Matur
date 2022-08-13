@@ -253,8 +253,8 @@
 		7E819AB028A187D100B67BAA /* Table */ = {
 			isa = PBXGroup;
 			children = (
-				7E819AB128A187D100B67BAA /* TableUIFunctions.swift */,
 				7E819AB228A187D100B67BAA /* Table.swift */,
+				7E819AB128A187D100B67BAA /* TableUIFunctions.swift */,
 			);
 			path = Table;
 			sourceTree = "<group>";

@@ -48,6 +48,8 @@ struct RoomView: View {
             DatePicker("Datum und Zeit", selection: $viewModel.date, displayedComponents: [.date, .hourAndMinute])
                 .padding()
                 .background(.regularMaterial)
+                .disabled(true)
+            // Funktioniert noch nicht weil keine Verbindung zwischen ViewModel und Repository...
             
         }
         .navigationTitle(room.name)

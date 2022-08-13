@@ -1,6 +1,5 @@
 import Foundation
 import SwiftUI
-import FirebaseFirestoreSwift
 
 // MARK: - Table
 /// The type for a table that is inside a room and that can be reserved by a customer.
@@ -28,7 +27,7 @@ struct Table: Identifiable, Codable, Equatable {
         self.name = name
         self.seats = []
         self.headSeatsEnabled = headSeatsEnabled
-        self.offset = .zero
+        self.offset = offset
         self.rotation = rotation
         
         for _ in 1 ... numberOfSeats {
@@ -48,6 +47,10 @@ extension Table {
     /// The type representing the rotation of the table in turns of 90 degrees.
     enum Rotation: String, Codable, Equatable {
         case normal, up, right, down
+        
+        var isHorizontal: Bool {
+            self == .normal || self == .right
+        }
         
         mutating func turnRight() {
             switch self {
@@ -148,14 +151,14 @@ extension Table {
 extension Table {
     /// The default values for a new table.
     static func new(_ tableNumber: Int? = nil) -> Table {
-        Table(name: "Tisch\(tableNumber != nil ? " \(tableNumber!)" : "")", seats: [Seat(), Seat()], headSeatsEnabled: true)
+        Table(name: "Tisch\(tableNumber != nil ? " \(tableNumber!)" : "")", numberOfSeats: 2, headSeatsEnabled: true)
     }
 }
 
 // MARK: - Empty
 extension Table {
     /// An empty table with only one seat.
-    static let empty = Table(id: UUID().uuidString, name: "", seats: [Seat()], headSeatsEnabled: false, offset: .zero, rotation: .normal)
+    static let empty = Table(id: UUID().uuidString, name: "", numberOfSeats: 1, headSeatsEnabled: false, offset: .zero, rotation: .normal)
 }
 
 // MARK: - Example
