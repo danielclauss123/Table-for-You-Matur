@@ -1,24 +1,19 @@
 import SwiftUI
 
-// MARK: - Constant Static Properties
+// MARK: - Static Properties
 extension Table {
-    /// The height of a normal table view with the seats and tabletop.
-    static private let normalHeight = 80.0
-    /// The percentage of the height that gets filled by the tabletop.
-    static private let tabletopHeightPercentage = 0.7
-    /// The percentage of the height that gets filled by one seat.
-    static private var seatHeightPercentage: Double {
-        (1 - tabletopHeightPercentage) / 2
-    }
+    /// The height of the tabletop.
+    static let tabletopHeight = 60.0
+    /// The size of a chair.
+    static let seatSize = CGSize(width: 30, height: 12)
+    /// The spacing between the tabletop and a chair.
+    static let tableToSeatSpacing = 2.5
 }
 
-// MARK: - Variable Properties
+// MARK: - Instance Properties
 extension Table {
-    /// How much bigger the width is in comparison to the height of the tabletop.
-    ///
-    /// This is always an Int, because the tabletop is maid out a as many squares as this property suggests.
-    /// Exp: If this property is 5, the table is 5 times as wide as high, so it consist of 5 equal squares.
-    private var tabletopNormalWidthToHeightRatio: Int {
+    /// The ratio of width / height of the tabletop.
+    var tabletopWidthToHeightRatio: Int {
         if headSeatsEnabled {
             return seats.count > 4 ? max(Int(Double(seats.count - 2 + 1) / 2), 1) : 1
         } else {
@@ -26,70 +21,20 @@ extension Table {
         }
     }
     
-    /// The normal width in the horizontal position with the tabletop and, if present, the side seats.
-    private var normalWidth: Double {
-        let combinedHeadSeatWidth: Double
-        if rightHeadSeat != nil {
-            combinedHeadSeatWidth = Self.normalHeight * Self.seatHeightPercentage * 2
-        } else if leftHeadSeat != nil {
-            combinedHeadSeatWidth = Self.normalHeight * Self.seatHeightPercentage * 1
-        } else {
-            combinedHeadSeatWidth = 0
-        }
-        
-        let tabletopWidth = Self.normalHeight * Self.tabletopHeightPercentage * Double(tabletopNormalWidthToHeightRatio)
-        
-        return tabletopWidth + combinedHeadSeatWidth
-    }
-}
-
-// MARK: - Frame
-extension Table {
-    /// The height for the complete table view. It changes according to the rotation.
-    var height: Double {
-        if rotation == .normal || rotation == .right {
-            return Self.normalHeight
-        } else {
-            return normalWidth
-        }
+    /// The width of the tabletop.
+    var tabletopWidth: Double {
+        Double(tabletopWidthToHeightRatio) * Table.tabletopHeight
     }
     
-    /// The width for the complete table view. It changes according to the rotation.
+    /// The width of the whole table view including the tabletop, the chairs and the space between.
     var width: Double {
-        if rotation == .normal || rotation == .right {
-            return normalWidth
-        } else {
-            return Self.normalHeight
-        }
-    }
-}
-
-// MARK: - Seat Frame
-extension Table {
-    /// The seat width is 3 / 4 of the width of one square of  tabletop, that means 3 / 4 of the height of the tabletop.
-    ///
-    /// This gets used when the seat is in its normal, horizontal position.
-    var normalSeatWidth: Double {
-        Self.normalHeight * Self.tabletopHeightPercentage * 0.75
+        let numberOfHeadSeats = leftHeadSeat != nil ? (rightHeadSeat != nil ? 2 : 1) : 0
+        
+        return tabletopWidth + (Self.tableToSeatSpacing + Self.seatSize.height) * Double(numberOfHeadSeats)
     }
     
-    /// The normal height times the seat height percentage.
-    ///
-    /// This gets used when the seat is in its normal, horizontal position.
-    var normalSeatHeight: Double {
-        Self.normalHeight * Self.seatHeightPercentage
+    /// The height of the whole table view including the tabletop, the chairs and the space between.
+    var height: Double {
+        seats.count > 1 ? Self.tabletopHeight + Self.tableToSeatSpacing * 2 + Self.seatSize.height * 2 : Self.tabletopHeight + Self.tableToSeatSpacing + Self.seatSize.height
     }
-}
-
-// MARK: - Seat and Tabletop Corner Radius
-extension Table {
-    var seatAndTabletopCornerRadius: Double {
-        Self.normalHeight * 0.1
-    }
-}
-
-// MARK: - Color
-extension Table {
-    static let seatFill = Color.blue
-    static let tableFill = LinearGradient(colors: [.indigo, .gray], startPoint: .topLeading, endPoint: .bottomTrailing)
 }
