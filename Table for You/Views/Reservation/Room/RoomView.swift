@@ -7,6 +7,8 @@ struct RoomView: View {
     @ObservedObject var reservationRepository: ReservationRepository
     
     @State private var scale = 1.0
+    @State private var minimumScale = 0.2
+    
     @State private var tableIsSelected = false
     
     // MARK: - Body
@@ -25,7 +27,8 @@ struct RoomView: View {
                                 TableView(table: table, seatFill: Color.accentColor, tableFill: Color.accentColor)
                             }
                             .disabled((reservationRepository.reservations.first(where: { $0.tableId == table.id }) != nil))
-                            .overlay((reservationRepository.reservations.first(where: { $0.tableId == table.id }) != nil) ? Color.red : Color.clear)
+                            .disabled(table.seats.count + 2 < viewModel.numberOfPeople || table.seats.count - 2 > viewModel.numberOfPeople)
+                            .opacity(table.seats.count + 2 < viewModel.numberOfPeople || table.seats.count - 2 > viewModel.numberOfPeople ? 0.5 : 1)
                             .offset(table.offset)
                             .scaleEffect(scale)
                         }
@@ -39,9 +42,10 @@ struct RoomView: View {
                     }
                     .frame(width: room.size.width * scale, height: room.size.height * scale)
                 }
-                .magnificationGesture(scale: $scale, maximumScale: 5, minimumScale: 0.2)
+                .magnificationGesture(scale: $scale, maximumScale: 5, minimumScale: minimumScale)
                 .task {
                     scale = room.perfectScale(inGeometry: geometry)
+                    minimumScale = scale
                 }
             }
             
