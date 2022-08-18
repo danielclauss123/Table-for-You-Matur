@@ -66,7 +66,6 @@
 		7E819B3F28A188EE00B67BAA /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0D28A188EE00B67BAA /* RoomView.swift */; };
 		7E819B4028A188EE00B67BAA /* RoomRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B0E28A188EE00B67BAA /* RoomRowView.swift */; };
 		7E819B4128A188EE00B67BAA /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1028A188EE00B67BAA /* TableView.swift */; };
-		7E819B4228A188EE00B67BAA /* RoomListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1128A188EE00B67BAA /* RoomListView.swift */; };
 		7E819B4328A188EE00B67BAA /* ReservationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1528A188EE00B67BAA /* ReservationViewModel.swift */; };
 		7E819B4628A188EE00B67BAA /* NewReservationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1828A188EE00B67BAA /* NewReservationView.swift */; };
 		7E819B4728A188EE00B67BAA /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B1A28A188EE00B67BAA /* Image.swift */; };
@@ -144,7 +143,6 @@
 		7E819B0D28A188EE00B67BAA /* RoomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
 		7E819B0E28A188EE00B67BAA /* RoomRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomRowView.swift; sourceTree = "<group>"; };
 		7E819B1028A188EE00B67BAA /* TableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
-		7E819B1128A188EE00B67BAA /* RoomListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomListView.swift; sourceTree = "<group>"; };
 		7E819B1528A188EE00B67BAA /* ReservationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReservationViewModel.swift; sourceTree = "<group>"; };
 		7E819B1828A188EE00B67BAA /* NewReservationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewReservationView.swift; sourceTree = "<group>"; };
 		7E819B1A28A188EE00B67BAA /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -457,7 +455,6 @@
 		7E819B0C28A188EE00B67BAA /* Room */ = {
 			isa = PBXGroup;
 			children = (
-				7E819B1128A188EE00B67BAA /* RoomListView.swift */,
 				7E819B0E28A188EE00B67BAA /* RoomRowView.swift */,
 				7E819B0D28A188EE00B67BAA /* RoomView.swift */,
 				7E819B0F28A188EE00B67BAA /* Components */,
@@ -651,7 +648,6 @@
 				7E819AD328A187D100B67BAA /* YelpFusionAPI.swift in Sources */,
 				7E819ACC28A187D100B67BAA /* TableUIFunctions.swift in Sources */,
 				7E819B5228A188EE00B67BAA /* HalfRoundedRectangle.swift in Sources */,
-				7E819B4228A188EE00B67BAA /* RoomListView.swift in Sources */,
 				7E819B4E28A188EE00B67BAA /* MKLocalSearchCompletionPlacemark.swift in Sources */,
 				7E819B3428A188EE00B67BAA /* YelpRestaurantDetailRowView.swift in Sources */,
 				7E819ADD28A187D100B67BAA /* UserDefaults.swift in Sources */,

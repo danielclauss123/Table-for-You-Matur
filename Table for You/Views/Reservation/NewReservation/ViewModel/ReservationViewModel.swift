@@ -60,3 +60,8 @@ class ReservationViewModel: ObservableObject {
         }
     }
 }
+
+// MARK: - Example
+extension ReservationViewModel {
+    static let example = ReservationViewModel(restaurant: .examples[0])
+}

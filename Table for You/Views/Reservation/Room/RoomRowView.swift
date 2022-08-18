@@ -11,7 +11,7 @@ struct RoomRowView: View {
         NavigationLink(destination: RoomView(room: room, viewModel: viewModel, reservationRepository: reservationRepository)) {
             VStack(alignment: .leading) {
                 Text(room.name)
-                    .font(.title2.bold())
+                    .font(.headline)
                 Text("\(room.tables.count) \(room.tables.count == 1 ? "Tisch" : "Tische")")
                     .foregroundColor(.secondary)
             }
@@ -25,7 +25,7 @@ struct RoomRowView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             List {
-                RoomRowView(room: Room.examples[0], viewModel: .init(restaurant: .examples[0]), reservationRepository: .example)
+                RoomRowView(room: Room.examples[0], viewModel: .example, reservationRepository: .example)
             }
         }
     }

@@ -2,6 +2,8 @@ import SwiftUI
 
 struct NewReservationView: View {
     @StateObject var viewModel: ReservationViewModel
+    @StateObject var roomRepository: RoomRepository
+    @StateObject var reservationRepository: ReservationRepository // TODO: Connection to viewModel
     
     // MARK: - Body
     var body: some View {
@@ -20,21 +22,56 @@ struct NewReservationView: View {
                         .datePickerStyle(.graphical)
                 }
                 
-                Section {
-                    NavigationLink("Tisch auswählen", destination: RoomListView(restaurant: viewModel.restaurant, viewModel: viewModel))
-                        .font(.body.bold())
-                        .foregroundColor(.accentColor)
-                        .disabled(!viewModel.detailsAreValid)
-                }
+                rooms
             }
             .navigationTitle("Reservierung")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
     
+    // MARK: - Rooms
+    var rooms: some View {
+        Section {
+            switch roomRepository.loadingStatus {
+                case .loading:
+                    EmptyView()
+                case .firestoreError(let error):
+                    Text("Fehler\n")
+                        .font(.headline)
+                    +
+                    Text(error)
+                        .foregroundColor(.secondary)
+                    Button("Neu laden") {
+                        
+                    }
+                case .ready:
+                    ForEach(roomRepository.rooms) { room in
+                        RoomRowView(room: room, viewModel: viewModel, reservationRepository: reservationRepository)
+                    }
+            }
+        } header: {
+            HStack {
+                Text("Wo willst du sitzen?")
+                if roomRepository.loadingStatus == .loading {
+                    ProgressView()
+                        .padding(.leading, 5)
+                }
+            }
+        }
+    }
+    
     // MARK: - Init
     init(restaurant: Restaurant) {
         self._viewModel = StateObject(wrappedValue: ReservationViewModel(restaurant: restaurant))
+        self._roomRepository = StateObject(wrappedValue: RoomRepository(restaurant: restaurant))
+        self._reservationRepository = StateObject(wrappedValue: ReservationRepository(restaurant: restaurant, date: Date.now))
+    }
+    
+    // MARK: - Example Init
+    fileprivate init() {
+        self._viewModel = StateObject(wrappedValue: ReservationViewModel.example)
+        self._roomRepository = StateObject(wrappedValue: RoomRepository.example)
+        self._reservationRepository = StateObject(wrappedValue: ReservationRepository.example)
     }
 }
 
@@ -42,6 +79,6 @@ struct NewReservationView: View {
 // MARK: - Previews
 struct NewReservationView_Previews: PreviewProvider {
     static var previews: some View {
-        NewReservationView(restaurant: Restaurant.examples[0])
+        NewReservationView()
     }
 }

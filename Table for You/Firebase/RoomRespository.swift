@@ -15,10 +15,6 @@ class RoomRepository: ObservableObject {
     private var currentListener: ListenerRegistration?
     private var currentListenerId: UUID?
     
-    var searchedRooms: [Room] {
-        rooms.filter { $0.name.lowercased().hasPrefix(searchText.lowercased()) }
-    }
-    
     // MARK: - Init
     init(restaurant: Restaurant) {
         self.restaurant = restaurant
@@ -47,6 +43,7 @@ class RoomRepository: ObservableObject {
         }
         
         currentListener = Firestore.collection(.restaurants).document(restaurantId).collection("rooms")
+            .order(by: "name")
             .addSnapshotListener { snapshot, error in
                 guard self.currentListenerId == listenerId else {
                     print("Different listener that gets executed then the current one.")
@@ -81,5 +78,5 @@ class RoomRepository: ObservableObject {
 
 // MARK: - Example
 extension RoomRepository {
-    static let example = RoomRepository(restaurant: Restaurant.examples[0], rooms: Room.examples)
+    static let example = RoomRepository(restaurant: .examples[0], rooms: Room.examples)
 }

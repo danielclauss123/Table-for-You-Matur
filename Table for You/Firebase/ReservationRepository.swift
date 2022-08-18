@@ -18,7 +18,7 @@ class ReservationRepository: ObservableObject {
     private var currentListener: ListenerRegistration?
     private var currentListenerId: UUID?
     
-    // MARK: - Initializer
+    // MARK: - Init
     init(restaurant: Restaurant, date: Date) {
         self.restaurant = restaurant
         self.date = date
