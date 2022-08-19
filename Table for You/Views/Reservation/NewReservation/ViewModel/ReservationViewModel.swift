@@ -20,13 +20,15 @@ class ReservationViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     let restaurant: Restaurant
+    let yelpRestaurant: YelpRestaurantDetail
     
     var detailsAreValid: Bool {
         !customerName.isEmpty && numberOfPeople >= 1 && numberOfPeople <= 20 && date > Date.now
     }
     
-    init(restaurant: Restaurant) {
+    init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail) {
         self.restaurant = restaurant
+        self.yelpRestaurant = yelpRestaurant
     }
     
     func uploadReservation() {
@@ -63,5 +65,5 @@ class ReservationViewModel: ObservableObject {
 
 // MARK: - Example
 extension ReservationViewModel {
-    static let example = ReservationViewModel(restaurant: .examples[0])
+    static let example = ReservationViewModel(restaurant: .examples[0], yelpRestaurant: .fullExample1)
 }

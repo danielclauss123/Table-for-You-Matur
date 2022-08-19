@@ -48,7 +48,7 @@ struct ReservationConfirmationView: View {
 struct ReservationConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ReservationConfirmationView(viewModel: .init(restaurant: .examples[0]))
+            ReservationConfirmationView(viewModel: .example)
         }
     }
 }

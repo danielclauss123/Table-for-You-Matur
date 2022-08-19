@@ -42,14 +42,20 @@ struct NewReservationView: View {
                     Text(error)
                         .foregroundColor(.secondary)
                 case .ready:
-                    ForEach(roomRepository.rooms) { room in
-                        RoomRowView(
-                            room: room,
-                            currentReservations: reservationRepository.reservations(forRoomId: room.id),
-                            viewModel: viewModel
-                        )
+                    Group {
+                        if roomRepository.rooms.isEmpty {
+                            Text("Noch kein Raum vorhanden...")
+                        } else {
+                            ForEach(roomRepository.rooms) { room in
+                                RoomRowView(
+                                    room: room,
+                                    currentReservations: reservationRepository.reservations(forRoomId: room.id),
+                                    viewModel: viewModel
+                                )
+                            }
+                            .disabled(!viewModel.detailsAreValid)
+                        }
                     }
-                    .disabled(!viewModel.detailsAreValid)
             }
         } header: {
             HStack {
@@ -63,8 +69,8 @@ struct NewReservationView: View {
     }
     
     // MARK: - Init
-    init(restaurant: Restaurant) {
-        let viewModel = ReservationViewModel(restaurant: restaurant)
+    init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail) {
+        let viewModel = ReservationViewModel(restaurant: restaurant, yelpRestaurant: yelpRestaurant)
         
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._roomRepository = StateObject(wrappedValue: RoomRepository(restaurant: restaurant))
