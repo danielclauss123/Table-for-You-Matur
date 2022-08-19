@@ -83,6 +83,7 @@
 		7E819B5328A188EE00B67BAA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B2B28A188EE00B67BAA /* ContentView.swift */; };
 		7E819B5628A1891400B67BAA /* YelpExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B5428A1891400B67BAA /* YelpExamples.swift */; };
 		7E819B5728A1891400B67BAA /* RestaurantExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B5528A1891400B67BAA /* RestaurantExamples.swift */; };
+		7E8432AD28AF8D9B00B79237 /* RoomThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8432AC28AF8D9B00B79237 /* RoomThumbnailView.swift */; };
 		7EC033E728A3D484009F8AED /* ReservationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC033E628A3D484009F8AED /* ReservationRepository.swift */; };
 		7EC4F37428A7E8FB00603DD0 /* DynamicalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */; };
 /* End PBXBuildFile section */
@@ -160,6 +161,7 @@
 		7E819B2B28A188EE00B67BAA /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7E819B5428A1891400B67BAA /* YelpExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpExamples.swift; sourceTree = "<group>"; };
 		7E819B5528A1891400B67BAA /* RestaurantExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantExamples.swift; sourceTree = "<group>"; };
+		7E8432AC28AF8D9B00B79237 /* RoomThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomThumbnailView.swift; sourceTree = "<group>"; };
 		7EC033E628A3D484009F8AED /* ReservationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRepository.swift; sourceTree = "<group>"; };
 		7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicalStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -457,6 +459,7 @@
 			children = (
 				7E819B0E28A188EE00B67BAA /* RoomRowView.swift */,
 				7E819B0D28A188EE00B67BAA /* RoomView.swift */,
+				7E8432AC28AF8D9B00B79237 /* RoomThumbnailView.swift */,
 				7E819B0F28A188EE00B67BAA /* Components */,
 			);
 			path = Room;
@@ -687,6 +690,7 @@
 				7E819AD428A187D100B67BAA /* GeoPoint.swift in Sources */,
 				7E819B3F28A188EE00B67BAA /* RoomView.swift in Sources */,
 				7E819B3E28A188EE00B67BAA /* ReviewView.swift in Sources */,
+				7E8432AD28AF8D9B00B79237 /* RoomThumbnailView.swift in Sources */,
 				7E819B5128A188EE00B67BAA /* SearchField.swift in Sources */,
 				7E819B5628A1891400B67BAA /* YelpExamples.swift in Sources */,
 				7E819B5728A1891400B67BAA /* RestaurantExamples.swift in Sources */,
