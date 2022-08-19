@@ -11,7 +11,7 @@ class ReservationViewModel: ObservableObject {
     }
     
     @Published var numberOfPeople = 2
-    @Published var date = Date.now
+    @Published var date = Date.now.addingTimeInterval(60)
     
     @Published var roomId: String?
     @Published var tableId: String?

@@ -1,33 +1,34 @@
 import Foundation
+import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 @MainActor
 class ReservationRepository: ObservableObject {
     @Published var reservations = [Reservation]()
-    @Published var date: Date {
-        didSet {
-            addFirestoreListener()
-        }
-    }
     
     @Published private(set) var loadingStatus = LoadingStatus.ready
     
     let restaurant: Restaurant
     
+    let reservationViewModel: ReservationViewModel
+    private var dateCancellable: AnyCancellable?
+    
     private var currentListener: ListenerRegistration?
     private var currentListenerId: UUID?
     
     // MARK: - Init
-    init(restaurant: Restaurant, date: Date) {
+    init(restaurant: Restaurant, reservationViewModel: ReservationViewModel) {
         self.restaurant = restaurant
-        self.date = date
+        self.reservationViewModel = reservationViewModel
         
-        addFirestoreListener()
+        dateCancellable = reservationViewModel.$date.sink { date in
+            self.addFirestoreListener(forDate: date)
+        }
     }
     
     // MARK: - Add Firestore Listener
-    func addFirestoreListener() {
+    func addFirestoreListener(forDate date: Date) {
         loadingStatus = .loading
         reservations = []
         currentListener?.remove()
@@ -73,5 +74,5 @@ class ReservationRepository: ObservableObject {
 
 // MARK: - Example
 extension ReservationRepository {
-    static let example = ReservationRepository(restaurant: .examples[0], date: Date.now)
+    static let example = ReservationRepository(restaurant: .examples[0], reservationViewModel: .example)
 }

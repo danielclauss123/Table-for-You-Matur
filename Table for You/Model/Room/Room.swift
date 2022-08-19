@@ -43,6 +43,18 @@ struct Room: Identifiable, Codable {
             }
         }
     }
+    
+    func availableTableCount(numberOfPeople: Int, existingReservations: [Reservation]) -> Int {
+        var fittingTables = tables.filter {
+            !($0.seats.count + 2 < numberOfPeople || $0.seats.count - 2 > numberOfPeople)
+        }
+        
+        existingReservations.forEach { reservation in
+            fittingTables.removeAll(where: { $0.id == reservation.tableId })
+        }
+        
+        return fittingTables.count
+    }
 }
 
 // MARK: - UI Functions

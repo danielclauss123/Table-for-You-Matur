@@ -3,7 +3,7 @@ import SwiftUI
 struct NewReservationView: View {
     @StateObject var viewModel: ReservationViewModel
     @StateObject var roomRepository: RoomRepository
-    @StateObject var reservationRepository: ReservationRepository // TODO: Connection to viewModel
+    @StateObject var reservationRepository: ReservationRepository
     
     // MARK: - Body
     var body: some View {
@@ -41,13 +41,11 @@ struct NewReservationView: View {
                     +
                     Text(error)
                         .foregroundColor(.secondary)
-                    Button("Neu laden") {
-                        
-                    }
                 case .ready:
                     ForEach(roomRepository.rooms) { room in
-                        RoomRowView(room: room, viewModel: viewModel, reservationRepository: reservationRepository)
+                        RoomRowView(room: room, currentReservations: reservationRepository.reservations.filter { $0.roomId == room.id }, viewModel: viewModel, reservationRepository: reservationRepository)
                     }
+                    .disabled(!viewModel.detailsAreValid)
             }
         } header: {
             HStack {
@@ -62,9 +60,11 @@ struct NewReservationView: View {
     
     // MARK: - Init
     init(restaurant: Restaurant) {
-        self._viewModel = StateObject(wrappedValue: ReservationViewModel(restaurant: restaurant))
+        let viewModel = ReservationViewModel(restaurant: restaurant)
+        
+        self._viewModel = StateObject(wrappedValue: viewModel)
         self._roomRepository = StateObject(wrappedValue: RoomRepository(restaurant: restaurant))
-        self._reservationRepository = StateObject(wrappedValue: ReservationRepository(restaurant: restaurant, date: Date.now))
+        self._reservationRepository = StateObject(wrappedValue: ReservationRepository(restaurant: restaurant, reservationViewModel: viewModel))
     }
     
     // MARK: - Example Init

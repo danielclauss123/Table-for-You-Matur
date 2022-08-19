@@ -14,7 +14,7 @@ class RestaurantAnnotationView: MKMarkerAnnotationView {
         
         glyphImage = UIImage(systemName: "fork.knife")
         titleVisibility = .visible
-        markerTintColor = .systemOrange
+        markerTintColor = UIColor(.accentColor)
     }
 }
 
@@ -35,7 +35,7 @@ class ClusterAnnotationView: MKMarkerAnnotationView {
         
         if let cluster = annotation as? MKClusterAnnotation {
             glyphText = "\(cluster.memberAnnotations.count)"
-            markerTintColor = .systemOrange
+            markerTintColor = UIColor(.accentColor)
         }
     }
 }

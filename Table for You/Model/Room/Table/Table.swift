@@ -34,6 +34,14 @@ struct Table: Identifiable, Codable, Equatable {
             self.seats.append(Seat())
         }
     }
+    
+    func available(forPeople numberOfPeople: Int) -> Bool {
+        seats.count + 2 >= numberOfPeople && seats.count - 2 <= numberOfPeople
+    }
+    
+    func available(withExistingReservations reservations: [Reservation]) -> Bool {
+        !reservations.contains(where: { $0.tableId == id })
+    }
 }
 
 // MARK: - Seat
