@@ -2,9 +2,9 @@ import SwiftUI
 
 struct RoomView: View {
     let room: Room
+    let currentReservations: [Reservation]
     
     @ObservedObject var viewModel: ReservationViewModel
-    @ObservedObject var reservationRepository: ReservationRepository
     
     @State private var scale = 1.0
     @State private var minimumScale = 0.2
@@ -26,9 +26,9 @@ struct RoomView: View {
                             } label: {
                                 TableView(table: table, seatFill: Color.accentColor, tableFill: Color.accentColor)
                             }
-                            .disabled((reservationRepository.reservations.first(where: { $0.tableId == table.id }) != nil))
-                            .disabled(table.seats.count + 2 < viewModel.numberOfPeople || table.seats.count - 2 > viewModel.numberOfPeople)
-                            .opacity(table.seats.count + 2 < viewModel.numberOfPeople || table.seats.count - 2 > viewModel.numberOfPeople ? 0.5 : 1)
+                            .disabled(!table.available(withExistingReservations: currentReservations))
+                            .disabled(!table.available(forPeople: viewModel.numberOfPeople))
+                            .opacity(table.available(forPeople: viewModel.numberOfPeople) ? 1 : 0.5)
                             .offset(table.offset)
                             .scaleEffect(scale)
                         }
@@ -66,7 +66,7 @@ struct RoomView: View {
 struct RoomView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RoomView(room: .examples[0], viewModel: .init(restaurant: .examples[0]), reservationRepository: .example)
+            RoomView(room: .examples[0], currentReservations: [], viewModel: .example)
         }
     }
 }

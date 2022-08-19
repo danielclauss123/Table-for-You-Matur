@@ -66,6 +66,10 @@ class ReservationRepository: ObservableObject {
             }
     }
     
+    func reservations(forRoomId roomId: String?) -> [Reservation] {
+        reservations.filter { $0.roomId == roomId }
+    }
+    
     // MARK: - Loading Status
     enum LoadingStatus {
         case ready, loading, firestoreError(String)

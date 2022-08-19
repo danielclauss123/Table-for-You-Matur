@@ -43,7 +43,11 @@ struct NewReservationView: View {
                         .foregroundColor(.secondary)
                 case .ready:
                     ForEach(roomRepository.rooms) { room in
-                        RoomRowView(room: room, currentReservations: reservationRepository.reservations.filter { $0.roomId == room.id }, viewModel: viewModel, reservationRepository: reservationRepository)
+                        RoomRowView(
+                            room: room,
+                            currentReservations: reservationRepository.reservations(forRoomId: room.id),
+                            viewModel: viewModel
+                        )
                     }
                     .disabled(!viewModel.detailsAreValid)
             }

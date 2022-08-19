@@ -5,7 +5,6 @@ struct RoomRowView: View {
     let currentReservations: [Reservation]
     
     @ObservedObject var viewModel: ReservationViewModel
-    @ObservedObject var reservationRepository: ReservationRepository
     
     var availableTableCount: Int {
         room.availableTableCount(numberOfPeople: viewModel.numberOfPeople, existingReservations: currentReservations)
@@ -13,7 +12,7 @@ struct RoomRowView: View {
     
     // MARK: - Body
     var body: some View {
-        NavigationLink(destination: RoomView(room: room, viewModel: viewModel, reservationRepository: reservationRepository)) {
+        NavigationLink(destination: RoomView(room: room, currentReservations: currentReservations, viewModel: viewModel)) {
             VStack(alignment: .leading) {
                 Text(room.name)
                     .font(.headline)
@@ -30,7 +29,7 @@ struct RoomRowView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             List {
-                RoomRowView(room: Room.examples[0], currentReservations: [], viewModel: .example, reservationRepository: .example)
+                RoomRowView(room: .examples[0], currentReservations: [], viewModel: .example)
             }
         }
     }
