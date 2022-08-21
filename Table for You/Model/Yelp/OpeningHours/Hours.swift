@@ -10,12 +10,20 @@ protocol Hours: Codable, Hashable {
 
 // MARK: - Extension
 extension Hours {
-    var startTime: Date? {
+    private var openingDate: Date? {
         Date(fromMilitaryTimeString: start)
     }
     
-    var endTime: Date? {
+    private var closingDate: Date? {
         Date(fromMilitaryTimeString: end)
+    }
+    
+    var openingTime: Time? {
+        openingDate != nil ? Time(date: openingDate!) : nil
+    }
+    
+    var closingTime: Time? {
+        closingDate != nil ? Time(date: closingDate!) : nil
     }
     
     /// A string representation like "18:00 - 20:00".
@@ -24,8 +32,8 @@ extension Hours {
         formatter.dateStyle = .none
         formatter.timeStyle = .short
         
-        let startText = startTime != nil ? formatter.string(from: startTime!) : "Unbekannt"
-        let endText = endTime != nil ? formatter.string(from: endTime!) : "Unbekannt"
+        let startText = openingDate != nil ? formatter.string(from: openingDate!) : "Unbekannt"
+        let endText = closingDate != nil ? formatter.string(from: closingDate!) : "Unbekannt"
         
         return "\(startText) - \(endText)"
     }

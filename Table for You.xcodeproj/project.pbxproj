@@ -86,6 +86,7 @@
 		7E8432AD28AF8D9B00B79237 /* RoomThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8432AC28AF8D9B00B79237 /* RoomThumbnailView.swift */; };
 		7E8432AF28AF94B100B79237 /* ConfiramtionTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8432AE28AF94B100B79237 /* ConfiramtionTestView.swift */; };
 		7EC033E728A3D484009F8AED /* ReservationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC033E628A3D484009F8AED /* ReservationRepository.swift */; };
+		7EC2546B28AFF97B0047CCB1 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2546A28AFF97B0047CCB1 /* Time.swift */; };
 		7EC4F37428A7E8FB00603DD0 /* DynamicalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */; };
 /* End PBXBuildFile section */
 
@@ -165,6 +166,7 @@
 		7E8432AC28AF8D9B00B79237 /* RoomThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomThumbnailView.swift; sourceTree = "<group>"; };
 		7E8432AE28AF94B100B79237 /* ConfiramtionTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiramtionTestView.swift; sourceTree = "<group>"; };
 		7EC033E628A3D484009F8AED /* ReservationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRepository.swift; sourceTree = "<group>"; };
+		7EC2546A28AFF97B0047CCB1 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicalStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -266,10 +268,10 @@
 		7E819AB328A187D100B67BAA /* Yelp */ = {
 			isa = PBXGroup;
 			children = (
-				7E819AB428A187D100B67BAA /* OpeningHours */,
-				7E819AB828A187D100B67BAA /* YelpRestaurantStore.swift */,
 				7E819AB928A187D100B67BAA /* YelpRestaurants.swift */,
+				7E819AB828A187D100B67BAA /* YelpRestaurantStore.swift */,
 				7E819ABA28A187D100B67BAA /* YelpFusionAPI.swift */,
+				7E819AB428A187D100B67BAA /* OpeningHours */,
 			);
 			path = Yelp;
 			sourceTree = "<group>";
@@ -277,9 +279,10 @@
 		7E819AB428A187D100B67BAA /* OpeningHours */ = {
 			isa = PBXGroup;
 			children = (
-				7E819AB528A187D100B67BAA /* Weekday.swift */,
-				7E819AB628A187D100B67BAA /* Hours.swift */,
 				7E819AB728A187D100B67BAA /* OpeningHours.swift */,
+				7E819AB628A187D100B67BAA /* Hours.swift */,
+				7E819AB528A187D100B67BAA /* Weekday.swift */,
+				7EC2546A28AFF97B0047CCB1 /* Time.swift */,
 			);
 			path = OpeningHours;
 			sourceTree = "<group>";
@@ -709,6 +712,7 @@
 				7E819B5328A188EE00B67BAA /* ContentView.swift in Sources */,
 				7E819B2D28A188EE00B67BAA /* RestaurantSearchView.swift in Sources */,
 				7E819B4728A188EE00B67BAA /* Image.swift in Sources */,
+				7EC2546B28AFF97B0047CCB1 /* Time.swift in Sources */,
 				7E819AE028A187D100B67BAA /* Restaurant.swift in Sources */,
 				7E819B3A28A188EE00B67BAA /* ContactView.swift in Sources */,
 				7E819AD028A187D100B67BAA /* OpeningHours.swift in Sources */,

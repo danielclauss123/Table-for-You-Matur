@@ -12,6 +12,14 @@ enum Weekday: Int, Identifiable, CaseIterable {
         self.init(rawValue: day)
     }
     
+    init?(fromDate date: Date) {
+        guard let weekday = Calendar.current.dateComponents([.weekday], from: date).weekday else {
+            return nil
+        }
+        
+        self.init(appleWeekday: weekday)
+    }
+    
     /// Id for Identifiable conformance.
     var id: Weekday {
         self
@@ -36,6 +44,28 @@ enum Weekday: Int, Identifiable, CaseIterable {
             return "Sonntag"
         case .unknown:
             return "Unbekannt"
+        }
+    }
+    
+    /// The weekday of yesterday.
+    var before: Weekday {
+        switch self {
+        case .monday:
+            return .sunday
+        case .tuesday:
+            return .monday
+        case .wednesday:
+            return .tuesday
+        case .thursday:
+            return .wednesday
+        case .friday:
+            return .thursday
+        case .saturday:
+            return .friday
+        case .sunday:
+            return .saturday
+        case .unknown:
+            return .unknown
         }
     }
     

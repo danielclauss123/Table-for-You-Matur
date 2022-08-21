@@ -22,6 +22,12 @@ struct NewReservationView: View {
                         .datePickerStyle(.graphical)
                 }
                 
+                if viewModel.yelpRestaurant.openingHours!.isOpenOnTime(ofDate: viewModel.date) {
+                    Text("open")
+                } else {
+                    Text("closed")
+                }
+                
                 rooms
             }
             .navigationTitle("Reservierung")
