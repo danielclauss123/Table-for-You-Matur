@@ -23,12 +23,10 @@ struct NewReservationView: View {
                 }
                 
                 if viewModel.yelpRestaurant.openingHours!.isOpenOnTime(ofDate: viewModel.date) {
-                    Text("open")
+                    rooms
                 } else {
-                    Text("closed")
+                    Text("Du kannst keine Reservierung um diese Uhrzeit machen, da das Restaurant geschlossen ist oder es noch weniger als 2 Stunden bis Schliessung sind.")
                 }
-                
-                rooms
             }
             .navigationTitle("Reservierung")
             .navigationBarTitleDisplayMode(.inline)
