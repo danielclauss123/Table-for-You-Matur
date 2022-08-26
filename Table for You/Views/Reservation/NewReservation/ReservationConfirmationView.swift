@@ -7,39 +7,78 @@ struct ReservationConfirmationView: View {
     
     // MARK: - Body
     var body: some View {
-        Form {
-            VStack(alignment: .leading) {
-                Text(viewModel.restaurant.name)
-                    .font(.title3.bold())
+        VStack {
+            HStack {
+                AsyncImage(url: URL(string: viewModel.yelpRestaurant.imageUrl ?? "")) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    Image.defaultPlaceholder()
+                        .aspectRatio(1, contentMode: .fit)
+                }
+                .frame(width: 50, height: 50)
+                .clipped()
+                .cornerRadius(10)
                 
-                Text(viewModel.date, style: .time)
-                +
-                Text(", ")
-                +
-                Text(viewModel.date, style: .date)
+                Text(viewModel.yelpRestaurant.name)
+                    .font(.title2.bold())
                 
-                Text("\(viewModel.customerName), \(viewModel.numberOfPeople) \(viewModel.numberOfPeople == 1 ? "Person" : "Personen")")
+                Spacer()
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.headline)
+                        .foregroundColor(.secondary)
+                        .padding(7)
+                        .background(.quaternary)
+                        .clipShape(Circle())
+                }
             }
             
-            Section {
-                Button {
-                    viewModel.uploadReservation()
+            Divider()
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(viewModel.date, style: .time)
+                        .font(.headline)
+                    +
+                    Text(", ")
+                        .font(.headline)
+                    +
+                    Text(viewModel.date, style: .date)
                     
-                    if !viewModel.showingErrorAlert {
-                        dismiss()
-                    }
-                } label: {
-                    Text("Reservieren")
-                        .font(.body.bold())
-                        .foregroundColor(.accentColor)
+                    Spacer()
                 }
-                .alert(viewModel.errorMessage ?? "Unbekanntes Problem", isPresented: $viewModel.showingErrorAlert) {
-                    Button("Ok") { }
-                }
+                
+                Text("\(viewModel.numberOfPeople) \(viewModel.numberOfPeople == 1 ? "Person" : "Personen")")
+                    .font(.headline)
+                +
+                Text(" unter ")
+                +
+                Text(viewModel.customerName)
             }
+            
+            Button {
+                viewModel.uploadReservation()
+            } label: {
+                Text("Reservieren")
+                    .font(.title3.bold())
+                    .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.bordered)
         }
-        .navigationTitle("Bestätigen")
-        .navigationBarTitleDisplayMode(.inline)
+        .padding(10)
+        .background {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.ultraThickMaterial)
+        }
+        .padding()
+        .alert(viewModel.errorMessage ?? "Unbekanntes Problem", isPresented: $viewModel.showingErrorAlert) {
+            Button("Ok") { }
+        }
     }
 }
 

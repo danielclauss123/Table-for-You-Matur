@@ -13,14 +13,6 @@ struct OpeningHours: Codable, Equatable {
         open.filter { $0.weekday == weekday }
     }
     
-    func isOpenOnWeekday(ofDate date: Date) -> Bool {
-        guard let weekday = Weekday(fromDate: date) else {
-            return false
-        }
-        
-        return !hours(forWeekday: weekday).isEmpty
-    }
-    
     func isOpenOnTime(ofDate date: Date) -> Bool {
         guard let weekday = Weekday(fromDate: date), let start = Time(date: date) else {
             return false
