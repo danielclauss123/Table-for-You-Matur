@@ -5,31 +5,62 @@ struct NewReservationView: View {
     @StateObject var roomRepository: RoomRepository
     @StateObject var reservationRepository: ReservationRepository
     
+    @Binding var sheetIsPresented: Bool
+    
+    var problem: String? {
+        if !viewModel.reservationInfosAreValid {
+            return "Die eingegebenen Informationen sind nicht genügend oder falsch."
+        } else if !viewModel.reservationTimeIsPossible {
+            return "Keine Reservation zu dieser Zeit and diesem Tag möglich."
+        } else {
+            return nil
+        }
+    }
+    
     // MARK: - Body
     var body: some View {
         NavigationView {
             Form {
-                Section("Reservierung für") {
-                    TextField("Dein Name", text: $viewModel.customerName)
+                reservationInfos
+                
+                if let problem = problem {
+                    Section("Problem") {
+                        Text(problem)
+                    }
                 }
                 
-                Section("Anzahl Personen") {
-                    Stepper("\(viewModel.numberOfPeople) Personen", value: $viewModel.numberOfPeople, in: 1 ... 20)
-                }
-                
-                Section("Datum und Zeit") {
-                    DatePicker("Datum und Zeit Auswahl", selection: $viewModel.date, in: Date.now...)
-                        .datePickerStyle(.graphical)
-                }
-                
-                if viewModel.yelpRestaurant.openingHours!.isOpenOnTime(ofDate: viewModel.date) {
-                    rooms
-                } else {
-                    Text("Du kannst keine Reservierung um diese Uhrzeit machen, da das Restaurant geschlossen ist oder es noch weniger als 2 Stunden bis Schliessung sind.")
-                }
+                rooms
             }
             .navigationTitle("Reservierung")
             .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    
+    // MARK: - Reservation Infos
+    var reservationInfos: some View {
+        Group {
+            Section("Reservierung für") {
+                TextField("Dein Name", text: $viewModel.customerName)
+            }
+            
+            Section("Anzahl Personen") {
+                Stepper("\(viewModel.numberOfPeople) Personen", value: $viewModel.numberOfPeople, in: 1 ... 20)
+            }
+            
+            Section("Datum und Zeit") {
+                DatePicker("Datum und Zeit Auswahl", selection: $viewModel.date, in: Date.now...)
+                    .datePickerStyle(.graphical)
+                
+                if let openingHours = viewModel.yelpRestaurant.openingHours {
+                    DisclosureGroup("Öffnungszeiten") {
+                        AllOpeningHoursView(openingHours: openingHours)
+                            .padding(.bottom, 5)
+                        Text("Reservierung sind möglich bis spätestens zwei Stunden vor Schliessung.")
+                            .font(.footnote)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
         }
     }
     
@@ -54,10 +85,11 @@ struct NewReservationView: View {
                                 RoomRowView(
                                     room: room,
                                     currentReservations: reservationRepository.reservations(forRoomId: room.id),
-                                    viewModel: viewModel
+                                    viewModel: viewModel,
+                                    sheetIsPresented: $sheetIsPresented
                                 )
                             }
-                            .disabled(!viewModel.detailsAreValid)
+                            .disabled(!viewModel.reservationInfosAreValid || !viewModel.reservationTimeIsPossible)
                         }
                     }
             }
@@ -73,12 +105,13 @@ struct NewReservationView: View {
     }
     
     // MARK: - Init
-    init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail) {
+    init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail, sheetIsPresented: Binding<Bool>) {
         let viewModel = ReservationViewModel(restaurant: restaurant, yelpRestaurant: yelpRestaurant)
         
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._roomRepository = StateObject(wrappedValue: RoomRepository(restaurant: restaurant))
         self._reservationRepository = StateObject(wrappedValue: ReservationRepository(restaurant: restaurant, reservationViewModel: viewModel))
+        self._sheetIsPresented = sheetIsPresented
     }
     
     // MARK: - Example Init
@@ -86,6 +119,7 @@ struct NewReservationView: View {
         self._viewModel = StateObject(wrappedValue: ReservationViewModel.example)
         self._roomRepository = StateObject(wrappedValue: RoomRepository.example)
         self._reservationRepository = StateObject(wrappedValue: ReservationRepository.example)
+        self._sheetIsPresented = .constant(true)
     }
 }
 

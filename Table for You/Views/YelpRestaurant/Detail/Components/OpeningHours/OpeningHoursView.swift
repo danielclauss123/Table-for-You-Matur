@@ -20,7 +20,7 @@ struct OpeningHoursView: View {
                 }
             
             if showingAllOpeningHours {
-                allOpeningHours
+                AllOpeningHoursView(openingHours: openingHours)
             }
         }
     }
@@ -42,23 +42,6 @@ struct OpeningHoursView: View {
             Image(systemName: "chevron.\(showingAllOpeningHours ? "up" : "down")")
                 .imageScale(.small)
                 .foregroundStyle(.secondary)
-        }
-    }
-    
-    // MARK: - All Opening Hours
-    var allOpeningHours: some View {
-        VStack(alignment: .leading) {
-            ForEach(Weekday.allCases.filter { $0 != .unknown }) { weekday in
-                HStack(alignment: .top) {
-                    Text(weekday.name)
-                    
-                    Spacer()
-                    
-                    DayHoursView(dayHours: openingHours.hours(forWeekday: weekday))
-                        .font(.headline)
-                }
-                .padding(.top, 5)
-            }
         }
     }
 }

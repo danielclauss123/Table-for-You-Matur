@@ -6,13 +6,15 @@ struct RoomRowView: View {
     
     @ObservedObject var viewModel: ReservationViewModel
     
+    @Binding var sheetIsPresented: Bool
+    
     var availableTableCount: Int {
         room.availableTableCount(numberOfPeople: viewModel.numberOfPeople, existingReservations: currentReservations)
     }
     
     // MARK: - Body
     var body: some View {
-        NavigationLink(destination: RoomView(room: room, currentReservations: currentReservations, viewModel: viewModel)) {
+        NavigationLink(destination: RoomView(room: room, currentReservations: currentReservations, viewModel: viewModel, sheetIsPresented: $sheetIsPresented)) {
             HStack {
                 RoomThumbnailView(room: room, currentReservations: currentReservations, viewModel: viewModel)
                     .frame(width: 110, height: 110)
@@ -35,7 +37,7 @@ struct RoomRowView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             List {
-                RoomRowView(room: .examples[0], currentReservations: [], viewModel: .example)
+                RoomRowView(room: .examples[0], currentReservations: [], viewModel: .example, sheetIsPresented: .constant(true))
             }
         }
     }

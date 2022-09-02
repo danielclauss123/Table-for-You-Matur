@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct ReservationConfirmationView: View {
-    @Environment(\.dismiss) var dismiss
-    
     @ObservedObject var viewModel: ReservationViewModel
+    
+    @Binding var sheetIsPresented: Bool
     
     // MARK: - Body
     var body: some View {
@@ -63,6 +63,9 @@ struct ReservationConfirmationView: View {
             
             Button {
                 viewModel.uploadReservation()
+                if !viewModel.showingErrorAlert {
+                    sheetIsPresented = false
+                }
             } label: {
                 Text("Reservieren")
                     .font(.title3.bold())
@@ -73,7 +76,7 @@ struct ReservationConfirmationView: View {
         .padding(10)
         .background {
             RoundedRectangle(cornerRadius: 10)
-                .fill(.ultraThickMaterial)
+                .fill(.quaternary)
         }
         .padding()
         .alert(viewModel.errorMessage ?? "Unbekanntes Problem", isPresented: $viewModel.showingErrorAlert) {
@@ -87,7 +90,7 @@ struct ReservationConfirmationView: View {
 struct ReservationConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ReservationConfirmationView(viewModel: .example)
+            ReservationConfirmationView(viewModel: .example, sheetIsPresented: .constant(true))
         }
     }
 }
