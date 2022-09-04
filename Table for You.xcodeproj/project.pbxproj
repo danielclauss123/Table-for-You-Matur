@@ -88,6 +88,7 @@
 		7EC033E728A3D484009F8AED /* ReservationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC033E628A3D484009F8AED /* ReservationRepository.swift */; };
 		7EC2546B28AFF97B0047CCB1 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2546A28AFF97B0047CCB1 /* Time.swift */; };
 		7EC4F37428A7E8FB00603DD0 /* DynamicalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */; };
+		7ECDC31C28C4A7ED0062735F /* ReservationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -168,6 +169,7 @@
 		7EC033E628A3D484009F8AED /* ReservationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRepository.swift; sourceTree = "<group>"; };
 		7EC2546A28AFF97B0047CCB1 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicalStack.swift; sourceTree = "<group>"; };
+		7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -482,6 +484,7 @@
 		7E819B1228A188EE00B67BAA /* Reservation */ = {
 			isa = PBXGroup;
 			children = (
+				7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */,
 				7E819B1328A188EE00B67BAA /* NewReservation */,
 			);
 			path = Reservation;
@@ -679,6 +682,7 @@
 				7E819AD628A187D100B67BAA /* Geohash.swift in Sources */,
 				7E819B4C28A188EE00B67BAA /* BottomSheet.swift in Sources */,
 				7E819AD128A187D100B67BAA /* YelpRestaurantStore.swift in Sources */,
+				7ECDC31C28C4A7ED0062735F /* ReservationRowView.swift in Sources */,
 				7E819ACE28A187D100B67BAA /* Weekday.swift in Sources */,
 				7E819B3D28A188EE00B67BAA /* PhotosView.swift in Sources */,
 				7E819B4828A188EE00B67BAA /* UIApplication.swift in Sources */,

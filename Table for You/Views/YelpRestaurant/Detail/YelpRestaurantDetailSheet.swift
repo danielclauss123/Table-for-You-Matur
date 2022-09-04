@@ -71,7 +71,7 @@ struct YelpRestaurantDetailSheet: View {
                     Button {
                         showingReservationSheet = true
                     } label: {
-                        Label("Reservieren", systemImage: "calendar.badge.clock")
+                        Label("Reservieren", systemImage: "calendar.badge.plus")
                             .font(.title2.bold())
                             .frame(maxWidth: .infinity)
                     }
