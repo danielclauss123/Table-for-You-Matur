@@ -53,7 +53,7 @@ struct NewReservationView: View {
                 
                 if let openingHours = viewModel.yelpRestaurant.openingHours {
                     DisclosureGroup("Öffnungszeiten") {
-                        AllOpeningHoursView(openingHours: openingHours)
+                        AllHoursView(openingHours: openingHours)
                             .padding(.bottom, 5)
                         Text("Reservierung sind möglich bis spätestens zwei Stunden vor Schliessung.")
                             .font(.footnote)

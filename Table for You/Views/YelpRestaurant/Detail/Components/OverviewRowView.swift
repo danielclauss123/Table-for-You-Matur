@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension YelpRestaurantDetailSheet {
+extension YelpRestaurantDetailContentView {
     struct OverviewRowView: View {
         let restaurant: YelpRestaurantDetail
         let distance: Double?
@@ -85,10 +85,10 @@ extension YelpRestaurantDetailSheet {
 struct OverviewRowView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            YelpRestaurantDetailSheet.OverviewRowView(restaurant: YelpRestaurantDetail.fullExample1, distance: 5.6) { _ in }
+            YelpRestaurantDetailContentView.OverviewRowView(restaurant: YelpRestaurantDetail.fullExample1, distance: 5.6) { _ in }
                 .previewLayout(.fixed(width: 300, height: 50))
             
-            YelpRestaurantDetailSheet.OverviewRowView(restaurant: YelpRestaurantDetail.lackingExample, distance: nil) { _ in }
+            YelpRestaurantDetailContentView.OverviewRowView(restaurant: YelpRestaurantDetail.lackingExample, distance: nil) { _ in }
                 .previewLayout(.fixed(width: 300, height: 50))
         }
     }

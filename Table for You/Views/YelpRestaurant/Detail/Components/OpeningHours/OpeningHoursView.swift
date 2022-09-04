@@ -20,7 +20,7 @@ struct OpeningHoursView: View {
                 }
             
             if showingAllOpeningHours {
-                AllOpeningHoursView(openingHours: openingHours)
+                AllHoursView(openingHours: openingHours)
             }
         }
     }

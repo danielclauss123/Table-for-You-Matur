@@ -108,7 +108,7 @@ struct RestaurantSearchSheet: View {
         ScrollView {
             VStack {
                 ForEach(restaurantRepo.searchedRestaurants) { restaurant in
-                    YelpRestaurantDetailRowView(restaurant: restaurant) {
+                    RestaurantRowView(restaurant: restaurant) {
                         selectedRestaurant = restaurant
                     }
                 }

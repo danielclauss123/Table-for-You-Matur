@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct AllOpeningHoursView: View {
+struct AllHoursView: View {
     let openingHours: OpeningHours
     
     // MARK: - Body
@@ -23,8 +23,8 @@ struct AllOpeningHoursView: View {
 
 
 // MARK: - Previews
-struct AllOpeningHoursView_Previews: PreviewProvider {
+struct AllHoursView_Previews: PreviewProvider {
     static var previews: some View {
-        AllOpeningHoursView(openingHours: .example)
+        AllHoursView(openingHours: .example)
     }
 }

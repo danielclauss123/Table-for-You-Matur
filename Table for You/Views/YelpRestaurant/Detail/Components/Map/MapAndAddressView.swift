@@ -1,7 +1,7 @@
 import SwiftUI
 import CoreLocation
 
-extension YelpRestaurantDetailSheet {
+extension YelpRestaurantDetailContentView {
     struct MapAndAddressView: View {
         let restaurant: YelpRestaurantDetail
         @Binding var distance: CLLocationDistance?
@@ -66,7 +66,7 @@ extension YelpRestaurantDetailSheet {
 // MARK: - Previews
 struct MapAndAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        YelpRestaurantDetailSheet.MapAndAddressView(restaurant: .fullExample1, distance: .constant(nil))
+        YelpRestaurantDetailContentView.MapAndAddressView(restaurant: .fullExample1, distance: .constant(nil))
             .previewLayout(.sizeThatFits)
     }
 }

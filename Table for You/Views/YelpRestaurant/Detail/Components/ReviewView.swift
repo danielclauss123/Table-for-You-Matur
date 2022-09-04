@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension YelpRestaurantDetailSheet {
+extension YelpRestaurantDetailContentView {
     struct ReviewView: View {
         let rating: Double
         let reviewCount: Int
@@ -38,7 +38,7 @@ extension YelpRestaurantDetailSheet {
 // MARK: - Previews
 struct ReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        YelpRestaurantDetailSheet.ReviewView(rating: 5, reviewCount: 4, yelpURL: YelpRestaurantDetail.fullExample1.yelpURL)
+        YelpRestaurantDetailContentView.ReviewView(rating: 5, reviewCount: 4, yelpURL: YelpRestaurantDetail.fullExample1.yelpURL)
             .previewLayout(.sizeThatFits)
     }
 }

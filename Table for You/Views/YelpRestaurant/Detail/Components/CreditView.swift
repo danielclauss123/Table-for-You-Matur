@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension YelpRestaurantDetailSheet {
+extension YelpRestaurantDetailContentView {
     struct CreditView: View {
         let yelpURL: URL
         
@@ -20,7 +20,7 @@ extension YelpRestaurantDetailSheet {
 // MARK: - Previews
 struct CreditView_Previews: PreviewProvider {
     static var previews: some View {
-        YelpRestaurantDetailSheet.CreditView(yelpURL: YelpRestaurantDetail.fullExample1.yelpURL)
+        YelpRestaurantDetailContentView.CreditView(yelpURL: YelpRestaurantDetail.fullExample1.yelpURL)
             .previewLayout(.sizeThatFits)
     }
 }

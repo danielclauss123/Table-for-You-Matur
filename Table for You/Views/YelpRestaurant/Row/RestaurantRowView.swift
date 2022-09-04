@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct YelpRestaurantDetailRowView: View {
+struct RestaurantRowView: View {
     let restaurant: YelpRestaurantDetail
     let onTap: () -> Void
     
@@ -79,15 +79,15 @@ struct YelpRestaurantDetailRowView: View {
 
 
 // MARK: - Previews
-struct YelpRestaurantDetailRowView_Previews: PreviewProvider {
+struct RestaurantRowView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ScrollView {
                 VStack {
-                    YelpRestaurantDetailRowView(restaurant: YelpRestaurantDetail.fullExample1) { }
+                    RestaurantRowView(restaurant: YelpRestaurantDetail.fullExample1) { }
                         .previewLayout(.sizeThatFits)
                     
-                    YelpRestaurantDetailRowView(restaurant: YelpRestaurantDetail.lackingExample) { }
+                    RestaurantRowView(restaurant: YelpRestaurantDetail.lackingExample) { }
                         .previewLayout(.sizeThatFits)
                 }
                 .padding()
