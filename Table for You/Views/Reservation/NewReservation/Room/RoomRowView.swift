@@ -4,7 +4,7 @@ struct RoomRowView: View {
     let room: Room
     let currentReservations: [Reservation]
     
-    @ObservedObject var viewModel: ReservationViewModel
+    @ObservedObject var viewModel: ReservationVM
     
     @Binding var sheetIsPresented: Bool
     

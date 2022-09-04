@@ -2,7 +2,7 @@
  Abstract:
     A class that combines the CLLocationManager and MKLocalSearchCompletion to get the user location either by GPS or by a text entered address provided by the user.
  Info:
-    The coordinate attribute is published and not a computed property. When using only this model, this doesn't make much sense and using a computed property would be safer and less complicated. However, this class is referenced by the RestaurantRepository and a published property for coordinate is needed, so that the repository can update when the coordinate changes (done with Combine).
+    The coordinate attribute is published and not a computed property. When using only this model, this doesn't make much sense and using a computed property would be safer and less complicated. However, this class is referenced by the RestaurantRepo and a published property for coordinate is needed, so that the repository can update when the coordinate changes (done with Combine).
  */
 
 import Foundation

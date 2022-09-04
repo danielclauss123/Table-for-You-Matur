@@ -4,7 +4,7 @@ import CoreLocation
 struct RestaurantSearchSheet: View {
     @Binding var selectedRestaurant: YelpRestaurantDetail?
     
-    @ObservedObject var restaurantRepository: RestaurantRepository
+    @ObservedObject var restaurantRepo: RestaurantRepo
     @ObservedObject var locationSearcher: LocationSearcher
     
     @State private var sheetStatus = BottomSheetStatus.up
@@ -36,7 +36,7 @@ struct RestaurantSearchSheet: View {
                     "Restaurant Name",
                     systemImage: "magnifyingglass",
                     backgroundColor: Color(uiColor: .systemGray5),
-                    text: $restaurantRepository.searchText
+                    text: $restaurantRepo.searchText
                 ) { isEditing in
                     if isEditing {
                         sheetStatus = .up
@@ -55,7 +55,7 @@ struct RestaurantSearchSheet: View {
                 if restaurantSearchIsFocused {
                     Button("Abbrechen") {
                         sheetStatus = .middle
-                        restaurantRepository.searchText = ""
+                        restaurantRepo.searchText = ""
                     }
                     .transition(.opacity)
                 }
@@ -74,7 +74,7 @@ struct RestaurantSearchSheet: View {
     // MARK: - Content
     var content: some View {
         Group {
-            switch restaurantRepository.loadingStatus {
+            switch restaurantRepo.loadingStatus {
                 case .loading:
                     ProgressView()
                         .frame(maxHeight: .infinity)
@@ -83,7 +83,7 @@ struct RestaurantSearchSheet: View {
                 case .firestoreError(let error):
                     errorView(error)
                 case .ready:
-                    if restaurantRepository.searchedRestaurants.isEmpty {
+                    if restaurantRepo.searchedRestaurants.isEmpty {
                         Text("Kein Ergebnis.")
                             .multilineTextAlignment(.center)
                             .foregroundColor(.secondary)
@@ -107,7 +107,7 @@ struct RestaurantSearchSheet: View {
     var restaurantList: some View {
         ScrollView {
             VStack {
-                ForEach(restaurantRepository.searchedRestaurants) { restaurant in
+                ForEach(restaurantRepo.searchedRestaurants) { restaurant in
                     YelpRestaurantDetailRowView(restaurant: restaurant) {
                         selectedRestaurant = restaurant
                     }
@@ -118,10 +118,10 @@ struct RestaurantSearchSheet: View {
     }
     
     // MARK: - Initializer
-    init(selectedRestaurant: Binding<YelpRestaurantDetail?>, restaurantRepository: RestaurantRepository) {
+    init(selectedRestaurant: Binding<YelpRestaurantDetail?>, restaurantRepo: RestaurantRepo) {
         self._selectedRestaurant = selectedRestaurant
-        self.restaurantRepository = restaurantRepository
-        self.locationSearcher = restaurantRepository.locationSearcher
+        self.restaurantRepo = restaurantRepo
+        self.locationSearcher = restaurantRepo.locationSearcher
     }
 }
 
@@ -134,7 +134,7 @@ struct RestaurantSearchSheet_Previews: PreviewProvider {
                 RestaurantAnnotationsMapView(selectedRestaurant: .constant(nil), restaurants: [], center: .zero)
                     .ignoresSafeArea()
                 
-                RestaurantSearchSheet(selectedRestaurant: .constant(nil), restaurantRepository: RestaurantRepository(locationSearcher: LocationSearcher.example))
+                RestaurantSearchSheet(selectedRestaurant: .constant(nil), restaurantRepo: RestaurantRepo(locationSearcher: LocationSearcher.example))
             }
         }
         .tabItem {

@@ -4,7 +4,7 @@ import CoreLocation
 struct YelpRestaurantDetailSheet: View {
     @Binding var selectedRestaurant: YelpRestaurantDetail?
     
-    @ObservedObject var restaurantRepository: RestaurantRepository
+    @ObservedObject var restaurantRepo: RestaurantRepo
     
     @State private var sheetStatus = BottomSheetStatus.hidden
     
@@ -77,7 +77,7 @@ struct YelpRestaurantDetailSheet: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .sheet(isPresented: $showingReservationSheet) {
-                        if let firestoreRestaurant = restaurantRepository.restaurant(forYelpId: restaurant.id) {
+                        if let firestoreRestaurant = restaurantRepo.restaurant(forYelpId: restaurant.id) {
                             NewReservationView(restaurant: firestoreRestaurant, yelpRestaurant: restaurant, sheetIsPresented: $showingReservationSheet)
                         }
                     }
@@ -121,7 +121,7 @@ struct YelpRestaurantDetailSheet_Previews: PreviewProvider {
                     RestaurantAnnotationsMapView(selectedRestaurant: $selectedRestaurant, restaurants: YelpRestaurantDetail.examples, center: CLLocationCoordinate2D(latitude: 47, longitude: 8))
                         .ignoresSafeArea()
                     
-                    YelpRestaurantDetailSheet(selectedRestaurant: $selectedRestaurant, restaurantRepository: RestaurantRepository(locationSearcher: .example))
+                    YelpRestaurantDetailSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: RestaurantRepo(locationSearcher: .example))
                 }
                 .task {
                     selectedRestaurant = .fullExample1

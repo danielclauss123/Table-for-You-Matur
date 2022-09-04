@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ReservationConfirmationView: View {
-    @ObservedObject var viewModel: ReservationViewModel
+    @ObservedObject var viewModel: ReservationVM
     
     @Binding var sheetIsPresented: Bool
     

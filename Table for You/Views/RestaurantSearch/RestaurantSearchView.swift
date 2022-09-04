@@ -7,7 +7,7 @@ import SwiftUI
 import CoreLocation
 
 struct RestaurantSearchView: View {
-    @StateObject var restaurantRepository: RestaurantRepository
+    @StateObject var restaurantRepo: RestaurantRepo
     
     @State private var selectedRestaurant: YelpRestaurantDetail?
     
@@ -17,18 +17,18 @@ struct RestaurantSearchView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                RestaurantAnnotationsMapView(selectedRestaurant: $selectedRestaurant, restaurants: restaurantRepository.searchedRestaurants, center: mapCenter)
+                RestaurantAnnotationsMapView(selectedRestaurant: $selectedRestaurant, restaurants: restaurantRepo.searchedRestaurants, center: mapCenter)
                     .ignoresSafeArea()
                 
-                RestaurantSearchSheet(selectedRestaurant: $selectedRestaurant, restaurantRepository: restaurantRepository)
+                RestaurantSearchSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo)
                     .zIndex(selectedRestaurant == nil ? 1 : 0) // TODO: This makes the animation not as nice, so maybe find different solution.
                 
-                YelpRestaurantDetailSheet(selectedRestaurant: $selectedRestaurant, restaurantRepository: restaurantRepository)
+                YelpRestaurantDetailSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo)
             }
             .navigationTitle("Restaurant Suche")
             .navigationBarHidden(true)
             .task {
-                restaurantRepository.locationSearcher.locationSourceSelected = {
+                restaurantRepo.locationSearcher.locationSourceSelected = {
                     mapCenter = $0
                 }
             }
@@ -37,7 +37,7 @@ struct RestaurantSearchView: View {
     
     // MARK: - Initializer
     init() {
-        self._restaurantRepository = StateObject(wrappedValue: RestaurantRepository(locationSearcher: LocationSearcher()))
+        self._restaurantRepo = StateObject(wrappedValue: RestaurantRepo(locationSearcher: LocationSearcher()))
     }
 }
 

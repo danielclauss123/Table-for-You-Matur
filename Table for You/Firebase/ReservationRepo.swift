@@ -4,25 +4,25 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 @MainActor
-class ReservationRepository: ObservableObject {
+class ReservationRepo: ObservableObject {
     @Published var reservations = [Reservation]()
     
     @Published private(set) var loadingStatus = LoadingStatus.ready
     
     let restaurant: Restaurant
     
-    let reservationViewModel: ReservationViewModel
+    let reservationVM: ReservationVM
     private var dateCancellable: AnyCancellable?
     
     private var currentListener: ListenerRegistration?
     private var currentListenerId: UUID?
     
     // MARK: - Init
-    init(restaurant: Restaurant, reservationViewModel: ReservationViewModel) {
+    init(restaurant: Restaurant, reservationVM: ReservationVM) {
         self.restaurant = restaurant
-        self.reservationViewModel = reservationViewModel
+        self.reservationVM = reservationVM
         
-        dateCancellable = reservationViewModel.$date.sink { date in
+        dateCancellable = reservationVM.$date.sink { date in
             self.addFirestoreListener(forDate: date)
         }
     }
@@ -77,6 +77,6 @@ class ReservationRepository: ObservableObject {
 }
 
 // MARK: - Example
-extension ReservationRepository {
-    static let example = ReservationRepository(restaurant: .examples[0], reservationViewModel: .example)
+extension ReservationRepo {
+    static let example = ReservationRepo(restaurant: .examples[0], reservationVM: .example)
 }

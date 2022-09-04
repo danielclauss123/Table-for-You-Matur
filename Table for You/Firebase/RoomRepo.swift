@@ -3,7 +3,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 @MainActor
-class RoomRepository: ObservableObject {
+class RoomRepo: ObservableObject {
     let restaurant: Restaurant
     
     @Published private(set) var rooms = [Room]()
@@ -77,6 +77,6 @@ class RoomRepository: ObservableObject {
 }
 
 // MARK: - Example
-extension RoomRepository {
-    static let example = RoomRepository(restaurant: .examples[0], rooms: Room.examples)
+extension RoomRepo {
+    static let example = RoomRepo(restaurant: .examples[0], rooms: Room.examples)
 }

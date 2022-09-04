@@ -6,7 +6,7 @@ import CoreLocation
 import Algorithms
 
 @MainActor
-class RestaurantRepository: ObservableObject {
+class RestaurantRepo: ObservableObject {
     @Published private var restaurants = [Restaurant]()
     @Published private var yelpRestaurants = [YelpRestaurantDetail]()
     

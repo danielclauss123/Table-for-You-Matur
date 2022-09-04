@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct NewReservationView: View {
-    @StateObject var viewModel: ReservationViewModel
-    @StateObject var roomRepository: RoomRepository
-    @StateObject var reservationRepository: ReservationRepository
+    @StateObject var viewModel: ReservationVM
+    @StateObject var roomRepo: RoomRepo
+    @StateObject var reservationRepo: ReservationRepo
     
     @Binding var sheetIsPresented: Bool
     
@@ -67,7 +67,7 @@ struct NewReservationView: View {
     // MARK: - Rooms
     var rooms: some View {
         Section {
-            switch roomRepository.loadingStatus {
+            switch roomRepo.loadingStatus {
                 case .loading:
                     EmptyView()
                 case .firestoreError(let error):
@@ -78,13 +78,13 @@ struct NewReservationView: View {
                         .foregroundColor(.secondary)
                 case .ready:
                     Group {
-                        if roomRepository.rooms.isEmpty {
+                        if roomRepo.rooms.isEmpty {
                             Text("Noch kein Raum vorhanden...")
                         } else {
-                            ForEach(roomRepository.rooms) { room in
+                            ForEach(roomRepo.rooms) { room in
                                 RoomRowView(
                                     room: room,
-                                    currentReservations: reservationRepository.reservations(forRoomId: room.id),
+                                    currentReservations: reservationRepo.reservations(forRoomId: room.id),
                                     viewModel: viewModel,
                                     sheetIsPresented: $sheetIsPresented
                                 )
@@ -96,7 +96,7 @@ struct NewReservationView: View {
         } header: {
             HStack {
                 Text("Wo willst du sitzen?")
-                if roomRepository.loadingStatus == .loading {
+                if roomRepo.loadingStatus == .loading {
                     ProgressView()
                         .padding(.leading, 5)
                 }
@@ -106,19 +106,19 @@ struct NewReservationView: View {
     
     // MARK: - Init
     init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail, sheetIsPresented: Binding<Bool>) {
-        let viewModel = ReservationViewModel(restaurant: restaurant, yelpRestaurant: yelpRestaurant)
+        let viewModel = ReservationVM(restaurant: restaurant, yelpRestaurant: yelpRestaurant)
         
         self._viewModel = StateObject(wrappedValue: viewModel)
-        self._roomRepository = StateObject(wrappedValue: RoomRepository(restaurant: restaurant))
-        self._reservationRepository = StateObject(wrappedValue: ReservationRepository(restaurant: restaurant, reservationViewModel: viewModel))
+        self._roomRepo = StateObject(wrappedValue: RoomRepo(restaurant: restaurant))
+        self._reservationRepo = StateObject(wrappedValue: ReservationRepo(restaurant: restaurant, reservationVM: viewModel))
         self._sheetIsPresented = sheetIsPresented
     }
     
     // MARK: - Example Init
     fileprivate init() {
-        self._viewModel = StateObject(wrappedValue: ReservationViewModel.example)
-        self._roomRepository = StateObject(wrappedValue: RoomRepository.example)
-        self._reservationRepository = StateObject(wrappedValue: ReservationRepository.example)
+        self._viewModel = StateObject(wrappedValue: ReservationVM.example)
+        self._roomRepo = StateObject(wrappedValue: RoomRepo.example)
+        self._reservationRepo = StateObject(wrappedValue: ReservationRepo.example)
         self._sheetIsPresented = .constant(true)
     }
 }

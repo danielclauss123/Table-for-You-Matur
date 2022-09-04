@@ -4,7 +4,7 @@ import FirebaseAuth
 import SystemConfiguration
 import SwiftUI
 
-class ReservationViewModel: ObservableObject {
+class ReservationVM: ObservableObject {
     @Published var customerName = UserDefaults.standard.loadAndDecode(fromKey: .customerName, withDefault: "") {
         didSet {
             try? UserDefaults.standard.encodeAndSet(customerName, forKey: .customerName)
@@ -87,6 +87,6 @@ class ReservationViewModel: ObservableObject {
 }
 
 // MARK: - Example
-extension ReservationViewModel {
-    static let example = ReservationViewModel(restaurant: .examples[0], yelpRestaurant: .fullExample1)
+extension ReservationVM {
+    static let example = ReservationVM(restaurant: .examples[0], yelpRestaurant: .fullExample1)
 }
