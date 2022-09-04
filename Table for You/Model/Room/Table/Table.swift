@@ -168,11 +168,3 @@ extension Table {
     /// An empty table with only one seat.
     static let empty = Table(id: UUID().uuidString, name: "", numberOfSeats: 1, headSeatsEnabled: false, offset: .zero, rotation: .normal)
 }
-
-// MARK: - Example
-extension Table {
-    /// An example table with the given properties.
-    static func example(seatCount: Int = 4, sideSeats: Bool = true, rotation: Rotation = .normal) -> Table {
-        Table(name: "Example \(seatCount) seats", numberOfSeats: seatCount, headSeatsEnabled: sideSeats, rotation: rotation)
-    }
-}

@@ -85,7 +85,8 @@
 		7E819B5628A1891400B67BAA /* YelpExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B5428A1891400B67BAA /* YelpExamples.swift */; };
 		7E819B5728A1891400B67BAA /* RestaurantExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819B5528A1891400B67BAA /* RestaurantExamples.swift */; };
 		7E8432AD28AF8D9B00B79237 /* RoomThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8432AC28AF8D9B00B79237 /* RoomThumbnailView.swift */; };
-		7E8BB7F328C4CABB00BACDB9 /* RoomExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BB7F228C4CABB00BACDB9 /* RoomExamples.swift */; };
+		7E8BB7F328C4CABB00BACDB9 /* RoomExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BB7F228C4CABB00BACDB9 /* RoomExample.swift */; };
+		7E8BB7F528C4CF1B00BACDB9 /* ReservationExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BB7F428C4CF1B00BACDB9 /* ReservationExamples.swift */; };
 		7EC033E728A3D484009F8AED /* ReservationRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC033E628A3D484009F8AED /* ReservationRepo.swift */; };
 		7EC2546B28AFF97B0047CCB1 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2546A28AFF97B0047CCB1 /* Time.swift */; };
 		7EC4F37428A7E8FB00603DD0 /* DynamicalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */; };
@@ -167,7 +168,8 @@
 		7E819B5428A1891400B67BAA /* YelpExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpExamples.swift; sourceTree = "<group>"; };
 		7E819B5528A1891400B67BAA /* RestaurantExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantExamples.swift; sourceTree = "<group>"; };
 		7E8432AC28AF8D9B00B79237 /* RoomThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomThumbnailView.swift; sourceTree = "<group>"; };
-		7E8BB7F228C4CABB00BACDB9 /* RoomExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomExamples.swift; sourceTree = "<group>"; };
+		7E8BB7F228C4CABB00BACDB9 /* RoomExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomExample.swift; sourceTree = "<group>"; };
+		7E8BB7F428C4CF1B00BACDB9 /* ReservationExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationExamples.swift; sourceTree = "<group>"; };
 		7EC033E628A3D484009F8AED /* ReservationRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRepo.swift; sourceTree = "<group>"; };
 		7EC2546A28AFF97B0047CCB1 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicalStack.swift; sourceTree = "<group>"; };
@@ -225,8 +227,9 @@
 			children = (
 				7E517806289EA24000B5127D /* Preview Assets.xcassets */,
 				7E819B5528A1891400B67BAA /* RestaurantExamples.swift */,
+				7E8BB7F428C4CF1B00BACDB9 /* ReservationExamples.swift */,
+				7E8BB7F228C4CABB00BACDB9 /* RoomExample.swift */,
 				7E819B5428A1891400B67BAA /* YelpExamples.swift */,
-				7E8BB7F228C4CABB00BACDB9 /* RoomExamples.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -659,9 +662,10 @@
 				7E819AD228A187D100B67BAA /* YelpRestaurants.swift in Sources */,
 				7E819AD728A187D100B67BAA /* Date.swift in Sources */,
 				7E819B2C28A188EE00B67BAA /* RestaurantSearchSheet.swift in Sources */,
-				7E8BB7F328C4CABB00BACDB9 /* RoomExamples.swift in Sources */,
+				7E8BB7F328C4CABB00BACDB9 /* RoomExample.swift in Sources */,
 				7E819B3328A188EE00B67BAA /* ShortPriceView.swift in Sources */,
 				7E819AD328A187D100B67BAA /* YelpFusionAPI.swift in Sources */,
+				7E8BB7F528C4CF1B00BACDB9 /* ReservationExamples.swift in Sources */,
 				7E819ACC28A187D100B67BAA /* TableUIFunctions.swift in Sources */,
 				7E819B5228A188EE00B67BAA /* HalfRoundedRectangle.swift in Sources */,
 				7E819B4E28A188EE00B67BAA /* MKLocalSearchCompletionPlacemark.swift in Sources */,

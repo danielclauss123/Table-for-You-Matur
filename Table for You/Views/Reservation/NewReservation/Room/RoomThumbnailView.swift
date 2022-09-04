@@ -34,6 +34,6 @@ struct RoomThumbnailView: View {
 // MARK: - Previews
 struct RoomThumbnailView_Previews: PreviewProvider {
     static var previews: some View {
-        RoomThumbnailView(room: .examples[0], currentReservations: [], viewModel: .example)
+        RoomThumbnailView(room: .example, currentReservations: [], viewModel: .example)
     }
 }

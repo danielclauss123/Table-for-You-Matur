@@ -88,5 +88,5 @@ class ReservationVM: ObservableObject {
 
 // MARK: - Example
 extension ReservationVM {
-    static let example = ReservationVM(restaurant: .examples[0], yelpRestaurant: .fullExample1)
+    static let example = ReservationVM(restaurant: .example, yelpRestaurant: .fullExample1)
 }

@@ -68,11 +68,11 @@ extension YelpRestaurantDetail {
         displayPhone: "+41 52 202 74 22",
         reviewCount: 12,
         rating: 4.5,
-        location: YelpLocation.example,
+        location: .example,
         coordinates: Coordinate(latitude: 47.4742813, longitude: 8.3077803),
         photos: ["https://s3-media2.fl.yelpcdn.com/bphoto/3z8n_I2Jw9acNH9GVDWpDQ/o.jpg", "https://s3-media4.fl.yelpcdn.com/bphoto/GKUXvdiR8FoYTsu5sPlUOg/o.jpg", "https://s3-media4.fl.yelpcdn.com/bphoto/4XPgGvNy8c6nOS_Cp6W06Q/o.jpg"],
         price: "$$",
-        hours: [OpeningHours.example],
+        hours: [.example],
         specialHours: []
     )
     
@@ -86,11 +86,11 @@ extension YelpRestaurantDetail {
         displayPhone: "076 283 11 21",
         reviewCount: 5,
         rating: 4.5,
-        location: YelpLocation.example,
+        location: .example,
         coordinates: Coordinate(latitude: 45, longitude: 8),
         photos: ["https://s3-media0.fl.yelpcdn.com/bphoto/b65JHPl73YODrcKlGxvPRg/o.jpg", "https://prinz.de/wp-content/uploads/2019/05/restaurant-massi.jpg", "https://www.mein-ruhrgebiet.blog/wp-content/uploads/2019/01/Fine_Dining_Spitzenkueche_Goldener_Anker_Dorsten_Restaurant_Kochschule_hochkant.jpg"],
         price: "$",
-        hours: [OpeningHours.example],
+        hours: [.example],
         specialHours: nil
     )
     

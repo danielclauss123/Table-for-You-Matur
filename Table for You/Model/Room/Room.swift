@@ -82,11 +82,3 @@ extension Room {
         Room(name: "Raum\(roomNumber != nil ? " \(roomNumber!)" : "")", tables: [Table.new(1)])
     }
 }
-
-// MARK: - Example
-extension Room {
-    /// An array of two example rooms.
-    static var examples: [Room] {
-        [Room(tables: [.example(), .example(), .example()]), Room(name: "Room 2", tables: [.example(), .example(), .example()])]
-    }
-}

@@ -78,5 +78,5 @@ class RoomRepo: ObservableObject {
 
 // MARK: - Example
 extension RoomRepo {
-    static let example = RoomRepo(restaurant: .examples[0], rooms: Room.examples)
+    static let example = RoomRepo(restaurant: .example, rooms: Room.examples)
 }

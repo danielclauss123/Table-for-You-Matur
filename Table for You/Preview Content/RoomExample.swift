@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 
+// MARK: - Room
 extension Room {
     static let example = Room(
         id: "1639C77E-1F6C-4927-BC47-236110257C53",
@@ -14,4 +15,14 @@ extension Room {
             Table(id: "7F72BC42-99CA-4DB2-B49F-3D917109880C", name: "Tisch 6", seats: [Seat(id: "28618DE6-3CA9-43F3-A94C-21941928729C"), Seat(id: "A68BC572-B9FA-4654-9DA7-617C778C2D06"), Seat(id: "3E36917E-29DC-4F68-AD63-9F08D5B73388"), Seat(id: "121129F5-D59D-4C0F-AC5D-ECD54A1BED31")], headSeatsEnabled: false, offset: CGSize(width: 77.8163428474168, height: 94.198730815294), rotation: .normal)
         ],
         size: CGSize(width: 418.6364541105113, height: 493.93605925793935))
+    
+    static let examples = [.example, Room(name: "Innen", tables: [.example()], size: CGSize(width: 100, height: 100))]
+}
+
+// MARK: - Table
+extension Table {
+    /// An example table with the given properties.
+    static func example(seatCount: Int = 4, sideSeats: Bool = true, rotation: Rotation = .normal) -> Table {
+        Table(name: "Example \(seatCount) seats", numberOfSeats: seatCount, headSeatsEnabled: sideSeats, rotation: rotation)
+    }
 }

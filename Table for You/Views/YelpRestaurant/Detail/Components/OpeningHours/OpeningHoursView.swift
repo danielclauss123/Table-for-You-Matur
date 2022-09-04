@@ -50,7 +50,7 @@ struct OpeningHoursView: View {
 // MARK: - Previews
 struct OpeningHoursView_Previews: PreviewProvider {
     static var previews: some View {
-        OpeningHoursView(openingHours: OpeningHours.example)
+        OpeningHoursView(openingHours: .example)
             .previewLayout(.sizeThatFits)
     }
 }

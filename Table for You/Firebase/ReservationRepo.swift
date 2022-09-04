@@ -78,5 +78,5 @@ class ReservationRepo: ObservableObject {
 
 // MARK: - Example
 extension ReservationRepo {
-    static let example = ReservationRepo(restaurant: .examples[0], reservationVM: .example)
+    static let example = ReservationRepo(restaurant: .example, reservationVM: .example)
 }

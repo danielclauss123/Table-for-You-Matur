@@ -37,7 +37,7 @@ struct RoomRowView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             List {
-                RoomRowView(room: .examples[0], currentReservations: [], viewModel: .example, sheetIsPresented: .constant(true))
+                RoomRowView(room: .example, currentReservations: [], viewModel: .example, sheetIsPresented: .constant(true))
             }
         }
     }
