@@ -37,7 +37,7 @@ class ReservationRepo: ObservableObject {
         self.currentListenerId = listenerId
         
         currentListener = Firestore.collection(.reservations)
-            .whereField("restaurantId", isEqualTo: restaurant.uuidUnwrappedId)
+            .whereField("restaurantId", isEqualTo: restaurant.id.unwrapWithUUID())
             .whereField("date", isGreaterThan: Timestamp(date: date.addingTimeInterval(-60 * 60 * 2)))
             .whereField("date", isLessThan: Timestamp(date: date.addingTimeInterval(60 * 60 * 2)))
             .addSnapshotListener { snapshot, error in

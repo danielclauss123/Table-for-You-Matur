@@ -15,11 +15,6 @@ struct Restaurant: Identifiable, Codable {
 
 // MARK: - Computed Properties
 extension Restaurant {
-    /// The id unwrapped with a uuid default.
-    var uuidUnwrappedId: String {
-        id ?? UUID().uuidString
-    }
-    
     /// The coordinate of the restaurant.
     ///
     /// It accesses the private geoPoint var that can be uploaded to firebase.

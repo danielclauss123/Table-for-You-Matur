@@ -17,11 +17,6 @@ struct Reservation: Identifiable, Codable {
 
 // MARK: - Computed Properties
 extension Reservation {
-    /// The id unwrapped with a uuid default.
-    var uuidUnwrappedId: String {
-        id ?? UUID().uuidString
-    }
-    
     var endDate: Date {
         date.addingTimeInterval(60 * 60 * 2)
     }
