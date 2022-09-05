@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension YelpRestaurantDetailContentView {
+extension RestaurantDetailSheet {
     struct ContactView: View {
         let phone: String
         let displayPhone: String
@@ -33,7 +33,7 @@ extension YelpRestaurantDetailContentView {
 // MARK: - Previews
 struct ContactView_Previews: PreviewProvider {
     static var previews: some View {
-        YelpRestaurantDetailContentView.ContactView(phone: "0522027422", displayPhone: "0522027422")
+        RestaurantDetailSheet.ContactView(phone: "0522027422", displayPhone: "0522027422")
             .previewLayout(.sizeThatFits)
     }
 }

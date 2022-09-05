@@ -1,6 +1,6 @@
 import SwiftUI
 
-extension YelpRestaurantDetailContentView {
+extension RestaurantDetailSheet {
     struct PhotosView: View {
         let photoURLs: [String]
         
@@ -40,7 +40,7 @@ extension YelpRestaurantDetailContentView {
 // MARK: - Previews
 struct PhotosView_Previews: PreviewProvider {
     static var previews: some View {
-        YelpRestaurantDetailContentView.PhotosView(photoURLs: YelpRestaurantDetail.fullExample1.photos ?? [])
+        RestaurantDetailSheet.PhotosView(photoURLs: YelpRestaurantDetail.fullExample1.photos ?? [])
             .previewLayout(.sizeThatFits)
     }
 }

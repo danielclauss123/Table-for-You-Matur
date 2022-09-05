@@ -23,7 +23,7 @@ struct RestaurantSearchView: View {
                 RestaurantSearchSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo)
                     .zIndex(selectedRestaurant == nil ? 1 : 0) // TODO: This makes the animation not as nice, so maybe find different solution.
                 
-                YelpRestaurantDetailSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo)
+                RestaurantDetailSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo)
             }
             .navigationTitle("Restaurant Suche")
             .navigationBarHidden(true)

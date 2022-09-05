@@ -63,15 +63,12 @@ struct RestaurantRowView: View {
     
     // MARK: - Price and Reviews
     var reviews: some View {
-        Group {
+        HStack {
             if let rating = restaurant.rating, let reviewCount = restaurant.reviewCount {
-                HStack {
-                    ShortRatingView(rating: rating, reviewCount: reviewCount)
-                    
-                    if let priceInt = restaurant.priceInt {
-                        ShortPriceView(price: priceInt)
-                    }
-                }
+                ShortRatingView(rating: rating, reviewCount: reviewCount)
+            }
+            if let priceInt = restaurant.priceInt {
+                ShortPriceView(price: priceInt)
             }
         }
     }
@@ -81,18 +78,11 @@ struct RestaurantRowView: View {
 // MARK: - Previews
 struct RestaurantRowView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            ScrollView {
-                VStack {
-                    RestaurantRowView(restaurant: YelpRestaurantDetail.fullExample1) { }
-                        .previewLayout(.sizeThatFits)
-                    
-                    RestaurantRowView(restaurant: YelpRestaurantDetail.lackingExample) { }
-                        .previewLayout(.sizeThatFits)
-                }
-                .padding()
-            }
-            .navigationTitle("Restaurants")
+        Group {
+            RestaurantRowView(restaurant: .fullExample1) { }
+            
+            RestaurantRowView(restaurant: .lackingExample) { }
         }
+        .previewLayout(.sizeThatFits)
     }
 }
