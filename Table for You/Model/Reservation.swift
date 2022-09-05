@@ -7,8 +7,10 @@ struct Reservation: Identifiable, Codable {
     
     var customerId: String
     var customerName: String
+    var numberOfPeople: Int
     
     var restaurantId: String
+    var yelpId: String
     var roomId: String
     var tableId: String
     

@@ -7,11 +7,7 @@ struct MyReservationsView: View {
         NavigationView {
             List {
                 ForEach(myReservationsRepo.reservations) { reservation in
-                    VStack {
-                        Text(reservation.customerName)
-                        Text(reservation.date, style: .date)
-                        Text(reservation.date, style: .time)
-                    }
+                    ReservationRowView(reservation: reservation, restaurant: myReservationsRepo.yelpRestaurants.first(where: { $0.id == reservation.yelpId }) ?? .empty)
                 }
             }
             .navigationTitle("Meine Reservationen")

@@ -72,7 +72,7 @@ class ReservationVM: ObservableObject {
         do {
             let userId = try Auth.currentUser().uid
 
-            let reservation = Reservation(customerId: userId, customerName: customerName, restaurantId: restaurant.id.unwrapWithUUID(), roomId: roomId, tableId: tableId, date: date)
+            let reservation = Reservation(customerId: userId, customerName: customerName, numberOfPeople: numberOfPeople, restaurantId: restaurant.id.unwrapWithUUID(), yelpId: yelpRestaurant.id, roomId: roomId, tableId: tableId, date: date)
             
             try SCNetworkConnection.checkConnection()
             
