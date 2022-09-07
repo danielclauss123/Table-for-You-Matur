@@ -27,6 +27,11 @@ class ReservationRepo: ObservableObject {
         }
     }
     
+    // MARK: - Deinit
+    deinit {
+        currentListener?.remove()
+    }
+    
     // MARK: - Add Firestore Listener
     func addFirestoreListener(forDate date: Date) {
         loadingStatus = .loading

@@ -17,7 +17,7 @@ actor YelpRestaurantStore {
     /// The initializer is private, because there should be only one shared instance.
     private init() { }
     
-    /// Loads the given restaurants concurrently from either the cache or the yelp server.
+    /*/// Loads the given restaurants concurrently from either the cache or the yelp server.
     func loadRestaurants(withIds ids: [String]) async throws -> [YelpRestaurantDetail] {
         var restaurants = [YelpRestaurantDetail]()
         
@@ -30,6 +30,32 @@ actor YelpRestaurantStore {
             
             for try await restaurant in group {
                 restaurants.append(restaurant)
+            }
+        }
+        
+        return restaurants
+    }*/
+    
+    /// Loads the given restaurants concurrently from either the cache or the yelp server. If the loading fails, the restaurant gets skipped, and the rest of them still get loaded.
+    func loadRestaurants(withIds ids: [String]) async -> [YelpRestaurantDetail] {
+        var restaurants = [YelpRestaurantDetail]()
+        
+        await withTaskGroup(of: YelpRestaurantDetail?.self) { group in
+            for id in ids {
+                group.addTask {
+                    do {
+                        return try await self.loadRestaurant(withId: id)
+                    } catch {
+                        print("Failed to load yelp restaurant \(id). Error: \(error.localizedDescription)")
+                        return nil
+                    }
+                }
+            }
+            
+            for await restaurant in group {
+                if let restaurant = restaurant {
+                    restaurants.append(restaurant)
+                }
             }
         }
         

@@ -94,6 +94,7 @@
 		7EC4F37428A7E8FB00603DD0 /* DynamicalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */; };
 		7ECDC31C28C4A7ED0062735F /* ReservationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */; };
 		7EE1CFC328C4E94600A21735 /* RestaurantDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE1CFC228C4E94600A21735 /* RestaurantDetailSheet.swift */; };
+		7EEB519728C8F06300AADA7C /* TestRestaurantRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB519628C8F06300AADA7C /* TestRestaurantRepo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +181,7 @@
 		7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicalStack.swift; sourceTree = "<group>"; };
 		7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRowView.swift; sourceTree = "<group>"; };
 		7EE1CFC228C4E94600A21735 /* RestaurantDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSheet.swift; sourceTree = "<group>"; };
+		7EEB519628C8F06300AADA7C /* TestRestaurantRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRestaurantRepo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				7E819AE228A1883D00B67BAA /* RestaurantRepo.swift */,
+				7EEB519628C8F06300AADA7C /* TestRestaurantRepo.swift */,
 				7EC033E628A3D484009F8AED /* ReservationRepo.swift */,
 				7E821E1928C62E1600327B0B /* MyReservationsRepo.swift */,
 				7E819AE828A1883D00B67BAA /* RoomRepo.swift */,
@@ -675,6 +678,7 @@
 				7E819ADD28A187D100B67BAA /* UserDefaults.swift in Sources */,
 				7E819ADC28A187D100B67BAA /* MKDirections.swift in Sources */,
 				7E819AE928A1883D00B67BAA /* RestaurantRepo.swift in Sources */,
+				7EEB519728C8F06300AADA7C /* TestRestaurantRepo.swift in Sources */,
 				7EC033E728A3D484009F8AED /* ReservationRepo.swift in Sources */,
 				7E155D1B28A27AAC00ED9C79 /* ReservationConfirmationView.swift in Sources */,
 				7E819AD828A187D100B67BAA /* SCNetworkConnection.swift in Sources */,
