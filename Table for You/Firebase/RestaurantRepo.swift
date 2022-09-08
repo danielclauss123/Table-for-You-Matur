@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import CoreLocation
+import SystemConfiguration
 import Algorithms
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -62,11 +63,13 @@ class RestaurantRepo: ObservableObject {
             } catch is CancellationError {
                 print("Loading restaurants task got canceled.")
             } catch LocationSearcher.LocationError.coordinateIsNil {
-                loadingStatus = .error("Der Standort der Suche ist nicht bekannt.")
+                loadingStatus = .error("Standort unbekannt")
                 print("The location is nil.")
+            } catch SCNetworkConnection.NetworkConnectionError.noConnection {
+                loadingStatus = .error("Keine Internetverbindung")
+                print("No network connection.")
             } catch {
-                loadingStatus = .error("Es gab einen Fehler beim laden.")
-                
+                loadingStatus = .error("Fehler beim laden")
                 print("Failed to load restaurants. Error: \(error.localizedDescription)")
             }
         }
@@ -117,6 +120,8 @@ private actor LoadingService {
     
     // MARK: Load Restaurants
     private func loadRestaurants(atCoordinate coordinate: CLLocationCoordinate2D) async throws -> Response {
+        try SCNetworkConnection.checkConnection()
+        
         let userGeohash4 = Geohash.encode(
             latitude: coordinate.latitude,
             longitude: coordinate.longitude, 4

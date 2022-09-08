@@ -95,10 +95,18 @@ struct RestaurantSearchSheet: View {
     
     // MARK: - Error View
     func errorView(_ error: String) -> some View {
-        Text(error)
-            .multilineTextAlignment(.center)
-            .foregroundColor(.secondary)
-            .frame(maxHeight: .infinity)
+        VStack {
+            Text(error)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
+            
+            Button {
+                restaurantRepo.loadRestaurants()
+            } label: {
+                Label("Nochmal versuchen", systemImage: "arrow.counterclockwise")
+            }
+        }
+        .frame(maxHeight: .infinity)
     }
     
     // MARK: - Restaurant List
