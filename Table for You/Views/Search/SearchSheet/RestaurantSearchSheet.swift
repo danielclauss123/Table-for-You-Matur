@@ -75,21 +75,19 @@ struct RestaurantSearchSheet: View {
     var content: some View {
         Group {
             switch restaurantRepo.loadingStatus {
-                case .loading:
-                    ProgressView()
+            case .loading:
+                ProgressView()
+                    .frame(maxHeight: .infinity)
+            case .error(let message):
+                errorView(message)
+            case .ready:
+                if restaurantRepo.searchedRestaurants.isEmpty {
+                    Text("Kein Ergebnis.")
+                        .multilineTextAlignment(.center)
+                        .foregroundColor(.secondary)
                         .frame(maxHeight: .infinity)
-                case .yelpError(let error):
-                    errorView(error)
-                case .firestoreError(let error):
-                    errorView(error)
-                case .ready:
-                    if restaurantRepo.searchedRestaurants.isEmpty {
-                        Text("Kein Ergebnis.")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.secondary)
-                            .frame(maxHeight: .infinity)
-                    } else {
-                        restaurantList
+                } else {
+                    restaurantList
                     }
             }
         }

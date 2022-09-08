@@ -1,9 +1,9 @@
 import Foundation
-import FirebaseFirestore
-import FirebaseFirestoreSwift
 import Combine
 import CoreLocation
 import Algorithms
+import FirebaseFirestore
+import FirebaseFirestoreSwift
 
 @MainActor
 class RestaurantRepo: ObservableObject {
@@ -11,137 +11,101 @@ class RestaurantRepo: ObservableObject {
     @Published private var yelpRestaurants = [YelpRestaurantDetail]()
     
     @Published var searchText = ""
-    
     @Published private(set) var loadingStatus = LoadingStatus.ready
+    
+    private let loadingService = LoadingService()
     
     let locationSearcher: LocationSearcher
     private var coordinateCancellable: AnyCancellable?
     private var lastCoordinateUpdate: CLLocationCoordinate2D?
     
-    private let yelpLoadingService = YelpLoadingService()
-    
-    private var currentListener: ListenerRegistration?
-    private var currentListenerId: UUID?
-    
     var searchedRestaurants: [YelpRestaurantDetail] {
         yelpRestaurants.filter { $0.name.lowercased().hasPrefix(searchText.lowercased()) }
+            .sorted(by: { $0.name < $1.name })
     }
     
-    // MARK: - Initializer
+    // MARK: Init
     init(locationSearcher: LocationSearcher) {
         self.locationSearcher = locationSearcher
         
         coordinateCancellable = locationSearcher.$coordinate.sink { coordinate in
-            // The coordinate change should only be looked at when it is bigger than 5km, because if the smallest change is leading to an update of the restaurants, the are constant updates, because the user always moves.
-            if let coordinate = coordinate {
-                if let lastCoordinateUpdate = self.lastCoordinateUpdate {
-                    if coordinate.distance(from: lastCoordinateUpdate) > 5 * 1000 {
-                        self.lastCoordinateUpdate = coordinate
-                        self.addFirestoreListener(forCoordinate: coordinate)
-                    }
-                } else {
-                    self.lastCoordinateUpdate = coordinate
-                    self.addFirestoreListener(forCoordinate: coordinate)
-                }
+            guard let coordinate = coordinate else { return }
+            
+            // The coordinate change gets ignored when it is under 5 km to prevent constant updates when the user moves around.
+            guard self.lastCoordinateUpdate?.distance(from: coordinate) ?? .infinity > 5 * 1000 else {
+                return
             }
+            
+            self.lastCoordinateUpdate = coordinate
+            self.loadRestaurants()
         }
     }
     
-    // MARK: - Add Firestore Listener
-    func addFirestoreListener(forCoordinate coordinate: CLLocationCoordinate2D) {
+    /// Example Init
+    private init(restaurants: [Restaurant], yelpRestaurants: [YelpRestaurantDetail], locationSearcher: LocationSearcher) {
+        self.restaurants = restaurants
+        self.yelpRestaurants = yelpRestaurants
+        self.locationSearcher = locationSearcher
+    }
+    
+    // MARK: Load Restaurants
+    func loadRestaurants() {
         loadingStatus = .loading
-        restaurants = []
-        yelpRestaurants = []
-        currentListener?.remove()
         
-        let userGeoHash4 = Geohash.encode(latitude: coordinate.latitude, longitude: coordinate.longitude, 4)
-        guard let neighborBuckets4 = Geohash.neighbors(userGeoHash4) else {
-            loadingStatus = .firestoreError("Failed to produce the neighbor buckets for the user location.")
-            return
-        }
-        
-        let neighborBuckets3 = Array(neighborBuckets4.map { bucket4 -> String in
-            var bucket3 = bucket4
-            bucket3.removeLast()
-            return bucket3
-        }.uniqued())
-        
-        let listenerId = UUID()
-        self.currentListenerId = listenerId
-        
-        currentListener = Firestore.collection(.restaurants)
-            .whereField("isActive", isEqualTo: true)
-            .whereField(FieldPath(["geoPoint", "geoHash3"]), in: neighborBuckets3)
-            .addSnapshotListener { snapshot, error in
-                guard self.currentListenerId == listenerId else {
-                    print("Different listener that gets executed then the current one.")
-                    return
-                }
+        Task {
+            do {
+                let response = try await loadingService.restaurants(atCoordinate: lastCoordinateUpdate)
+                restaurants = response.firestore
+                yelpRestaurants = response.yelp
                 
-                guard let snapshot = snapshot else {
-                    print("Failed to load restaurants from firebase: \(error?.localizedDescription ?? "Snapshot is nil.")")
-                    self.loadingStatus = .firestoreError(error?.localizedDescription ?? "Unknown Error")
-                    return
-                }
+                loadingStatus = .ready
+            } catch is CancellationError {
+                print("Loading restaurants task got canceled.")
+            } catch LocationSearcher.LocationError.coordinateIsNil {
+                loadingStatus = .error("Der Standort der Suche ist nicht bekannt.")
+                print("The location is nil.")
+            } catch {
+                loadingStatus = .error("Es gab einen Fehler beim laden.")
                 
-                self.restaurants = snapshot.documents.compactMap { document in
-                    do {
-                        let restaurant = try document.data(as: Restaurant.self)
-                        if restaurant.coordinate.distance(from: coordinate) > 50 * 1000 {
-                            return nil
-                        } else {
-                            return restaurant
-                        }
-                    } catch {
-                        print("Failed to decode document: \(error.localizedDescription)")
-                        
-                        return nil
-                    }
-                }
-                
-                Task {
-                    do {
-                        let yelpRestaurants = try await self.yelpLoadingService.loadRestaurants(withIds: self.restaurants.map { $0.yelpId })
-                        
-                        guard self.currentListenerId == listenerId else {
-                            print("Different listener that gets executed then the current one.")
-                            return
-                        }
-                        
-                        self.yelpRestaurants = yelpRestaurants
-                        self.loadingStatus = .ready
-                    } catch is CancellationError {
-                        print("Task got canceled.")
-                    } catch {
-                        self.loadingStatus = .yelpError(error.localizedDescription)
-                        print("Loading request for yelp restaurants failed: \(error.localizedDescription)")
-                    }
-                }
+                print("Failed to load restaurants. Error: \(error.localizedDescription)")
             }
+        }
     }
     
-    // MARK: - Loading Status
-    enum LoadingStatus {
-        case ready, loading, firestoreError(String), yelpError(String)
-    }
-    
-    // MARK: - Functions
+    // MARK: Functions
     func restaurant(forYelpId yelpId: String) -> Restaurant? {
         restaurants.first(where: { $0.yelpId == yelpId })
     }
+    
+    // MARK: Example
+    static let example = RestaurantRepo(restaurants: Restaurant.examples, yelpRestaurants: YelpRestaurantDetail.examples, locationSearcher: .example)
 }
 
-// MARK: - Yelp Loading Service
-/// An actor that manages the loading of the yelp restaurants. It cancels old tasks and only returns the newest data.
-private actor YelpLoadingService {
-    var currentTask: Task<[YelpRestaurantDetail], Error>?
+// MARK: - Loading Status
+extension RestaurantRepo {
+    /// The current loading status of the repo.
+    enum LoadingStatus {
+        case ready, loading, error(String)
+    }
+}
+
+// MARK: - Loading Service
+/// Manages all the loading of both the yelp and firestore restaurants..
+private actor LoadingService {
+    var currentTask: Task<Response, Error>?
     
-    func loadRestaurants(withIds ids: [String]) async throws -> [YelpRestaurantDetail] {
+    // MARK: Restaurants
+    /// The firestore and yelp restaurants for a given location.
+    func restaurants(atCoordinate coordinate: CLLocationCoordinate2D?) async throws -> Response {
         // Cancels any current task to prevent an older task finishing after a newer task.
         currentTask?.cancel()
         
+        guard let coordinate = coordinate else {
+            throw LocationSearcher.LocationError.coordinateIsNil
+        }
+        
         currentTask = Task {
-            try await YelpRestaurantStore.shared.loadRestaurants(withIds: ids)
+            try await loadRestaurants(atCoordinate: coordinate)
         }
         
         if let result = try await currentTask?.value {
@@ -149,5 +113,52 @@ private actor YelpLoadingService {
         } else {
             throw CancellationError()
         }
+    }
+    
+    // MARK: Load Restaurants
+    private func loadRestaurants(atCoordinate coordinate: CLLocationCoordinate2D) async throws -> Response {
+        let userGeohash4 = Geohash.encode(
+            latitude: coordinate.latitude,
+            longitude: coordinate.longitude, 4
+        )
+        guard let neighborBuckets4 = Geohash.neighbors(userGeohash4) else {
+            throw Geohash.GeohashError.noNeighborBuckets
+        }
+        let neighborBuckets3 = Array(neighborBuckets4.map { bucket4 -> String in
+            var bucket3 = bucket4
+            bucket3.removeLast()
+            return bucket3
+        }.uniqued())
+        
+        let reference = Firestore
+            .collection(.restaurants)
+            .whereField("isActive", isEqualTo: true)
+            .whereField(FieldPath(["geoPoint", "geoHash3"]), in: neighborBuckets3)
+        
+        let snapshot = try await reference.getDocuments()
+        let restaurants: [Restaurant] = snapshot.documents.compactMap { document in
+            do {
+                let restaurant = try document.data(as: Restaurant.self)
+                if restaurant.coordinate.distance(from: coordinate) > 50 * 1000{
+                    return nil
+                } else {
+                    return restaurant
+                }
+            } catch {
+                print("Failed to decode restaurant document \(document.documentID). Error: \(error.localizedDescription)")
+                return nil
+            }
+        }
+        
+        let yelpRestaurants = await YelpRestaurantStore.shared.loadRestaurants(withIds: restaurants.map { $0.yelpId })
+        
+        return Response(firestore: restaurants, yelp: yelpRestaurants)
+    }
+    
+    // MARK: Response
+    /// The response of a loading request for the restaurants.
+    struct Response {
+        let firestore: [Restaurant]
+        let yelp: [YelpRestaurantDetail]
     }
 }

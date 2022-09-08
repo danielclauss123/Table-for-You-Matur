@@ -199,6 +199,19 @@ extension LocationSearcher: MKLocalSearchCompleterDelegate {
     }
 }
 
+extension LocationSearcher {
+    enum LocationError: Error, LocalizedError {
+        case coordinateIsNil
+        
+        var errorDescription: String? {
+            switch self {
+            case .coordinateIsNil:
+                return "The coordinate value is nil."
+            }
+        }
+    }
+}
+
 // MARK: - Example
 extension LocationSearcher {
     static let example = LocationSearcher(coordinate: CLLocationCoordinate2D(latitude: 47.49230, longitude: 8.73363))

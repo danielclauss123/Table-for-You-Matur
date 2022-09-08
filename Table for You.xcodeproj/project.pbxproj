@@ -41,7 +41,6 @@
 		7E819ADE28A187D100B67BAA /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC828A187D100B67BAA /* Double.swift */; };
 		7E819ADF28A187D100B67BAA /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AC928A187D100B67BAA /* Reservation.swift */; };
 		7E819AE028A187D100B67BAA /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819ACA28A187D100B67BAA /* Restaurant.swift */; };
-		7E819AE928A1883D00B67BAA /* RestaurantRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AE228A1883D00B67BAA /* RestaurantRepo.swift */; };
 		7E819AEA28A1883D00B67BAA /* FirestoreReferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AE428A1883D00B67BAA /* FirestoreReferences.swift */; };
 		7E819AEB28A1883D00B67BAA /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AE628A1883D00B67BAA /* Auth.swift */; };
 		7E819AED28A1883D00B67BAA /* RoomRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E819AE828A1883D00B67BAA /* RoomRepo.swift */; };
@@ -86,6 +85,7 @@
 		7E821E1828C62BCF00327B0B /* ReserveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E821E1728C62BCF00327B0B /* ReserveButton.swift */; };
 		7E821E1A28C62E1600327B0B /* MyReservationsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E821E1928C62E1600327B0B /* MyReservationsRepo.swift */; };
 		7E821E1C28C62F6E00327B0B /* MyReservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E821E1B28C62F6E00327B0B /* MyReservationsView.swift */; };
+		7E83899028CA551E002D9F8F /* Geohash-Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E83898F28CA551E002D9F8F /* Geohash-Error.swift */; };
 		7E8432AD28AF8D9B00B79237 /* RoomThumbnailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8432AC28AF8D9B00B79237 /* RoomThumbnailView.swift */; };
 		7E8BB7F328C4CABB00BACDB9 /* RoomExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BB7F228C4CABB00BACDB9 /* RoomExample.swift */; };
 		7E8BB7F528C4CF1B00BACDB9 /* ReservationExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BB7F428C4CF1B00BACDB9 /* ReservationExamples.swift */; };
@@ -94,7 +94,7 @@
 		7EC4F37428A7E8FB00603DD0 /* DynamicalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */; };
 		7ECDC31C28C4A7ED0062735F /* ReservationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */; };
 		7EE1CFC328C4E94600A21735 /* RestaurantDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EE1CFC228C4E94600A21735 /* RestaurantDetailSheet.swift */; };
-		7EEB519728C8F06300AADA7C /* TestRestaurantRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB519628C8F06300AADA7C /* TestRestaurantRepo.swift */; };
+		7EEB519728C8F06300AADA7C /* RestaurantRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EEB519628C8F06300AADA7C /* RestaurantRepo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,7 +128,6 @@
 		7E819AC828A187D100B67BAA /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		7E819AC928A187D100B67BAA /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		7E819ACA28A187D100B67BAA /* Restaurant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
-		7E819AE228A1883D00B67BAA /* RestaurantRepo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestaurantRepo.swift; sourceTree = "<group>"; };
 		7E819AE428A1883D00B67BAA /* FirestoreReferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirestoreReferences.swift; sourceTree = "<group>"; };
 		7E819AE628A1883D00B67BAA /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		7E819AE828A1883D00B67BAA /* RoomRepo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoomRepo.swift; sourceTree = "<group>"; };
@@ -173,6 +172,7 @@
 		7E821E1728C62BCF00327B0B /* ReserveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReserveButton.swift; sourceTree = "<group>"; };
 		7E821E1928C62E1600327B0B /* MyReservationsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationsRepo.swift; sourceTree = "<group>"; };
 		7E821E1B28C62F6E00327B0B /* MyReservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReservationsView.swift; sourceTree = "<group>"; };
+		7E83898F28CA551E002D9F8F /* Geohash-Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Geohash-Error.swift"; sourceTree = "<group>"; };
 		7E8432AC28AF8D9B00B79237 /* RoomThumbnailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomThumbnailView.swift; sourceTree = "<group>"; };
 		7E8BB7F228C4CABB00BACDB9 /* RoomExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomExample.swift; sourceTree = "<group>"; };
 		7E8BB7F428C4CF1B00BACDB9 /* ReservationExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationExamples.swift; sourceTree = "<group>"; };
@@ -181,7 +181,7 @@
 		7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicalStack.swift; sourceTree = "<group>"; };
 		7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRowView.swift; sourceTree = "<group>"; };
 		7EE1CFC228C4E94600A21735 /* RestaurantDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailSheet.swift; sourceTree = "<group>"; };
-		7EEB519628C8F06300AADA7C /* TestRestaurantRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRestaurantRepo.swift; sourceTree = "<group>"; };
+		7EEB519628C8F06300AADA7C /* RestaurantRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantRepo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +318,7 @@
 			children = (
 				7E819ABE28A187D100B67BAA /* GeohashBox.swift */,
 				7E819ABF28A187D100B67BAA /* Geohash.swift */,
+				7E83898F28CA551E002D9F8F /* Geohash-Error.swift */,
 			);
 			path = GeoHash;
 			sourceTree = "<group>";
@@ -341,8 +342,7 @@
 		7E819AE128A1883D00B67BAA /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				7E819AE228A1883D00B67BAA /* RestaurantRepo.swift */,
-				7EEB519628C8F06300AADA7C /* TestRestaurantRepo.swift */,
+				7EEB519628C8F06300AADA7C /* RestaurantRepo.swift */,
 				7EC033E628A3D484009F8AED /* ReservationRepo.swift */,
 				7E821E1928C62E1600327B0B /* MyReservationsRepo.swift */,
 				7E819AE828A1883D00B67BAA /* RoomRepo.swift */,
@@ -674,11 +674,11 @@
 				7E819B5228A188EE00B67BAA /* HalfRoundedRectangle.swift in Sources */,
 				7E819B4E28A188EE00B67BAA /* MKLocalSearchCompletionPlacemark.swift in Sources */,
 				7E819B3428A188EE00B67BAA /* RestaurantRowView.swift in Sources */,
+				7E83899028CA551E002D9F8F /* Geohash-Error.swift in Sources */,
 				7E821E1A28C62E1600327B0B /* MyReservationsRepo.swift in Sources */,
 				7E819ADD28A187D100B67BAA /* UserDefaults.swift in Sources */,
 				7E819ADC28A187D100B67BAA /* MKDirections.swift in Sources */,
-				7E819AE928A1883D00B67BAA /* RestaurantRepo.swift in Sources */,
-				7EEB519728C8F06300AADA7C /* TestRestaurantRepo.swift in Sources */,
+				7EEB519728C8F06300AADA7C /* RestaurantRepo.swift in Sources */,
 				7EC033E728A3D484009F8AED /* ReservationRepo.swift in Sources */,
 				7E155D1B28A27AAC00ED9C79 /* ReservationConfirmationView.swift in Sources */,
 				7E819AD828A187D100B67BAA /* SCNetworkConnection.swift in Sources */,
