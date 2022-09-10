@@ -12,13 +12,24 @@ class UserReservationsRepo: ObservableObject {
     private var currentListener: ListenerRegistration?
     private var currentListenerId: UUID?
     
-    // MARK: Init
-    init() {
-        // Load data
+    var currentReservations: [Reservation] {
+        reservations.filter { $0.date > Date.now.addingTimeInterval(-60 * 60) }
     }
     
-    private init(reservations: [Reservation]) {
-        self.reservations = reservations
+    var pastReservations: [Reservation] {
+        var reservations = reservations
+        
+        reservations.removeAll(where: { currentReservations.contains($0) })
+        
+        return reservations
+    }
+    
+    /// The only instance, shared, to be accessible from everywhere.
+    static let shared = UserReservationsRepo()
+    
+    // MARK: Init
+    private init() {
+        addListener()
     }
     
     // MARK: Deinit
@@ -71,7 +82,4 @@ class UserReservationsRepo: ObservableObject {
             self.loadingStatus = .ready
         }
     }
-    
-    // MARK: Example
-    static let example = UserReservationsRepo(reservations: Reservation.examples)
 }

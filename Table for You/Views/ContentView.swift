@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var userReservationsRepo = UserReservationsRepo.shared
+    
     var body: some View {
         TabView {
             MyReservationsView()
@@ -12,6 +14,8 @@ struct ContentView: View {
                 .tabItem {
                     Label("Suchen", systemImage: "magnifyingglass")
                 }
+            
+            UserReservationsView()
         }
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 // MARK: - Struct
-struct Reservation: Identifiable, Codable {
+struct Reservation: Identifiable, Codable, Hashable {
     @DocumentID var id: String?
     
     var customerId: String

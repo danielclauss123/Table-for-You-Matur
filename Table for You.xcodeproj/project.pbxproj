@@ -92,6 +92,8 @@
 		7E8BB7F328C4CABB00BACDB9 /* RoomExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BB7F228C4CABB00BACDB9 /* RoomExample.swift */; };
 		7E8BB7F528C4CF1B00BACDB9 /* ReservationExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BB7F428C4CF1B00BACDB9 /* ReservationExamples.swift */; };
 		7EB1FD3328CCD53C005D71B0 /* UserReservationsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1FD3228CCD53C005D71B0 /* UserReservationsRepo.swift */; };
+		7EB1FD3728CCDA65005D71B0 /* UserReservationsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1FD3628CCDA65005D71B0 /* UserReservationsVM.swift */; };
+		7EB1FD3928CCE05F005D71B0 /* UserReservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1FD3828CCE05F005D71B0 /* UserReservationsView.swift */; };
 		7EC2546B28AFF97B0047CCB1 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC2546A28AFF97B0047CCB1 /* Time.swift */; };
 		7EC4F37428A7E8FB00603DD0 /* DynamicalStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */; };
 		7ECDC31C28C4A7ED0062735F /* ReservationRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */; };
@@ -181,6 +183,8 @@
 		7E8BB7F228C4CABB00BACDB9 /* RoomExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomExample.swift; sourceTree = "<group>"; };
 		7E8BB7F428C4CF1B00BACDB9 /* ReservationExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationExamples.swift; sourceTree = "<group>"; };
 		7EB1FD3228CCD53C005D71B0 /* UserReservationsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReservationsRepo.swift; sourceTree = "<group>"; };
+		7EB1FD3628CCDA65005D71B0 /* UserReservationsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReservationsVM.swift; sourceTree = "<group>"; };
+		7EB1FD3828CCE05F005D71B0 /* UserReservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReservationsView.swift; sourceTree = "<group>"; };
 		7EC2546A28AFF97B0047CCB1 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		7EC4F37328A7E8FB00603DD0 /* DynamicalStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynamicalStack.swift; sourceTree = "<group>"; };
 		7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationRowView.swift; sourceTree = "<group>"; };
@@ -503,7 +507,9 @@
 			children = (
 				7ECDC31B28C4A7ED0062735F /* ReservationRowView.swift */,
 				7E821E1B28C62F6E00327B0B /* MyReservationsView.swift */,
+				7EB1FD3628CCDA65005D71B0 /* UserReservationsVM.swift */,
 				7E819B1328A188EE00B67BAA /* NewReservation */,
+				7EB1FD3828CCE05F005D71B0 /* UserReservationsView.swift */,
 			);
 			path = Reservation;
 			sourceTree = "<group>";
@@ -690,6 +696,7 @@
 				7EEB519728C8F06300AADA7C /* RestaurantRepo.swift in Sources */,
 				7E155D1B28A27AAC00ED9C79 /* ReservationConfirmationView.swift in Sources */,
 				7E819AD828A187D100B67BAA /* SCNetworkConnection.swift in Sources */,
+				7EB1FD3928CCE05F005D71B0 /* UserReservationsView.swift in Sources */,
 				7E819B3928A188EE00B67BAA /* CreditView.swift in Sources */,
 				7E819ACD28A187D100B67BAA /* Table.swift in Sources */,
 				7E819B4B28A188EE00B67BAA /* MagnificationGesture.swift in Sources */,
@@ -726,6 +733,7 @@
 				7E819B5128A188EE00B67BAA /* SearchField.swift in Sources */,
 				7E819B5628A1891400B67BAA /* YelpExamples.swift in Sources */,
 				7E819B5728A1891400B67BAA /* RestaurantExamples.swift in Sources */,
+				7EB1FD3728CCDA65005D71B0 /* UserReservationsVM.swift in Sources */,
 				7E819B4328A188EE00B67BAA /* ReservationVM.swift in Sources */,
 				7E819B3628A188EE00B67BAA /* OpeningHoursView.swift in Sources */,
 				7E819B5028A188EE00B67BAA /* LocationSearchButton.swift in Sources */,
