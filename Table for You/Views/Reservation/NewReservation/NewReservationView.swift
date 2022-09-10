@@ -12,6 +12,8 @@ struct NewReservationView: View {
             return "Die eingegebenen Informationen sind nicht genügend oder falsch."
         } else if !viewModel.reservationTimeIsPossible {
             return "Keine Reservation zu dieser Zeit and diesem Tag möglich."
+        } else if !viewModel.noUserReservationOnTime {
+            return "Du hast bereits eine Reservierung an diesem Datum und Uhrzeit."
         } else {
             return nil
         }

@@ -4,6 +4,7 @@ import FirebaseAuth
 import SystemConfiguration
 import SwiftUI
 
+@MainActor
 class ReservationVM: ObservableObject {
     @Published var customerName = UserDefaults.standard.loadAndDecode(fromKey: .customerName, withDefault: "") {
         didSet {
@@ -35,6 +36,18 @@ class ReservationVM: ObservableObject {
         }
     }
     
+    var noUserReservationOnTime: Bool {
+        for reservation in UserReservationsRepo.shared.currentReservations {
+            if date <= reservation.date && date.addingTimeInterval(60 * 60 * 2) >= reservation.date {
+                return false
+            }
+            if date >= reservation.date && date <= reservation.date.addingTimeInterval(60 * 60 * 2) {
+                return false
+            }
+        }
+        return true
+    }
+    
     // MARK: - Init
     init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail) {
         self.restaurant = restaurant
@@ -44,6 +57,24 @@ class ReservationVM: ObservableObject {
     // MARK: - Upload Reservation
     func uploadReservation() { // TODO: überarbeiten
         errorMessage = nil
+        
+        guard UserReservationsRepo.shared.currentReservations.count < 3 else {
+            errorMessage = "Du kannst maximal drei anstehende Reservierungen haben."
+            showingErrorAlert = true
+            return
+        }
+        
+        guard !UserReservationsRepo.shared.currentReservations.contains(where: { $0.restaurantId == restaurant.id }) else {
+            errorMessage = "Du kannst nur eine anstehende Reservierung pro Restaurant haben."
+            showingErrorAlert = true
+            return
+        }
+        
+        guard noUserReservationOnTime else {
+            errorMessage = "Du kannst nicht zwei Reservierungen zur gleichen Zeit haben."
+            showingErrorAlert = true
+            return
+        }
         
         guard reservationInfosAreValid else {
             errorMessage = "Die eingegebenen Informationen sind falsch oder unvollständig."
