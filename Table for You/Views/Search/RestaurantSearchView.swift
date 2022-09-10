@@ -31,13 +31,18 @@ struct RestaurantSearchView: View {
                 restaurantRepo.locationSearcher.locationSourceSelected = {
                     mapCenter = $0
                 }
+                
+                // With this, the map updates the first time. However, not the most elegant solution.
+                restaurantRepo.locationSearcher.locationSourceSelected(restaurantRepo.locationSearcher.coordinate)
             }
         }
     }
     
     // MARK: - Initializer
     init() {
-        self._restaurantRepo = StateObject(wrappedValue: RestaurantRepo(locationSearcher: LocationSearcher()))
+        let locationSearcher = LocationSearcher()
+        
+        self._restaurantRepo = StateObject(wrappedValue: RestaurantRepo(locationSearcher: locationSearcher))
     }
 }
 

@@ -70,7 +70,7 @@ struct RestaurantAnnotationsMapView: UIViewRepresentable {
         if center != lastSetCenter {
             if let center = center {
                 uiView.setRegion(
-                    MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+                    MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
                     , animated: true
                 )
             }

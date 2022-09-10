@@ -7,7 +7,7 @@ struct RestaurantSearchSheet: View {
     @ObservedObject var restaurantRepo: RestaurantRepo
     @ObservedObject var locationSearcher: LocationSearcher
     
-    @State private var sheetStatus = BottomSheetStatus.up
+    @State private var sheetStatus = BottomSheetStatus.middle
     
     @FocusState private var restaurantSearchIsFocused: Bool
     
