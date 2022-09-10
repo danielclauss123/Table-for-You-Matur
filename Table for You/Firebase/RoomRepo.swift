@@ -1,82 +1,102 @@
 import Foundation
+import SystemConfiguration
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 @MainActor
 class RoomRepo: ObservableObject {
-    let restaurant: Restaurant
-    
     @Published private(set) var rooms = [Room]()
-    
-    @Published var searchText = ""
     
     @Published private(set) var loadingStatus = LoadingStatus.ready
     
-    private var currentListener: ListenerRegistration?
-    private var currentListenerId: UUID?
+    let restaurant: Restaurant
     
-    // MARK: - Init
+    private let loadingService = LoadingService()
+    
+    // MARK: Init
     init(restaurant: Restaurant) {
         self.restaurant = restaurant
         
-        addFirestoreListener()
+        loadRooms()
     }
     
-    // MARK: - Example Init
+    /// Example Init
     private init(restaurant: Restaurant, rooms: [Room]) {
         self.restaurant = restaurant
         self.rooms = rooms
     }
     
-    // MARK: - Add Firestore Listener
-    func addFirestoreListener() {
+    // MARK: Load Rooms
+    func loadRooms() {
         loadingStatus = .loading
-        rooms = []
-        currentListener?.remove()
         
-        let listenerId = UUID()
-        self.currentListenerId = listenerId
-        
-        guard let restaurantId = restaurant.id else {
-            self.loadingStatus = .firestoreError("The restaurant id is nil.")
-            return
-        }
-        
-        currentListener = Firestore.collection(.restaurants).document(restaurantId).collection("rooms")
-            .order(by: "name")
-            .addSnapshotListener { snapshot, error in
-                guard self.currentListenerId == listenerId else {
-                    print("Different listener that gets executed then the current one.")
-                    return
-                }
-                
-                guard let snapshot = snapshot else {
-                    print("Failed to load rooms from firebase: \(error?.localizedDescription ?? "Snapshot is nil.")")
-                    self.loadingStatus = .firestoreError(error?.localizedDescription ?? "Unknown Error")
-                    return
-                }
-                
-                self.rooms = snapshot.documents.compactMap { document in
-                    do {
-                        return try document.data(as: Room.self)
-                    } catch {
-                        print("Failed to decode document: \(error.localizedDescription)")
-                        
-                        return nil
-                    }
-                }
-                
-                self.loadingStatus = .ready
+        Task {
+            do {
+                rooms = try await loadingService.rooms(ofRestaurant: restaurant)
+                loadingStatus = .ready
+            } catch is CancellationError {
+                print("Loading restaurants task got canceled.")
+            } catch SCNetworkConnection.NetworkConnectionError.noConnection {
+                loadingStatus = .error("Keine Internetverbindung")
+                print("No network connection.")
+            } catch {
+                loadingStatus = .error("Fehler beim laden")
+                print("Failed to load restaurants. Error: \(error.localizedDescription)")
             }
+        }
     }
     
-    // MARK: - Loading Status
+    // MARK: Example
+    static let example = RoomRepo(restaurant: .example, rooms: Room.examples)
+}
+
+// MARK: - Loading Status
+extension RoomRepo {
+    /// The current loading status of the repo.
     enum LoadingStatus: Equatable {
-        case ready, loading, firestoreError(String)
+        case ready, loading, error(String)
     }
 }
 
-// MARK: - Example
-extension RoomRepo {
-    static let example = RoomRepo(restaurant: .example, rooms: Room.examples)
+// MARK: - Loading Service
+private actor LoadingService {
+    var currentTask: Task<[Room], Error>?
+    
+    // MARK: Rooms
+    /// The firestore and yelp restaurants for a given location.
+    func rooms(ofRestaurant restaurant: Restaurant) async throws -> [Room] {
+        // Cancels any current task to prevent an older task finishing after a newer task.
+        currentTask?.cancel()
+        
+        currentTask = Task {
+            try await loadRooms(ofRestaurant: restaurant)
+        }
+        
+        if let result = try await currentTask?.value {
+            return result
+        } else {
+            throw CancellationError()
+        }
+    }
+    
+    // MARK: LoadRooms
+    private func loadRooms(ofRestaurant restaurant: Restaurant) async throws -> [Room] {
+        try SCNetworkConnection.checkConnection()
+        
+        let reference = Firestore.collection(.restaurants).document(restaurant.id.unwrapWithUUID())
+            .collection("rooms")
+            .order(by: "name")
+        
+        let snapshot = try await reference.getDocuments()
+        let rooms: [Room] = snapshot.documents.compactMap { document in
+            do {
+                return try document.data(as: Room.self)
+            } catch {
+                print("Failed to decode room document: \(document.documentID). Error: \(error.localizedDescription)")
+                return nil
+            }
+        }
+        
+        return rooms
+    }
 }

@@ -70,12 +70,17 @@ struct NewReservationView: View {
             switch roomRepo.loadingStatus {
                 case .loading:
                     EmptyView()
-                case .firestoreError(let error):
-                    Text("Fehler\n")
-                        .font(.headline)
-                    +
-                    Text(error)
+                case .error(let message):
+                VStack {
+                    Text(message)
                         .foregroundColor(.secondary)
+                    
+                    Button {
+                        roomRepo.loadRooms()
+                    } label: {
+                        Label("Nochmal versuchen", systemImage: "arrow.counterclockwise")
+                    }
+                }
                 case .ready:
                     Group {
                         if roomRepo.rooms.isEmpty {
