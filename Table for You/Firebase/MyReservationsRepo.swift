@@ -90,7 +90,7 @@ class MyReservationRepo: ObservableObject {
 
 // MARK: - Example
 extension MyReservationRepo {
-    static let example = ReservationRepo(restaurant: .example, reservationVM: .example)
+    static let example = MyReservationRepo() // Change this 
 }
 
 // MARK: - Yelp Loading Service
