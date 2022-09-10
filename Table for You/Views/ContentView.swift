@@ -5,17 +5,15 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            MyReservationsView()
-                .tabItem {
-                    Label("Reservierungen", systemImage: "calendar")
-                }
-            
             RestaurantSearchView()
                 .tabItem {
                     Label("Suchen", systemImage: "magnifyingglass")
                 }
             
             UserReservationsView()
+                .tabItem {
+                    Label("Reservierungen", systemImage: "calendar")
+                }
         }
     }
 }
