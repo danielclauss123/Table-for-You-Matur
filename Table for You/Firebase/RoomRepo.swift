@@ -7,7 +7,7 @@ import FirebaseFirestoreSwift
 class RoomRepo: ObservableObject {
     @Published private(set) var rooms = [Room]()
     
-    @Published private(set) var loadingStatus = LoadingStatus.ready
+    @Published private(set) var loadingStatus = Firestore.LoadingStatus.ready
     
     let restaurant: Restaurant
     
@@ -48,14 +48,6 @@ class RoomRepo: ObservableObject {
     
     // MARK: Example
     static let example = RoomRepo(restaurant: .example, rooms: Room.examples)
-}
-
-// MARK: - Loading Status
-extension RoomRepo {
-    /// The current loading status of the repo.
-    enum LoadingStatus: Equatable {
-        case ready, loading, error(String)
-    }
 }
 
 // MARK: - Loading Service

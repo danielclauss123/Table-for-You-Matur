@@ -12,7 +12,7 @@ class RestaurantRepo: ObservableObject {
     @Published private var yelpRestaurants = [YelpRestaurantDetail]()
     
     @Published var searchText = ""
-    @Published private(set) var loadingStatus = LoadingStatus.ready
+    @Published private(set) var loadingStatus = Firestore.LoadingStatus.ready
     
     private let loadingService = LoadingService()
     
@@ -82,14 +82,6 @@ class RestaurantRepo: ObservableObject {
     
     // MARK: Example
     static let example = RestaurantRepo(restaurants: Restaurant.examples, yelpRestaurants: YelpRestaurantDetail.examples, locationSearcher: .example)
-}
-
-// MARK: - Loading Status
-extension RestaurantRepo {
-    /// The current loading status of the repo.
-    enum LoadingStatus {
-        case ready, loading, error(String)
-    }
 }
 
 // MARK: - Loading Service
