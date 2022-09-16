@@ -11,7 +11,7 @@ extension RestaurantDetailSheet {
         var problem: String? {
             if UserReservationsRepo.shared.currentReservations.count >= 3 {
                 return "Du kannst höchstens drei anstehende Reservierungen haben."
-            } else if !UserReservationsRepo.shared.currentReservations.contains(where: { $0.yelpId == yelpRestaurant.id }) {
+            } else if UserReservationsRepo.shared.currentReservations.contains(where: { $0.yelpId == yelpRestaurant.id }) {
                 return "Du kannst nur eine anstehende Reservierung pro Restaurant haben."
             }
             

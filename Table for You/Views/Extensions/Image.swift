@@ -1,13 +1,7 @@
-/*
- Abstract:
-    Standart Placeholder für AsyncImage.
-    Yelp Rating Images.
- */
-
 import SwiftUI
 
-// MARK: - Placeholder
 extension Image {
+    // MARK: Placeholder
     /// The default placeholder for an async image.
     static func defaultPlaceholder(_ color: Color = Color(uiColor: .secondarySystemBackground)) -> some View {
         ZStack {
@@ -17,10 +11,8 @@ extension Image {
                 .foregroundColor(.secondary)
         }
     }
-}
-
-// MARK: - Yelp
-extension Image {
+    
+    // MARK: Yelp
     /// An image with the corresponding yelp rating from 1 to 5.
     init(yelpRating: Double) {
         guard yelpRating >= 0 && yelpRating <= 5 else {
