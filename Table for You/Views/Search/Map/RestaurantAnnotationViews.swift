@@ -1,5 +1,6 @@
 import MapKit
 
+// MARK: - Restaurant Annotation
 class RestaurantAnnotationView: MKMarkerAnnotationView {
     init(annotation: RestaurantAnnotation, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -18,7 +19,8 @@ class RestaurantAnnotationView: MKMarkerAnnotationView {
     }
 }
 
-// MARK: - Cluster Annotation View
+
+// MARK: - Cluster Annotation
 class ClusterAnnotationView: MKMarkerAnnotationView {
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)

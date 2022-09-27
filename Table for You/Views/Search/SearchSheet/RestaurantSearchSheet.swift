@@ -88,7 +88,7 @@ struct RestaurantSearchSheet: View {
                         .frame(maxHeight: .infinity)
                 } else {
                     restaurantList
-                    }
+                }
             }
         }
     }

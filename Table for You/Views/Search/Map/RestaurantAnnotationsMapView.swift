@@ -109,7 +109,7 @@ extension RestaurantAnnotationsMapView {
                 annotationView?.annotation = annotation
             }
             
-            /* If this is not here but instead in the init, the cluster annotations don't work anymore after the annotations got removed and readded.
+            /* If this is not here but instead in the init, the cluster annotations don't work anymore after the annotations got removed and re-added.
                 Source: https://developer.apple.com/forums/thread/93399
              */
             annotationView?.clusteringIdentifier = "restaurant"
