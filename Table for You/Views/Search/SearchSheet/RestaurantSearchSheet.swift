@@ -34,17 +34,17 @@ struct RestaurantSearchSheet: View {
             HStack {
                 SearchField(
                     "Restaurant Name",
-                    systemImage: "magnifyingglass",
-                    backgroundColor: Color(uiColor: .systemGray5),
-                    text: $restaurantRepo.searchText
-                ) { isEditing in
-                    if isEditing {
-                        sheetStatus = .up
-                    }
-                }
+                    text: $restaurantRepo.searchText, systemImage: "magnifyingglass",
+                    backgroundColor: Color(uiColor: .systemGray5)
+                )
                 .focused($restaurantSearchIsFocused)
                 .onSubmit {
                     sheetStatus = .middle
+                }
+                .onChange(of: restaurantSearchIsFocused) {
+                    if $0 {
+                        sheetStatus = .up
+                    }
                 }
                 .onChange(of: sheetStatus) { newValue in
                     if newValue == .middle || newValue == .down {

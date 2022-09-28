@@ -1,26 +1,32 @@
 import SwiftUI
+import MapKit
 
 struct LocationSearchButton: View {
-    @ObservedObject var locationSearcher: LocationSearcher
+    @StateObject var locationSearcher = LocationSearcher()
     
-    var onTap: () -> Void = { }
+    @State private var showingSearchSheet = false
     
-    @State private var showingLocationSearchSheet = false
+    var mapCenter: CLLocationCoordinate2D?
+    
+    var tapAction: () -> Void = { }
     
     // MARK: - Body
     var body: some View {
         Button {
-            showingLocationSearchSheet = true
-            onTap()
+            showingSearchSheet = true
+            tapAction()
         } label: {
-            Label(locationSearcher.locationText, systemImage: "location")
-                .symbolVariant(locationSearcher.coordinate == nil ? .slash : .none)
-                .font(.subheadline.bold())
-                .foregroundColor(locationSearcher.coordinate == nil ? .secondary : (locationSearcher.userLocationSelected ? .accentColor : .primary))
+            Label(
+                locationSearcher.coordinate != nil ? locationSearcher.searchText : "Unbekannt",
+                systemImage: "location"
+            )
+            .symbolVariant(locationSearcher.coordinate == nil ? .slash : (locationSearcher.locationSource == .device ? .fill : .none))
+            .font(.subheadline.bold())
+            .foregroundColor(locationSearcher.coordinate == nil ? .secondary : (locationSearcher.locationSource == .device ? .accentColor : .primary))
         }
         .lineLimit(1)
-        .sheet(isPresented: $showingLocationSearchSheet) {
-            LocationSearchSheet(viewModel: locationSearcher)
+        .sheet(isPresented: $showingSearchSheet) {
+            LocationSearchSheet(locationSearcher: locationSearcher, mapCenter: mapCenter)
         }
     }
 }

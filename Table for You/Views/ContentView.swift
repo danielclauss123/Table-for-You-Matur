@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-/*struct ContentView: View {
+struct ContentView: View {
     @StateObject var userReservationsRepo = UserReservationsRepo.shared
     
     var body: some View {
@@ -17,9 +17,9 @@ import MapKit
                 }
         }
     }
-}*/
+}
 
-struct ContentView: View {
+/*struct ContentView: View {
     @State private var selected: YelpRestaurantDetail?
     @State private var centerCoordinate = CLLocationCoordinate2D(latitude: 47, longitude: 8)
     
@@ -35,7 +35,7 @@ struct ContentView: View {
             Text("\(centerCoordinate.latitude)")
         }
     }
-}
+}*/
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

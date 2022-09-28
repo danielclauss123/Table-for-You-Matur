@@ -1,218 +1,150 @@
-/*
- Abstract:
-    A class that combines the CLLocationManager and MKLocalSearchCompletion to get the user location either by GPS or by a text entered address provided by the user.
- Info:
-    The coordinate attribute is published and not a computed property. When using only this model, this doesn't make much sense and using a computed property would be safer and less complicated. However, this class is referenced by the RestaurantRepo and a published property for coordinate is needed, so that the repository can update when the coordinate changes (done with Combine).
- */
-
 import Foundation
 import Combine
 import MapKit
 
-/// A class that combines the CLLocationManager and MKLocalSearchCompletion to get the user location either by GPS or by a text entered address provided by the user.
-///
-/// Use the coordinate attribute to get the current coordinate.
-class LocationSearcher: NSObject, ObservableObject {
+class LocationSearcher: NSObject, ObservableObject, MKLocalSearchCompleterDelegate, CLLocationManagerDelegate {
     @Published var searchText = ""
-    @Published private(set) var coordinate: CLLocationCoordinate2D?
-    
-    @Published var userLocationSelected = true {
+    @Published var locationSource = LocationSource.undefined {
         didSet {
-            setCoordinate()
+            guard locationSource != oldValue else { return }
             
-            if userLocationSelected {
-                searchText = Self.userLocationText
+            coordinate = nil
+            
+            if locationSource == .device {
+                searchText = "Mein Standort"
+                
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.startUpdatingLocation()
+            } else if locationSource == .map {
+                searchText = "Kartenbereich"
+                locationManager.stopUpdatingLocation()
+            } else {
+                searchText = ""
+                locationManager.stopUpdatingLocation()
             }
         }
     }
-    @Published private(set) var searchedPlacemark: MKPlacemark? {
-        didSet {
-            setCoordinate()
-        }
-    }
-    @Published private(set) var placemarkIsGettingSelected = false // It needs this, so that the change in search text, that comes from the selection, does not set the searched placemark to nil.
     
-    @Published private var locationAuthorizationStatus = CLAuthorizationStatus.notDetermined
-    @Published private var userLocation: CLLocation? {
-        didSet {
-            setCoordinate()
-        }
-    }
-    @Published private var locationError: Error?
+    @Published private(set) var coordinate: CLLocationCoordinate2D?
+    @Published private(set) var searchCompletions = [MKLocalSearchCompletion]()
+    @Published private(set) var locationServiceAvailable = false
+    @Published private(set) var errorMessage: String?
+    
+    private let localSearchCompleter = MKLocalSearchCompleter()
+    private var cancellables = [AnyCancellable]()
     
     private let locationManager = CLLocationManager()
     
-    @Published private(set) var searchCompletions = [MKLocalSearchCompletion]()
-    @Published private var searchError: Error?
-    
-    private let searchCompleter = MKLocalSearchCompleter()
-    private var queryCancellable: AnyCancellable?
-    
-    static let userLocationText = "Dein Standort"
-    static let locationNotFoundText = "Ort nicht gefunden"
-    
-    /// A closure that gets called when the location source gets selected. This is perfect to set the center for a map, for example.
-    var locationSourceSelected: (CLLocationCoordinate2D?) -> Void = { _ in }
-    
-    /// The display text for the selected location.
-    var locationText: String {
-        if coordinate != nil {
-            return searchText
-        } else {
-            return "Unbekannt"
-        }
-    }
-    
-    /// Whether the user has allowed location use.
-    var locationServiceAvailable: Bool {
-        locationAuthorizationStatus == .authorizedAlways || locationAuthorizationStatus == .authorizedWhenInUse
-    }
-    
-    /// A possible error that occurred by the location service or the address search.
-    var error: Error? {
-        locationError ?? searchError
-    }
-    
-    // MARK: - Initializer
+    // MARK: Init
     override init() {
         super.init()
         
+        localSearchCompleter.delegate = self
+        localSearchCompleter.resultTypes = .address
+        
         locationManager.delegate = self
-        startLocationUpdates()
         
-        searchCompleter.delegate = self
-        searchCompleter.resultTypes = .address
-        
-        queryCancellable = $searchText
+        $searchText
+            .dropFirst()
             .debounce(for: 0.2, scheduler: RunLoop.main)
             .sink { text in
-                if !self.placemarkIsGettingSelected {
-                    self.searchedPlacemark = nil
+                if self.locationSource == .search {
+                    self.errorMessage = nil
                 }
                 
-                if text != Self.userLocationText {
-                    self.userLocationSelected = false
-                }
-                
-                if text.isEmpty || text == Self.userLocationText || text == Self.locationNotFoundText {
+                if text.isEmpty || self.locationSource != .search {
                     self.searchCompletions = []
                 } else {
-                    self.searchCompleter.queryFragment = text
+                    self.localSearchCompleter.queryFragment = text
                 }
-                
-                self.placemarkIsGettingSelected = false
             }
+            .store(in: &cancellables)
         
-        Task {
-            await selectUserLocation()
-        }
+        locationSource = .device
     }
     
-    /// The initializer for the example.
+    /// Example init.
     private init(coordinate: CLLocationCoordinate2D) {
-        self.searchText = "Example Coordinate"
         self.coordinate = coordinate
+        self.locationSource = .search
+        self.searchText = "Example Coordinate"
     }
     
+    // MARK: Deinit
     deinit {
+        localSearchCompleter.cancel()
         locationManager.stopUpdatingLocation()
     }
     
-    /// Sets the coordinate to the appropriate value. Call this function whenever one of the properties that decide the coordinate changes.
-    private func setCoordinate() {
-        coordinate = userLocationSelected ? userLocation?.coordinate : searchedPlacemark?.coordinate
-    }
-    
-    // MARK: - Public Functions
-    /// Selects the first one of the search completions for the entered text.
-    @MainActor func selectFirstCompletion() async {
-        guard let completion = searchCompletions.first else {
-            return
-        }
-        
-        await selectCompletion(completion)
-        locationSourceSelected(coordinate)
-    }
-    
-    /// Sets the given search completion as the one to provide the location.
+    // MARK: Select Completion
     @MainActor func selectCompletion(_ searchCompletion: MKLocalSearchCompletion) async {
-        placemarkIsGettingSelected = true
-        searchText = "\(searchCompletion.title)\(searchCompletion.subtitle.isEmpty ? "" : ", \(searchCompletion.subtitle)")"
-        searchedPlacemark = nil
-        do {
-            searchedPlacemark = try await searchCompletion.placemark()
-            if searchedPlacemark == nil {
-                searchText = Self.locationNotFoundText
-            }
-            locationSourceSelected(coordinate)
-        } catch {
-            searchError = error
-        }
-    }
-    
-    /// Selects the device location as the source for the coordinate.
-    @MainActor func selectUserLocation() {
-        guard locationServiceAvailable else { return }
-        searchedPlacemark = nil
-        userLocationSelected = true
-        locationSourceSelected(coordinate)
-    }
-}
-
-// MARK: - CLLocationManager Functions
-extension LocationSearcher: CLLocationManagerDelegate {
-    func startLocationUpdates() {
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        locationAuthorizationStatus = manager.authorizationStatus
+        searchText = searchCompletion.fullText
         
-        if locationAuthorizationStatus == .authorizedWhenInUse || locationAuthorizationStatus == .authorizedAlways {
-            if searchedPlacemark == nil {
-                userLocationSelected = true
-            }
-        } else {
-            userLocationSelected = false
+        do {
+            coordinate = try await searchCompletion.coordinate()
+        } catch {
+            errorMessage = "Laden der Koordinaten fehlgeschlagen."
+            print("Failed to produce coordinate from completion: \(searchCompletion). Error: \(error.localizedDescription)")
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        locationError = error
+    // MARK: Select Map Coordinate
+    @MainActor func selectMapCoordinate(_ mapCenter: CLLocationCoordinate2D) {
+        locationSource = .map
+        coordinate = mapCenter
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        userLocation = locations.last
-    }
-}
-
-// MARK: - MKLocalSearchCompleter Functions
-extension LocationSearcher: MKLocalSearchCompleterDelegate {
+    // MARK: Search Completer Delegate
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchCompletions = completer.results
     }
 
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
-        print("Search service failed: \(error.localizedDescription)")
-        searchError = error
+        errorMessage = "Laden der Suchresultate fehlgeschlagen."
+        print("MKLocalSearchCompleter failed with text: \(completer.queryFragment). Error: \(error.localizedDescription)")
     }
+    
+    // MARK: Location Manager Delegate
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        locationServiceAvailable = manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways
+        
+        if locationServiceAvailable && coordinate == nil {
+            locationSource = .device
+        } else if !locationServiceAvailable && locationSource == .device {
+            locationSource = .undefined
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if locationSource == .device {
+            coordinate = locations.last?.coordinate
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        errorMessage = "Standortbestimmung fehlgeschlagen."
+        print("CLLocationManager failed. Error: \(error.localizedDescription)")
+    }
+    
+    // MARK: Location Source
+    enum LocationSource {
+        case device, search, map, undefined
+    }
+    
+    // MARK: Example
+    static let example = LocationSearcher(coordinate: .init(latitude: 47.49230, longitude: 8.73363))
 }
 
+// MARK: - Location Error
 extension LocationSearcher {
     enum LocationError: Error, LocalizedError {
         case coordinateIsNil
         
-        var errorDescription: String? {
+        var errorDescription: String {
             switch self {
             case .coordinateIsNil:
                 return "The coordinate value is nil."
             }
         }
     }
-}
-
-// MARK: - Example
-extension LocationSearcher {
-    static let example = LocationSearcher(coordinate: CLLocationCoordinate2D(latitude: 47.49230, longitude: 8.73363))
 }

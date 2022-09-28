@@ -11,13 +11,14 @@ struct RestaurantSearchView: View {
     
     @State private var selectedRestaurant: YelpRestaurantDetail?
     
-    @State private var mapCenter: CLLocationCoordinate2D?
+    @State private var mapCenter = CLLocationCoordinate2D()
+    @State private var lastSetSource = LocationSearcher.LocationSource.undefined
     
     // MARK: - Body
     var body: some View {
         NavigationView {
             ZStack {
-                RestaurantAnnotationsMapView(selectedRestaurant: $selectedRestaurant, restaurants: restaurantRepo.searchedRestaurants, center: mapCenter)
+                RestaurantsMapView(selectedRestaurant: $selectedRestaurant, centerCoordinate: $mapCenter, restaurants: restaurantRepo.searchedRestaurants)
                     .ignoresSafeArea()
                 
                 RestaurantSearchSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo)
@@ -27,13 +28,13 @@ struct RestaurantSearchView: View {
             }
             .navigationTitle("Restaurant Suche")
             .navigationBarHidden(true)
-            .task {
-                restaurantRepo.locationSearcher.locationSourceSelected = {
-                    mapCenter = $0
-                }
+            .onChange(of: restaurantRepo.locationSearcher.coordinate) { coordinate in
+                guard lastSetSource != restaurantRepo.locationSearcher.locationSource else { return }
                 
-                // With this, the map updates the first time. However, not the most elegant solution.
-                restaurantRepo.locationSearcher.locationSourceSelected(restaurantRepo.locationSearcher.coordinate)
+                guard let coordinate = coordinate else { return }
+                
+                mapCenter = coordinate
+                lastSetSource = restaurantRepo.locationSearcher.locationSource
             }
         }
     }

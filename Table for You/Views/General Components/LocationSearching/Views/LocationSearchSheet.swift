@@ -2,21 +2,48 @@ import SwiftUI
 import MapKit
 
 struct LocationSearchSheet: View {
+    @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var viewModel: LocationSearcher
+    @ObservedObject var locationSearcher: LocationSearcher
+    
+    var mapCenter: CLLocationCoordinate2D?
     
     @FocusState private var searchFieldIsFocused: Bool
     
-    // MARK: - Body
+    // MARK: Body
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 VStack(alignment: .leading) {
-                    searchField
+                    SearchField(
+                        "Adresse, Postleitzahl, Stadt, Kanton...",
+                        text: $locationSearcher.searchText,
+                        systemImage: "location.magnifyingglass",
+                        backgroundColor: Color(uiColor: .systemGray5)
+                    )
+                    .textContentType(.fullStreetAddress)
+                    .focused($searchFieldIsFocused)
+                    .foregroundColor(locationSearcher.locationSource == .device ? .accentColor : .primary)
+                    .onSubmit {
+                        if let completion = locationSearcher.searchCompletions.first,  locationSearcher.locationSource == .search {
+                            Task {
+                                await locationSearcher.selectCompletion(completion)
+                                dismiss()
+                            }
+                        } else {
+                            locationSearcher.locationSource = .device
+                            dismiss()
+                        }
+                    }
+                    .onChange(of: searchFieldIsFocused) { newValue in
+                        if newValue {
+                            locationSearcher.locationSource = .search
+                        }
+                    }
                     
-                    if let error = viewModel.error {
-                        Text("Problem: \(error.localizedDescription)")
+                    if let errorMessage = locationSearcher.errorMessage {
+                        Text(errorMessage)
                             .font(.callout)
                             .foregroundColor(.secondary)
                     }
@@ -24,77 +51,88 @@ struct LocationSearchSheet: View {
                 .padding(.horizontal)
                 
                 List {
-                    yourLocationButton
+                    userLocationButton
+                    if let mapCenter = mapCenter {
+                        mapCenterButton(mapCenter)
+                    }
                     
-                    ForEach(viewModel.searchCompletions, id: \.self) { completion in
-                        searchCompletionButton(completion)
+                    if locationSearcher.locationSource == .search {
+                        ForEach(locationSearcher.searchCompletions, id: \.self) { completion in
+                            searchCompletionButton(completion)
+                        }
                     }
                 }
+                .scrollDismissesKeyboard(.interactively)
             }
-            .background(Color(uiColor: .secondarySystemBackground))
             .navigationTitle("Standort")
             .navigationBarTitleDisplayMode(.inline)
+            .background(Color(uiColor: colorScheme == .light ? .secondarySystemBackground : .systemBackground))
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Fertig") {
-                        submitOrDone()
+                        if locationSearcher.locationSource == .search {
+                            if let completion = locationSearcher.searchCompletions.first {
+                                Task {
+                                    await locationSearcher.selectCompletion(completion)
+                                    dismiss()
+                                }
+                            } else {
+                                locationSearcher.locationSource = .device
+                                dismiss()
+                            }
+                        } else {
+                            dismiss()
+                        }
                     }
                 }
             }
-            .interactiveDismissDisabled()
         }
+        .interactiveDismissDisabled()
     }
     
-    // MARK: - Search Field
-    var searchField: some View {
-        SearchField(
-            "Addresse, Postleitzahl, Stadt, ...",
-            systemImage: "location.magnifyingglass", backgroundColor: Color(uiColor: .systemGray5),
-            text: $viewModel.searchText
-        ) { isEditing in
-            if isEditing && viewModel.userLocationSelected {
-                viewModel.searchText = ""
-            }
-        }
-        .textContentType(.fullStreetAddress)
-        .submitLabel(.done)
-        .onSubmit {
-            submitOrDone()
-        }
-        .focused($searchFieldIsFocused)
-        .foregroundColor(viewModel.userLocationSelected ? .accentColor : .primary)
-        .task {
-            searchFieldIsFocused = true
-        }
-    }
-    
-    // MARK: - Your Location Button
-    var yourLocationButton: some View {
+    // MARK: User Location Button
+    var userLocationButton: some View {
         Button {
-            viewModel.selectUserLocation()
+            locationSearcher.locationSource = .device
+            searchFieldIsFocused = false
             dismiss()
         } label: {
             HStack {
                 Image(systemName: "location")
-                    .symbolVariant(viewModel.locationServiceAvailable ? .fill : .slash)
+                    .symbolVariant(locationSearcher.locationServiceAvailable ? .fill : .slash)
                     .font(.title3)
                     .padding(.trailing, 10)
                 
-                VStack(alignment: .leading) {
-                    Text("Mein Standort")
-                        .bold()
-                }
+                Text("Mein Standort")
+                    .bold()
             }
-            .foregroundColor(viewModel.locationServiceAvailable ? .accentColor : .secondary)
         }
-        .disabled(!viewModel.locationServiceAvailable)
+        .disabled(!locationSearcher.locationServiceAvailable)
     }
     
-    // MARK: - Search Completion Button
+    // MARK: User Location Button
+    func mapCenterButton(_ mapCenter: CLLocationCoordinate2D) -> some View {
+        Button {
+            locationSearcher.selectMapCoordinate(mapCenter)
+            searchFieldIsFocused = false
+            dismiss()
+        } label: {
+            HStack {
+                Image(systemName: "map")
+                    .font(.title3)
+                    .padding(.trailing, 10)
+                
+                Text("Kartenbereich")
+                    .bold()
+            }
+        }
+    }
+    
+    // MARK: Search Completion Button
     func searchCompletionButton(_ completion: MKLocalSearchCompletion) -> some View {
         Button {
             Task {
-                await viewModel.selectCompletion(completion)
+                await locationSearcher.selectCompletion(completion)
                 dismiss()
             }
         } label: {
@@ -114,25 +152,12 @@ struct LocationSearchSheet: View {
         }
         .foregroundColor(.primary)
     }
-    
-    // MARK: - Submit Or Done
-    func submitOrDone() {
-        if viewModel.searchText.isEmpty {
-            viewModel.selectUserLocation()
-            dismiss()
-        } else {
-            Task {
-                await viewModel.selectFirstCompletion()
-                dismiss()
-            }
-        }
-    }
 }
 
 
 // MARK: - Previews
 struct LocationSearchSheet_Previews: PreviewProvider {
     static var previews: some View {
-        LocationSearchSheet(viewModel: LocationSearcher())
+        LocationSearchSheet(locationSearcher: .init())
     }
 }

@@ -9,9 +9,6 @@ struct RestaurantsMapView: UIViewRepresentable {
     
     private let locationFetcher = LocationFetcher()
     
-    /* This property is needed to check if a change to centerCoordinate came from outside. */
-    @State private var privateCenterCoordinate = CLLocationCoordinate2D()
-    
     // MARK: Make UIView
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -62,7 +59,10 @@ struct RestaurantsMapView: UIViewRepresentable {
         
         // Set Center
         /* Updates to centerCoordinate from outside trigger this because lastCenterCoordinate does not get set from outside. */
-        if centerCoordinate != privateCenterCoordinate {
+        print(centerCoordinate != context.coordinator.privateCenterCoordinate)
+        if centerCoordinate != context.coordinator.privateCenterCoordinate {
+            print("C \(centerCoordinate)")
+            print("P \(context.coordinator.privateCenterCoordinate)")
             uiView.setRegion(
                 .init(center: centerCoordinate, span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)),
                 animated: true
@@ -74,13 +74,20 @@ struct RestaurantsMapView: UIViewRepresentable {
 // MARK: - Coordinator
 extension RestaurantsMapView {
     class Coordinator: NSObject, MKMapViewDelegate {
-        let parent: RestaurantsMapView
+        var parent: RestaurantsMapView
+        
+        /* This property is needed to check if a change to centerCoordinate came from outside the view. It is in the Coordinator because the view itself is a value type and this leads to problems. */
+        var privateCenterCoordinate = CLLocationCoordinate2D()
         
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
             Task {
                 await MainActor.run {
-                    parent.centerCoordinate = mapView.centerCoordinate
-                    parent.privateCenterCoordinate = mapView.centerCoordinate
+                    let center = mapView.centerCoordinate
+                    
+                    parent.centerCoordinate = center
+                    privateCenterCoordinate = center
+                    print("C* \(parent.centerCoordinate)")
+                    print("P* \(privateCenterCoordinate)")
                 }
             }
         }
