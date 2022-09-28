@@ -25,7 +25,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            RestaurantsMapView(selectedRestaurant: $selected, centerCoordinate: $centerCoordinate, restaurants: YelpRestaurantDetail.examples, settableMapCenter: centerCoordinate)
+            RestaurantsMapView(selectedRestaurant: $selected, centerCoordinate: $centerCoordinate, restaurants: YelpRestaurantDetail.examples)
             
             Button("TAp") {
                 centerCoordinate = .init(latitude: 50, longitude: 2)

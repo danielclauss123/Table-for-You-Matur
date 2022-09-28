@@ -7,12 +7,10 @@ struct RestaurantsMapView: UIViewRepresentable {
     
     let restaurants: [YelpRestaurantDetail]
     
-    let settableMapCenter: CLLocationCoordinate2D?
-    
     private let locationFetcher = LocationFetcher()
     
-    @State private var lastSetMapCenter: CLLocationCoordinate2D?
-    @State private var lastCenterCoordinate = CLLocationCoordinate2D()
+    /* This property is needed to check if a change to centerCoordinate came from outside. */
+    @State private var privateCenterCoordinate = CLLocationCoordinate2D()
     
     // MARK: Make UIView
     func makeUIView(context: Context) -> MKMapView {
@@ -62,29 +60,14 @@ struct RestaurantsMapView: UIViewRepresentable {
             }
         }
         
-        /*if settableMapCenter != lastSetMapCenter {
-            if let settableMapCenter = settableMapCenter {
-                uiView.setRegion(
-                    .init(center: settableMapCenter, span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)),
-                    animated: true
-                )
-            }
-            
-            lastSetMapCenter = settableMapCenter
-        }*/
-        
         // Set Center
-        /* Updates to centerCoordinate from outside trigger the first block, from inside (drag of map) are always made together with update to lastCenterCoordinate. */
-        if centerCoordinate != lastCenterCoordinate {
+        /* Updates to centerCoordinate from outside trigger this because lastCenterCoordinate does not get set from outside. */
+        if centerCoordinate != privateCenterCoordinate {
             uiView.setRegion(
                 .init(center: centerCoordinate, span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)),
                 animated: true
             )
-        } /*else {
-            centerCoordinate = uiView.centerCoordinate
         }
-        
-        lastCenterCoordinate = centerCoordinate*/
     }
 }
 
@@ -93,16 +76,24 @@ extension RestaurantsMapView {
     class Coordinator: NSObject, MKMapViewDelegate {
         let parent: RestaurantsMapView
         
-        func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-            
-        }
-        
         func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
             Task {
                 await MainActor.run {
                     parent.centerCoordinate = mapView.centerCoordinate
-                    parent.lastCenterCoordinate = mapView.centerCoordinate
+                    parent.privateCenterCoordinate = mapView.centerCoordinate
                 }
+            }
+        }
+        
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            if let annotation = view.annotation as? RestaurantAnnotation {
+                parent.selectedRestaurant = annotation.restaurant
+            }
+        }
+        
+        func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+            if (view.annotation as? RestaurantAnnotation)?.restaurant == parent.selectedRestaurant {
+                parent.selectedRestaurant = nil
             }
         }
         
@@ -133,18 +124,6 @@ extension RestaurantsMapView {
             return annotationView
         }
         
-        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-            if let annotation = view.annotation as? RestaurantAnnotation {
-                parent.selectedRestaurant = annotation.restaurant
-            }
-        }
-        
-        func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-            if (view.annotation as? RestaurantAnnotation)?.restaurant == parent.selectedRestaurant {
-                parent.selectedRestaurant = nil
-            }
-        }
-        
         init(_ parent: RestaurantsMapView) {
             self.parent = parent
         }
@@ -168,9 +147,9 @@ struct RestaurantsMapView_Previews: PreviewProvider {
         
         var body: some View {
             VStack {
-                RestaurantsMapView(selectedRestaurant: $selected, centerCoordinate: $centerCoordinate, restaurants: YelpRestaurantDetail.examples, settableMapCenter: centerCoordinate)
+                RestaurantsMapView(selectedRestaurant: $selected, centerCoordinate: $centerCoordinate, restaurants: YelpRestaurantDetail.examples)
                 
-                Button("TAp") {
+                Button("Tap") {
                     centerCoordinate = .init(latitude: 50, longitude: 2)
                 }
                 .padding(30)
