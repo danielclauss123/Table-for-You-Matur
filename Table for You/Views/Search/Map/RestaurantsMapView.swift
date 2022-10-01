@@ -59,10 +59,7 @@ struct RestaurantsMapView: UIViewRepresentable {
         
         // Set Center
         /* Updates to centerCoordinate from outside trigger this because lastCenterCoordinate does not get set from outside. */
-        print(centerCoordinate != context.coordinator.privateCenterCoordinate)
         if centerCoordinate != context.coordinator.privateCenterCoordinate {
-            print("C \(centerCoordinate)")
-            print("P \(context.coordinator.privateCenterCoordinate)")
             uiView.setRegion(
                 .init(center: centerCoordinate, span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)),
                 animated: true
@@ -86,8 +83,6 @@ extension RestaurantsMapView {
                     
                     parent.centerCoordinate = center
                     privateCenterCoordinate = center
-                    print("C* \(parent.centerCoordinate)")
-                    print("P* \(privateCenterCoordinate)")
                 }
             }
         }
