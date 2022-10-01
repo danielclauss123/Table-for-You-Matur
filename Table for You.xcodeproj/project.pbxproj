@@ -90,6 +90,7 @@
 		7E8E14CC28E465DE009D4F79 /* LocationSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E14CB28E465DE009D4F79 /* LocationSearcher.swift */; };
 		7E8E14CE28E4671F009D4F79 /* LocationSearchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E14CD28E4671F009D4F79 /* LocationSearchButton.swift */; };
 		7E8E14D028E46725009D4F79 /* LocationSearchSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8E14CF28E46725009D4F79 /* LocationSearchSheet.swift */; };
+		7E9D2EB528E8650F00BEC72C /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9D2EB428E8650F00BEC72C /* TestView.swift */; };
 		7EB1FD3328CCD53C005D71B0 /* UserReservationsRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1FD3228CCD53C005D71B0 /* UserReservationsRepo.swift */; };
 		7EB1FD3728CCDA65005D71B0 /* UserReservationsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1FD3628CCDA65005D71B0 /* UserReservationsVM.swift */; };
 		7EB1FD3928CCE05F005D71B0 /* UserReservationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EB1FD3828CCE05F005D71B0 /* UserReservationsView.swift */; };
@@ -180,6 +181,7 @@
 		7E8E14CB28E465DE009D4F79 /* LocationSearcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearcher.swift; sourceTree = "<group>"; };
 		7E8E14CD28E4671F009D4F79 /* LocationSearchButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchButton.swift; sourceTree = "<group>"; };
 		7E8E14CF28E46725009D4F79 /* LocationSearchSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchSheet.swift; sourceTree = "<group>"; };
+		7E9D2EB428E8650F00BEC72C /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		7EB1FD3228CCD53C005D71B0 /* UserReservationsRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReservationsRepo.swift; sourceTree = "<group>"; };
 		7EB1FD3628CCDA65005D71B0 /* UserReservationsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReservationsVM.swift; sourceTree = "<group>"; };
 		7EB1FD3828CCE05F005D71B0 /* UserReservationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReservationsView.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 			children = (
 				7E819AF028A188EE00B67BAA /* SearchSheet */,
 				7E819AF228A188EE00B67BAA /* RestaurantSearchView.swift */,
+				7E9D2EB428E8650F00BEC72C /* TestView.swift */,
 				7E819AF328A188EE00B67BAA /* Map */,
 			);
 			path = Search;
@@ -677,6 +680,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E9D2EB528E8650F00BEC72C /* TestView.swift in Sources */,
 				7E3B9D0028CC877E00DA435D /* LoadingStatus.swift in Sources */,
 				7E819B3B28A188EE00B67BAA /* MapAndAddressView.swift in Sources */,
 				7E819B3028A188EE00B67BAA /* RestaurantAnnotationViews.swift in Sources */,

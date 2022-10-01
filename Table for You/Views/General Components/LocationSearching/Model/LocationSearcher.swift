@@ -6,9 +6,6 @@ class LocationSearcher: NSObject, ObservableObject, MKLocalSearchCompleterDelega
     @Published var searchText = ""
     @Published var locationSource = LocationSource.undefined {
         didSet {
-            aboutToChange = true
-            guard locationSource != oldValue else { return }
-            
             coordinate = nil
             
             if locationSource == .device {
@@ -25,8 +22,6 @@ class LocationSearcher: NSObject, ObservableObject, MKLocalSearchCompleterDelega
             }
         }
     }
-    
-    @Published var aboutToChange = false
     
     @Published private(set) var coordinate: CLLocationCoordinate2D?
     @Published private(set) var searchCompletions = [MKLocalSearchCompletion]()
@@ -120,7 +115,7 @@ class LocationSearcher: NSObject, ObservableObject, MKLocalSearchCompleterDelega
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if locationSource == .device {
+        if locationSource == .device && coordinate == nil {
             coordinate = locations.last?.coordinate
         }
     }

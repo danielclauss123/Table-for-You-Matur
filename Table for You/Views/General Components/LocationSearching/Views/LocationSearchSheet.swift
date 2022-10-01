@@ -24,7 +24,7 @@ struct LocationSearchSheet: View {
                     )
                     .textContentType(.fullStreetAddress)
                     .focused($searchFieldIsFocused)
-                    .foregroundColor(locationSearcher.locationSource == .device ? .accentColor : .primary)
+                    .foregroundColor(locationSearcher.locationSource == .device || locationSearcher.locationSource == .map ? .accentColor : .primary)
                     .onSubmit {
                         if let completion = locationSearcher.searchCompletions.first,  locationSearcher.locationSource == .search {
                             Task {
