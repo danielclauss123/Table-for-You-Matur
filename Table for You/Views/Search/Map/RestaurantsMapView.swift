@@ -47,7 +47,15 @@ struct RestaurantsMapView: UIViewRepresentable {
         uiView.addAnnotations(annotationsToAdd)
         
         // Check Selected Restaurant
-        if selectedRestaurant == nil {
+        if let selectedRestaurant = selectedRestaurant {
+            let annotation = uiView.annotations.compactMap {
+                $0 as? RestaurantAnnotation
+            }.first(where: { $0.restaurant == selectedRestaurant })
+            
+            if let annotation = annotation {
+                uiView.selectAnnotation(annotation, animated: true)
+            }
+        } else {
             let selectedRestaurantAnnotations = uiView.selectedAnnotations.filter {
                 $0 is RestaurantAnnotation
             }
