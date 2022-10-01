@@ -62,7 +62,7 @@ struct RestaurantSearchSheet: View {
             }
             
             HStack {
-                LocationSearchButton(locationSearcher: locationSearcher) {
+                LocationSearchButton(locationSearcher: locationSearcher, mapCenter: CLLocationCoordinate2D.zero) {
                     sheetStatus = .middle
                 }
                 
@@ -137,7 +137,7 @@ struct RestaurantSearchSheet_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
             ZStack {
-                RestaurantAnnotationsMapView(selectedRestaurant: .constant(nil), restaurants: [], center: .zero)
+                Color.brown
                     .ignoresSafeArea()
                 
                 RestaurantSearchSheet(selectedRestaurant: .constant(nil), restaurantRepo: RestaurantRepo(locationSearcher: LocationSearcher.example))

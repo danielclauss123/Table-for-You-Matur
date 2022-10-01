@@ -17,7 +17,10 @@ class LocationSearcher: NSObject, ObservableObject, MKLocalSearchCompleterDelega
                 searchText = "Kartenbereich"
                 locationManager.stopUpdatingLocation()
             } else {
-                searchText = ""
+                // Without it, the text gets set to empty when the user taps the text field again.
+                if !(oldValue == .search && locationSource == .search) {
+                    searchText = ""
+                }
                 locationManager.stopUpdatingLocation()
             }
         }
@@ -61,7 +64,7 @@ class LocationSearcher: NSObject, ObservableObject, MKLocalSearchCompleterDelega
         locationSource = .device
     }
     
-    /// Example init.
+    /// Example init
     private init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
         self.locationSource = .search

@@ -2,13 +2,42 @@ import SwiftUI
 import MapKit
 
 struct LocationSearchButton: View {
-    @StateObject var locationSearcher = LocationSearcher()
+    @ObservedObject var locationSearcher: LocationSearcher
+    
+    var mapCenter: CLLocationCoordinate2D?
+    var tapAction: () -> Void = { }
     
     @State private var showingSearchSheet = false
     
-    var mapCenter: CLLocationCoordinate2D?
+    var symbolVariant: SymbolVariants {
+        guard locationSearcher.coordinate != nil else {
+            return .slash
+        }
+        
+        switch locationSearcher.locationSource {
+        case .device:
+            return .fill
+        case .search, .map:
+            return .none
+        case .undefined:
+            return .slash
+        }
+    }
     
-    var tapAction: () -> Void = { }
+    var foregroundColor: Color {
+        guard locationSearcher.coordinate != nil else {
+            return .secondary
+        }
+        
+        switch locationSearcher.locationSource {
+        case .device, .map:
+            return .accentColor
+        case .search:
+            return .primary
+        case .undefined:
+            return .secondary
+        }
+    }
     
     // MARK: - Body
     var body: some View {
@@ -18,11 +47,11 @@ struct LocationSearchButton: View {
         } label: {
             Label(
                 locationSearcher.coordinate != nil ? locationSearcher.searchText : "Unbekannt",
-                systemImage: "location"
+                systemImage: locationSearcher.locationSource == .map ? "map" : "location"
             )
-            .symbolVariant(locationSearcher.coordinate == nil ? .slash : (locationSearcher.locationSource == .device ? .fill : .none))
+            .symbolVariant(symbolVariant)
             .font(.subheadline.bold())
-            .foregroundColor(locationSearcher.coordinate == nil ? .secondary : (locationSearcher.locationSource == .device ? .accentColor : .primary))
+            .foregroundColor(foregroundColor)
         }
         .lineLimit(1)
         .sheet(isPresented: $showingSearchSheet) {
@@ -35,7 +64,7 @@ struct LocationSearchButton: View {
 // MARK: - Previews
 struct LocationSearchButton_Previews: PreviewProvider {
     static var previews: some View {
-        LocationSearchButton(locationSearcher: LocationSearcher())
+        LocationSearchButton(locationSearcher: .example)
             .previewLayout(.sizeThatFits)
     }
 }

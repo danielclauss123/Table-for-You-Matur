@@ -70,7 +70,15 @@ struct LocationSearchSheet: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Fertig") {
-                        if locationSearcher.locationSource == .search {
+                        if locationSearcher.locationSource == .device {
+                            locationSearcher.locationSource = .device
+                            dismiss()
+                        } else if locationSearcher.locationSource == .map {
+                            if let mapCenter = mapCenter {
+                                locationSearcher.selectMapCoordinate(mapCenter)
+                            }
+                            dismiss()
+                        } else {
                             if let completion = locationSearcher.searchCompletions.first {
                                 Task {
                                     await locationSearcher.selectCompletion(completion)
@@ -80,8 +88,6 @@ struct LocationSearchSheet: View {
                                 locationSearcher.locationSource = .device
                                 dismiss()
                             }
-                        } else {
-                            dismiss()
                         }
                     }
                 }
@@ -158,6 +164,6 @@ struct LocationSearchSheet: View {
 // MARK: - Previews
 struct LocationSearchSheet_Previews: PreviewProvider {
     static var previews: some View {
-        LocationSearchSheet(locationSearcher: .init())
+        LocationSearchSheet(locationSearcher: .example)
     }
 }
