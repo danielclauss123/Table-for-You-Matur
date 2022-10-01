@@ -53,7 +53,8 @@ struct LocationSearchButton: View {
             .font(.subheadline.bold())
             .foregroundColor(foregroundColor)
         }
-        .lineLimit(1)
+        .buttonStyle(.bordered)
+        .lineLimit(2)
         .sheet(isPresented: $showingSearchSheet) {
             LocationSearchSheet(locationSearcher: locationSearcher, mapCenter: mapCenter)
         }

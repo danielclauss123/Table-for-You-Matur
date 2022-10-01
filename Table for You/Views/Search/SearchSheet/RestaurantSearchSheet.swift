@@ -7,9 +7,17 @@ struct RestaurantSearchSheet: View {
     @ObservedObject var restaurantRepo: RestaurantRepo
     @ObservedObject var locationSearcher: LocationSearcher
     
+    var mapCenter: CLLocationCoordinate2D
+    
     @State private var sheetStatus = BottomSheetStatus.middle
     
     @FocusState private var restaurantSearchIsFocused: Bool
+    
+    var showingMapAreaButton: Bool {
+        guard let coordinate = locationSearcher.coordinate else { return false }
+        
+        return coordinate.distance(from: mapCenter) > 50 * 1000
+    }
     
     // MARK: - Body
     var body: some View {
@@ -61,12 +69,24 @@ struct RestaurantSearchSheet: View {
                 }
             }
             
-            HStack {
-                LocationSearchButton(locationSearcher: locationSearcher, mapCenter: CLLocationCoordinate2D.zero) {
+            HStack(spacing: 0) {
+                LocationSearchButton(locationSearcher: locationSearcher, mapCenter: mapCenter) {
                     sheetStatus = .middle
                 }
                 
                 Spacer()
+                
+                if showingMapAreaButton {
+                    Button {
+                        locationSearcher.selectMapCoordinate(mapCenter)
+                    } label: {
+                        HStack {
+                            Text("Hier Suchen")
+                                .font(.subheadline.bold())
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                }
             }
         }
     }
@@ -124,10 +144,11 @@ struct RestaurantSearchSheet: View {
     }
     
     // MARK: - Initializer
-    init(selectedRestaurant: Binding<YelpRestaurantDetail?>, restaurantRepo: RestaurantRepo) {
+    init(selectedRestaurant: Binding<YelpRestaurantDetail?>, restaurantRepo: RestaurantRepo, mapCenter: CLLocationCoordinate2D) {
         self._selectedRestaurant = selectedRestaurant
         self.restaurantRepo = restaurantRepo
         self.locationSearcher = restaurantRepo.locationSearcher
+        self.mapCenter = mapCenter
     }
 }
 
@@ -140,7 +161,7 @@ struct RestaurantSearchSheet_Previews: PreviewProvider {
                 Color.brown
                     .ignoresSafeArea()
                 
-                RestaurantSearchSheet(selectedRestaurant: .constant(nil), restaurantRepo: RestaurantRepo(locationSearcher: LocationSearcher.example))
+                RestaurantSearchSheet(selectedRestaurant: .constant(nil), restaurantRepo: RestaurantRepo(locationSearcher: LocationSearcher.example), mapCenter: .zero)
             }
         }
         .tabItem {
