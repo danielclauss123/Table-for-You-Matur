@@ -14,6 +14,10 @@ struct RestaurantSearchView: View {
     @State private var mapCenter = CLLocationCoordinate2D()
     @State private var lastSetSource = LocationSearcher.LocationSource.undefined
     
+    @State private var locationWillChange = false
+    
+    @StateObject var locationSearcher: LocationSearcher
+    
     // MARK: - Body
     var body: some View {
         NavigationView {
@@ -28,14 +32,32 @@ struct RestaurantSearchView: View {
             }
             .navigationTitle("Restaurant Suche")
             .navigationBarHidden(true)
-            .onChange(of: restaurantRepo.locationSearcher.coordinate) { coordinate in
+            /*.onReceive(restaurantRepo.locationSearcher.$locationSource, perform: { _ in
+                locationWillChange = true
+            })*/
+            /*.onChange(of: restaurantRepo.locationSearcher.locationSource) { source in
+                if source != .undefined {
+                    locationWillChange = true
+                }
+            }*/
+            .onChange(of: locationSearcher.coordinate) { coordinate in
+                guard let coordinate = coordinate else { return }
+                print("asdfkasdljhfas kdlfghasjkdflad adhsfkjsadhf jkalsfd fafkasdfahdklsfjahdjsfas")
+                
+                if locationSearcher.aboutToChange {
+                    mapCenter = coordinate
+                    locationWillChange = false
+                    locationSearcher.aboutToChange = false
+                }
+            }
+            /*.onChange(of: restaurantRepo.locationSearcher.coordinate) { coordinate in
                 guard lastSetSource != restaurantRepo.locationSearcher.locationSource else { return }
                 
                 guard let coordinate = coordinate else { return }
                 
                 mapCenter = coordinate
                 lastSetSource = restaurantRepo.locationSearcher.locationSource
-            }
+            }*/
         }
     }
     
@@ -43,6 +65,7 @@ struct RestaurantSearchView: View {
     init() {
         let locationSearcher = LocationSearcher()
         
+        self._locationSearcher = StateObject(wrappedValue: locationSearcher)
         self._restaurantRepo = StateObject(wrappedValue: RestaurantRepo(locationSearcher: locationSearcher))
     }
 }

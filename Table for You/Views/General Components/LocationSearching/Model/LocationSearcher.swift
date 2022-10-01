@@ -6,6 +6,7 @@ class LocationSearcher: NSObject, ObservableObject, MKLocalSearchCompleterDelega
     @Published var searchText = ""
     @Published var locationSource = LocationSource.undefined {
         didSet {
+            aboutToChange = true
             guard locationSource != oldValue else { return }
             
             coordinate = nil
@@ -24,6 +25,8 @@ class LocationSearcher: NSObject, ObservableObject, MKLocalSearchCompleterDelega
             }
         }
     }
+    
+    @Published var aboutToChange = false
     
     @Published private(set) var coordinate: CLLocationCoordinate2D?
     @Published private(set) var searchCompletions = [MKLocalSearchCompletion]()
@@ -78,6 +81,7 @@ class LocationSearcher: NSObject, ObservableObject, MKLocalSearchCompleterDelega
     
     // MARK: Select Completion
     @MainActor func selectCompletion(_ searchCompletion: MKLocalSearchCompletion) async {
+        locationSource = .search
         searchText = searchCompletion.fullText
         
         do {
