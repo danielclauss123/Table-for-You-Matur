@@ -136,7 +136,7 @@ private actor LoadingService {
         let restaurants: [Restaurant] = snapshot.documents.compactMap { document in
             do {
                 let restaurant = try document.data(as: Restaurant.self)
-                if restaurant.coordinate.distance(from: coordinate) > 50 * 1000{
+                if restaurant.coordinate.distance(from: coordinate) > 50 * 1000 {
                     return nil
                 } else {
                     return restaurant

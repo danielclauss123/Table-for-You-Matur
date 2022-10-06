@@ -409,8 +409,8 @@
 			isa = PBXGroup;
 			children = (
 				7E09124F28DF79930062152F /* RestaurantsMapView.swift */,
-				7E819AF528A188EE00B67BAA /* RestaurantAnnotation.swift */,
 				7E819AF628A188EE00B67BAA /* RestaurantAnnotationViews.swift */,
+				7E819AF528A188EE00B67BAA /* RestaurantAnnotation.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";

@@ -42,7 +42,8 @@ struct RestaurantSearchSheet: View {
             HStack {
                 SearchField(
                     "Restaurant Name",
-                    text: $restaurantRepo.searchText, systemImage: "magnifyingglass",
+                    text: $restaurantRepo.searchText,
+                    systemImage: "magnifyingglass",
                     backgroundColor: Color(uiColor: .systemGray5)
                 )
                 .focused($restaurantSearchIsFocused)
@@ -65,26 +66,22 @@ struct RestaurantSearchSheet: View {
                         sheetStatus = .middle
                         restaurantRepo.searchText = ""
                     }
-                    .transition(.opacity)
                 }
             }
             
             HStack(spacing: 0) {
-                LocationSearchButton(locationSearcher: locationSearcher, mapCenter: mapCenter) {
-                    sheetStatus = .middle
-                }
+                LocationSearchButton(
+                    locationSearcher: locationSearcher,
+                    mapCenter: mapCenter
+                ) { sheetStatus = .middle }
                 
                 Spacer()
                 
                 if showingMapAreaButton {
-                    Button {
+                    Button("Hier Suchen") {
                         locationSearcher.selectMapCoordinate(mapCenter)
-                    } label: {
-                        HStack {
-                            Text("Hier Suchen")
-                                .font(.subheadline.bold())
-                        }
                     }
+                    .font(.subheadline.bold())
                     .buttonStyle(.bordered)
                 }
             }
