@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct NewReservationView: View {
-    @StateObject var viewModel: ReservationVM
+    @StateObject var viewModel: NewReservationVM
     @StateObject var roomRepo: RoomRepo
     @StateObject var reservationRepo: RoomReservationsRepo
     
@@ -113,7 +113,7 @@ struct NewReservationView: View {
     
     // MARK: - Init
     init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail, sheetIsPresented: Binding<Bool>) {
-        let viewModel = ReservationVM(restaurant: restaurant, yelpRestaurant: yelpRestaurant)
+        let viewModel = NewReservationVM(restaurant: restaurant, yelpRestaurant: yelpRestaurant)
         
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._roomRepo = StateObject(wrappedValue: RoomRepo(restaurant: restaurant))
@@ -123,7 +123,7 @@ struct NewReservationView: View {
     
     // MARK: - Example Init
     fileprivate init() {
-        self._viewModel = StateObject(wrappedValue: ReservationVM.example)
+        self._viewModel = StateObject(wrappedValue: NewReservationVM.example)
         self._roomRepo = StateObject(wrappedValue: RoomRepo.example)
         self._reservationRepo = StateObject(wrappedValue: RoomReservationsRepo.example)
         self._sheetIsPresented = .constant(true)

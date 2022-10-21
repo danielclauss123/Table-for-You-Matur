@@ -6,7 +6,7 @@ struct TableView<SeatFill: ShapeStyle, TableFill: ShapeStyle>: View {
     let seatFill: SeatFill
     let tableFill: TableFill
     
-    // MARK: - Body
+    // MARK: Body
     var body: some View {
         DynamicalStack(table.rotation.isHorizontal ? .horizontal : .vertical, spacing: Table.tableToSeatSpacing) {
             // Left head seat

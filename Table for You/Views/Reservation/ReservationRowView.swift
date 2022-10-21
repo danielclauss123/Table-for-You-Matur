@@ -7,7 +7,7 @@ struct ReservationRowView: View {
     // MARK: Body
     var body: some View {
         NavigationLink {
-            Text("Detail View")
+            ReservationDetailView(reservation: reservation, restaurant: restaurant ?? .fullExample1)
         } label: {
             HStack {
                 AsyncImage(url: URL(string: restaurant?.imageUrl ?? "")) { image in

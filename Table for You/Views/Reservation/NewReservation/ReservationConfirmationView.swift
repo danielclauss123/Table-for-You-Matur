@@ -1,57 +1,79 @@
 import SwiftUI
 
 struct ReservationConfirmationView: View {
-    @ObservedObject var viewModel: ReservationVM
+    @Binding var isShown: Bool
+    
+    @ObservedObject var viewModel: NewReservationVM
     
     @Binding var sheetIsPresented: Bool
     
-    // MARK: - Body
+    // MARK: Body
     var body: some View {
         VStack {
-            HStack {
-                AsyncImage(url: URL(string: viewModel.yelpRestaurant.imageUrl ?? "")) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    Image.defaultPlaceholder()
-                        .aspectRatio(1, contentMode: .fit)
-                }
-                .frame(width: 50, height: 50)
-                .clipped()
-                .cornerRadius(10)
-                
-                Text(viewModel.yelpRestaurant.name)
-                    .font(.title2.bold())
-                
-                Spacer()
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "xmark")
-                        .font(.headline)
-                        .foregroundColor(.secondary)
-                        .padding(7)
-                        .background(.quaternary)
-                        .clipShape(Circle())
-                }
-            }
+            header
             
             Divider()
             
+            information
+            
+            reserveButton
+        }
+        .padding(10)
+        .background {
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color(uiColor: .secondarySystemBackground))
+                .shadow(radius: 10)
+        }
+        .padding()
+        .alert(viewModel.errorMessage ?? "Unbekanntes Problem", isPresented: $viewModel.showingErrorAlert) {
+            Button("Ok") { }
+        }
+    }
+    
+    // MARK: Header
+    var header: some View {
+        HStack {
+            AsyncImage(url: URL(string: viewModel.yelpRestaurant.imageUrl ?? "")) { image in
+                image
+                    .resizable()
+                    .scaledToFill()
+            } placeholder: {
+                Image.defaultPlaceholder()
+                    .aspectRatio(1, contentMode: .fit)
+            }
+            .frame(width: 50, height: 50)
+            .clipped()
+            .cornerRadius(10)
+            
+            Text(viewModel.yelpRestaurant.name)
+                .font(.title2.bold())
+            
+            Spacer()
+            
+            Button {
+                isShown = false
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                    .padding(7)
+                    .background(Color(uiColor: .systemGray4))
+                    .clipShape(Circle())
+            }
+        }
+    }
+    
+    // MARK: Information
+    var information: some View {
+        HStack {
             VStack(alignment: .leading) {
-                HStack {
-                    Text(viewModel.date, style: .time)
-                        .font(.headline)
-                    +
-                    Text(", ")
-                        .font(.headline)
-                    +
-                    Text(viewModel.date, style: .date)
-                    
-                    Spacer()
-                }
+                Text(viewModel.date, style: .time)
+                    .font(.headline)
+                +
+                Text(", ")
+                    .font(.headline)
+                +
+                Text(viewModel.date, style: .date)
                 
                 Text("\(viewModel.numberOfPeople) \(viewModel.numberOfPeople == 1 ? "Person" : "Personen")")
                     .font(.headline)
@@ -61,27 +83,22 @@ struct ReservationConfirmationView: View {
                 Text(viewModel.customerName)
             }
             
-            Button {
-                viewModel.uploadReservation()
-                if !viewModel.showingErrorAlert {
-                    sheetIsPresented = false
-                }
-            } label: {
-                Text("Reservieren")
-                    .font(.title3.bold())
-                    .frame(maxWidth: .infinity)
+            Spacer()
+        }
+    }
+    
+    var reserveButton: some View {
+        Button {
+            viewModel.uploadReservation()
+            if !viewModel.showingErrorAlert {
+                sheetIsPresented = false
             }
-            .buttonStyle(.bordered)
+        } label: {
+            Text("Reservieren")
+                .font(.title3.bold())
+                .frame(maxWidth: .infinity)
         }
-        .padding(10)
-        .background {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.quaternary)
-        }
-        .padding()
-        .alert(viewModel.errorMessage ?? "Unbekanntes Problem", isPresented: $viewModel.showingErrorAlert) {
-            Button("Ok") { }
-        }
+        .buttonStyle(.bordered)
     }
 }
 
@@ -89,8 +106,13 @@ struct ReservationConfirmationView: View {
 // MARK: - Previews
 struct ReservationConfirmationView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            ReservationConfirmationView(viewModel: .example, sheetIsPresented: .constant(true))
+        ZStack {
+            Color.accentColor
+                .ignoresSafeArea()
+            Rectangle().fill(.regularMaterial)
+                .ignoresSafeArea()
+            
+            ReservationConfirmationView(isShown: .constant(true), viewModel: .example, sheetIsPresented: .constant(true))
         }
     }
 }

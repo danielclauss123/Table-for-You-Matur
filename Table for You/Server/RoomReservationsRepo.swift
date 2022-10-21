@@ -9,14 +9,14 @@ class RoomReservationsRepo: ObservableObject {
     
     @Published private(set) var loadingStatus = Firestore.LoadingStatus.ready
     
-    let reservationVM: ReservationVM
+    let reservationVM: NewReservationVM
     private var dateCancellable: AnyCancellable?
     
     private var currentListener: ListenerRegistration?
     private var currentListenerId: UUID?
     
     // MARK: Init
-    init(reservationVM: ReservationVM) {
+    init(reservationVM: NewReservationVM) {
         self.reservationVM = reservationVM
         
         dateCancellable = reservationVM.$date.sink { date in

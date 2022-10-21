@@ -4,7 +4,7 @@ struct RoomThumbnailView: View {
     let room: Room
     let currentReservations: [Reservation]
     
-    @ObservedObject var viewModel: ReservationVM
+    @ObservedObject var viewModel: NewReservationVM
     
     @State private var scale = 1.0
     

@@ -4,7 +4,7 @@ struct RoomView: View {
     let room: Room
     let currentReservations: [Reservation]
     
-    @ObservedObject var viewModel: ReservationVM
+    @ObservedObject var viewModel: NewReservationVM
     
     @Binding var sheetIsPresented: Bool
     
@@ -22,7 +22,7 @@ struct RoomView: View {
                         ForEach(room.tables) { table in
                             Button {
                                 viewModel.roomId = room.id.unwrapWithUUID()
-                                viewModel.tableId = table.id
+                                viewModel.table = table
                                 
                                 tableIsSelected = true
                             } label: {
@@ -52,7 +52,7 @@ struct RoomView: View {
                         tableIsSelected = false
                     }
                 
-                ReservationConfirmationView(viewModel: viewModel, sheetIsPresented: $sheetIsPresented)
+                ReservationConfirmationView(isShown: $tableIsSelected, viewModel: viewModel, sheetIsPresented: $sheetIsPresented)
             }
         }
         .navigationTitle(room.name)

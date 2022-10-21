@@ -5,7 +5,7 @@ import SystemConfiguration
 import SwiftUI
 
 @MainActor
-class ReservationVM: ObservableObject {
+class NewReservationVM: ObservableObject {
     @Published var customerName = UserDefaults.standard.loadAndDecode(fromKey: .customerName, withDefault: "") {
         didSet {
             try? UserDefaults.standard.encodeAndSet(customerName, forKey: .customerName)
@@ -16,8 +16,9 @@ class ReservationVM: ObservableObject {
     @Published var date = Date.now.addingTimeInterval(60 * 5)
     
     @Published var roomId: String?
-    @Published var tableId: String?
+    @Published var table: Table?
     
+    @Published var successfulUpload = false
     @Published var showingErrorAlert = false
     @Published var errorMessage: String?
     
@@ -88,7 +89,7 @@ class ReservationVM: ObservableObject {
             return
         }
         
-        guard let roomId = roomId, let tableId = tableId else {
+        guard let roomId = roomId, let table = table else {
             errorMessage = "Kein Tisch ausgewählt. Wähle einen aus und versuche es erneut."
             showingErrorAlert = true
             return
@@ -103,7 +104,7 @@ class ReservationVM: ObservableObject {
         do {
             let userId = try Auth.currentUser().uid
 
-            let reservation = Reservation(customerId: userId, customerName: customerName, numberOfPeople: numberOfPeople, restaurantId: restaurant.id.unwrapWithUUID(), yelpId: yelpRestaurant.id, roomId: roomId, tableId: tableId, date: date)
+            let reservation = Reservation(customerId: userId, customerName: customerName, numberOfPeople: numberOfPeople, restaurantId: restaurant.id.unwrapWithUUID(), yelpId: yelpRestaurant.id, roomId: roomId, tableId: table.id, date: date)
             
             try SCNetworkConnection.checkConnection()
             
@@ -115,9 +116,13 @@ class ReservationVM: ObservableObject {
             showingErrorAlert = true
         }
     }
+    
+    enum UploadingState {
+        case inProgress, successful, failed
+    }
 }
 
 // MARK: - Example
-extension ReservationVM {
-    static let example = ReservationVM(restaurant: .example, yelpRestaurant: .fullExample1)
+extension NewReservationVM {
+    static let example = NewReservationVM(restaurant: .example, yelpRestaurant: .fullExample1)
 }
