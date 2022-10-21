@@ -5,8 +5,6 @@ struct ReservationConfirmationView: View {
     
     @ObservedObject var viewModel: NewReservationVM
     
-    @Binding var sheetIsPresented: Bool
-    
     // MARK: Body
     var body: some View {
         VStack {
@@ -25,7 +23,7 @@ struct ReservationConfirmationView: View {
                 .shadow(radius: 10)
         }
         .padding()
-        .alert(viewModel.errorMessage ?? "Unbekanntes Problem", isPresented: $viewModel.showingErrorAlert) {
+        .alert(viewModel.errorMessage ?? "Unbekanntes Problem", isPresented: viewModel.errorAlertIsPresented) {
             Button("Ok") { }
         }
     }
@@ -90,9 +88,6 @@ struct ReservationConfirmationView: View {
     var reserveButton: some View {
         Button {
             viewModel.uploadReservation()
-            if !viewModel.showingErrorAlert {
-                sheetIsPresented = false
-            }
         } label: {
             Text("Reservieren")
                 .font(.title3.bold())
@@ -112,7 +107,7 @@ struct ReservationConfirmationView_Previews: PreviewProvider {
             Rectangle().fill(.regularMaterial)
                 .ignoresSafeArea()
             
-            ReservationConfirmationView(isShown: .constant(true), viewModel: .example, sheetIsPresented: .constant(true))
+            ReservationConfirmationView(isShown: .constant(true), viewModel: .example)
         }
     }
 }

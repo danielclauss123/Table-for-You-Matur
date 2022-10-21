@@ -6,8 +6,6 @@ struct RoomView: View {
     
     @ObservedObject var viewModel: NewReservationVM
     
-    @Binding var sheetIsPresented: Bool
-    
     @State private var scale = 1.0
     @State private var minimumScale = 0.2
     
@@ -52,7 +50,7 @@ struct RoomView: View {
                         tableIsSelected = false
                     }
                 
-                ReservationConfirmationView(isShown: $tableIsSelected, viewModel: viewModel, sheetIsPresented: $sheetIsPresented)
+                ReservationConfirmationView(isShown: $tableIsSelected, viewModel: viewModel)
             }
         }
         .navigationTitle(room.name)
@@ -65,7 +63,7 @@ struct RoomView: View {
 struct RoomView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            RoomView(room: .example, currentReservations: [], viewModel: .example, sheetIsPresented: .constant(true))
+            RoomView(room: .example, currentReservations: [], viewModel: .example)
         }
     }
 }

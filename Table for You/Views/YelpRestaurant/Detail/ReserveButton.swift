@@ -39,7 +39,7 @@ extension RestaurantDetailSheet {
             }
             .sheet(isPresented: $showingReservationSheet) {
                 if let restaurant = restaurant {
-                    NewReservationView(restaurant: restaurant, yelpRestaurant: yelpRestaurant, sheetIsPresented: $showingReservationSheet)
+                    NewReservationView(restaurant: restaurant, yelpRestaurant: yelpRestaurant)
                 }
             }
         }

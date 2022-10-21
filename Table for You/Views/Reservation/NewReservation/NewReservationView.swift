@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct NewReservationView: View {
+    @Environment(\.dismiss) var dismiss
+    
     @StateObject var viewModel: NewReservationVM
     @StateObject var roomRepo: RoomRepo
     @StateObject var reservationRepo: RoomReservationsRepo
-    
-    @Binding var sheetIsPresented: Bool
     
     var problem: String? {
         if !viewModel.reservationInfosAreValid {
@@ -35,6 +35,11 @@ struct NewReservationView: View {
             }
             .navigationTitle("Reservierung")
             .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: viewModel.uploadingState) {
+                if $0 == .successful {
+                    dismiss()
+                }
+            }
         }
     }
     
@@ -92,8 +97,7 @@ struct NewReservationView: View {
                                 RoomRowView(
                                     room: room,
                                     currentReservations: reservationRepo.reservations(forRoomId: room.id),
-                                    viewModel: viewModel,
-                                    sheetIsPresented: $sheetIsPresented
+                                    viewModel: viewModel
                                 )
                             }
                             .disabled(!viewModel.reservationInfosAreValid || !viewModel.reservationTimeIsPossible)
@@ -112,13 +116,12 @@ struct NewReservationView: View {
     }
     
     // MARK: - Init
-    init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail, sheetIsPresented: Binding<Bool>) {
+    init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail) {
         let viewModel = NewReservationVM(restaurant: restaurant, yelpRestaurant: yelpRestaurant)
         
         self._viewModel = StateObject(wrappedValue: viewModel)
         self._roomRepo = StateObject(wrappedValue: RoomRepo(restaurant: restaurant))
         self._reservationRepo = StateObject(wrappedValue: RoomReservationsRepo(reservationVM: viewModel))
-        self._sheetIsPresented = sheetIsPresented
     }
     
     // MARK: - Example Init
@@ -126,7 +129,6 @@ struct NewReservationView: View {
         self._viewModel = StateObject(wrappedValue: NewReservationVM.example)
         self._roomRepo = StateObject(wrappedValue: RoomRepo.example)
         self._reservationRepo = StateObject(wrappedValue: RoomReservationsRepo.example)
-        self._sheetIsPresented = .constant(true)
     }
 }
 

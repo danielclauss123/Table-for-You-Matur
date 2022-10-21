@@ -18,8 +18,7 @@ class NewReservationVM: ObservableObject {
     @Published var roomId: String?
     @Published var table: Table?
     
-    @Published var successfulUpload = false
-    @Published var showingErrorAlert = false
+    @Published var uploadingState = UploadingState.inProgress
     @Published var errorMessage: String?
     
     let restaurant: Restaurant
@@ -49,6 +48,15 @@ class NewReservationVM: ObservableObject {
         return true
     }
     
+    var errorAlertIsPresented: Binding<Bool> {
+        Binding<Bool> {
+            self.uploadingState == .failed
+        } set: {
+            self.uploadingState = $0 ? .failed : .inProgress
+        }
+
+    }
+    
     // MARK: - Init
     init(restaurant: Restaurant, yelpRestaurant: YelpRestaurantDetail) {
         self.restaurant = restaurant
@@ -61,43 +69,43 @@ class NewReservationVM: ObservableObject {
         
         guard UserReservationsRepo.shared.currentReservations.count < 3 else {
             errorMessage = "Du kannst maximal drei anstehende Reservierungen haben."
-            showingErrorAlert = true
+            uploadingState = .failed
             return
         }
         
         guard !UserReservationsRepo.shared.currentReservations.contains(where: { $0.restaurantId == restaurant.id }) else {
             errorMessage = "Du kannst nur eine anstehende Reservierung pro Restaurant haben."
-            showingErrorAlert = true
+            uploadingState = .failed
             return
         }
         
         guard noUserReservationOnTime else {
             errorMessage = "Du kannst nicht zwei Reservierungen zur gleichen Zeit haben."
-            showingErrorAlert = true
+            uploadingState = .failed
             return
         }
         
         guard reservationInfosAreValid else {
             errorMessage = "Die eingegebenen Informationen sind falsch oder unvollständig."
-            showingErrorAlert = true
+            uploadingState = .failed
             return
         }
         
         guard reservationTimeIsPossible else {
             errorMessage = "Zur eingegebenen Zeit ist keine Reservierung möglich."
-            showingErrorAlert = true
+            uploadingState = .failed
             return
         }
         
         guard let roomId = roomId, let table = table else {
             errorMessage = "Kein Tisch ausgewählt. Wähle einen aus und versuche es erneut."
-            showingErrorAlert = true
+            uploadingState = .failed
             return
         }
         
         guard SCNetworkConnection.isConnectedToNetwork() else {
             errorMessage = "Keine Internet Verbindung."
-            showingErrorAlert = true
+            uploadingState = .failed
             return
         }
         
@@ -109,11 +117,13 @@ class NewReservationVM: ObservableObject {
             try SCNetworkConnection.checkConnection()
             
             try reservation.setToFirestore()
+            
+            uploadingState = .successful
         } catch {
             print("Failed to upload reservation to firestore: \(error.localizedDescription)")
             
             errorMessage = "Hochladen der Reservierung ist fehlgeschlagen."
-            showingErrorAlert = true
+            uploadingState = .failed
         }
     }
     
