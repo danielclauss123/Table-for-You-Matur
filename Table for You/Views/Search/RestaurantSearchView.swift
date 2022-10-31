@@ -15,22 +15,18 @@ struct RestaurantSearchView: View {
     
     // MARK: - Body
     var body: some View {
-        NavigationView {
-            ZStack {
-                RestaurantsMapView(selectedRestaurant: $selectedRestaurant, centerCoordinate: $mapCenter, restaurants: restaurantRepo.searchedRestaurants)
-                    .ignoresSafeArea()
-                
-                RestaurantSearchSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo, mapCenter: mapCenter)
-                    .zIndex(selectedRestaurant == nil ? 1 : 0) // TODO: This makes the animation not as nice, so maybe find different solution.
-                
-                RestaurantDetailSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo)
-            }
-            .navigationTitle("Restaurant Suche")
-            .navigationBarHidden(true)
-            .onReceive(locationSearcher.$coordinate) { coordinate in
-                guard let coordinate = coordinate else { return }
-                mapCenter = coordinate
-            }
+        ZStack {
+            RestaurantsMapView(selectedRestaurant: $selectedRestaurant, centerCoordinate: $mapCenter, restaurants: restaurantRepo.searchedRestaurants)
+                .ignoresSafeArea()
+            
+            RestaurantSearchSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo, mapCenter: mapCenter)
+                .zIndex(selectedRestaurant == nil ? 1 : 0) // TODO: This makes the animation not as nice, so maybe find different solution.
+            
+            RestaurantDetailSheet(selectedRestaurant: $selectedRestaurant, restaurantRepo: restaurantRepo)
+        }
+        .onReceive(locationSearcher.$coordinate) { coordinate in
+            guard let coordinate = coordinate else { return }
+            mapCenter = coordinate
         }
     }
     
