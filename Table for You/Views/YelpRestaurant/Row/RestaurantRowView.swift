@@ -28,6 +28,7 @@ struct RestaurantRowView: View {
                         Text(restaurant.name)
                             .font(.title3.bold())
                             .foregroundColor(.primary)
+                            .multilineTextAlignment(.leading)
                         
                         openingHours
                         
