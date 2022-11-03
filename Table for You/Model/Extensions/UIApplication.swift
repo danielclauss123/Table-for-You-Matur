@@ -6,7 +6,7 @@
  */
 
 import Foundation
-import UIKit
+import SwiftUI
 
 extension UIApplication {
     /// Calls the given phone number.

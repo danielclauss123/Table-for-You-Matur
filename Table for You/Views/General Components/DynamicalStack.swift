@@ -42,7 +42,7 @@ struct DynamicalStack_Previews: PreviewProvider {
         var body: some View {
             DynamicalStack(isHorizontal ? .horizontal : .vertical) {
                 Text("Hello")
-                Text("Swiftui")
+                Text("SwiftUI")
                 Button("Tap me") {
                     isHorizontal.toggle()
                 }

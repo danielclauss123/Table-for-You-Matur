@@ -8,18 +8,12 @@ struct ReservationDetailView: View {
     
     var body: some View {
         ScrollView {
-            switch viewModel.loadingStatus {
-            case .loading:
-                ProgressView()
-            case .error(let message):
-                Text(message)
-            case .ready:
-                content
-            }
+            content
         }
+        .frame(maxWidth: .infinity)
         .navigationTitle("Reservation \(restaurant.name)")
         .navigationBarTitleDisplayMode(.inline)
-        .background(Color(uiColor: .secondarySystemBackground).ignoresSafeArea())
+        .background(.regularMaterial)
     }
     
     init(reservation: Reservation, restaurant: YelpRestaurantDetail) {
@@ -30,16 +24,66 @@ struct ReservationDetailView: View {
     
     var content: some View {
         VStack {
-            if let room = viewModel.room {
-                InsetScrollViewSection(title: room.name) {
-                    RoomReservedTableView(room: room, reservedTableId: reservation.tableId)
-                        .frame(height: 300)
+            AsyncImage(url: URL(string: restaurant.imageUrl ?? "")) { image in
+                image
+                    .resizable()
+                    .scaledToFit()
+            } placeholder: {
+                Image.defaultPlaceholder()
+                    .font(.largeTitle)
+                    .aspectRatio(4 / 3, contentMode: .fit)
+            }
+            .cornerRadius(10)
+            .frame(height: 270)
+            
+            InsetScrollViewSection(title: "Daten") {
+                HStack {
+                    VStack(alignment: .leading) {
+                        HStack(spacing: 0) {
+                            Text(reservation.date, style: .time)
+                            +
+                            Text(", ")
+                            
+                            Text(reservation.date, style: .date)
+                        }
+                        .bold()
+                        
+                        Text("**\(reservation.numberOfPeople) \(reservation.numberOfPeople == 1 ? "Person" : "Personen")**")
+                        +
+                        Text(" unter \(reservation.customerName)")
+                    }
+                    Spacer()
                 }
-            } else {
-                Text("No Room")
+            }
+            
+            InsetScrollViewSection(title: "Tisch") {
+                switch viewModel.loadingStatus {
+                case .loading:
+                    ProgressView()
+                case .error(let message):
+                    Text(message)
+                case .ready:
+                    if let room = viewModel.room {
+                        VStack(alignment: .leading) {
+                            Text("\(room.name)")
+                                .bold()
+                            
+                            RoomReservedTableView(room: room, reservedTableId: reservation.tableId)
+                                .frame(height: 270)
+                        }
+                    } else {
+                        Text("No Room")
+                    }
+                }
             }
             
             RestaurantDetailSheet.MapAndAddressView(restaurant: restaurant, distance: .constant(nil))
+            
+            if let phone = restaurant.phone, let displayPhone = restaurant.displayPhone {
+                RestaurantDetailSheet.ContactView(phone: phone, displayPhone: displayPhone)
+            }
+            
+            RestaurantDetailSheet.CreditView(yelpURL: restaurant.yelpURL)
         }
         .padding(.horizontal)
     }

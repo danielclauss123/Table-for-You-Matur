@@ -18,6 +18,12 @@ class ReservationDetailVM: ObservableObject {
         loadRoom()
     }
     
+    // MARK: Example Init
+    init(reservation: Reservation, room: Room) {
+        self.reservation = reservation
+        self.room = room
+    }
+    
     private func loadRoom() {
         loadingStatus = .loading
         

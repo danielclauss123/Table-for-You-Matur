@@ -529,9 +529,9 @@
 			isa = PBXGroup;
 			children = (
 				7E819B1828A188EE00B67BAA /* NewReservationView.swift */,
-				7E819B0C28A188EE00B67BAA /* Room */,
 				7E155D1A28A27AAC00ED9C79 /* ReservationConfirmationView.swift */,
 				7E819B1428A188EE00B67BAA /* ViewModel */,
+				7E819B0C28A188EE00B67BAA /* Room */,
 			);
 			path = NewReservation;
 			sourceTree = "<group>";

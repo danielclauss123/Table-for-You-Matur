@@ -21,7 +21,7 @@ struct SafeAreaBottomInset_Previews: PreviewProvider {
         Color.blue
             .ignoresSafeArea()
             .safeAreaBottomInset {
-                Text("asdfasdfasf")
+                Text("Hello World!")
             }
     }
 }

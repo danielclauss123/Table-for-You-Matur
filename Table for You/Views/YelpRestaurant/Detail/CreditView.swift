@@ -4,15 +4,15 @@ extension RestaurantDetailSheet {
     struct CreditView: View {
         let yelpURL: URL
         
+        var text: String {
+            "Die Restaurant Informationen wurden von Yelp zur verfügung gestellt. **[Mehr auf Yelp](\(yelpURL.absoluteString))**"
+        }
+        
         // MARK: - Body
         var body: some View {
-            VStack(alignment: .leading) {
-                Text("Die Restaurant Informationen wurden von Yelp zur verfügung gestellt.")
-                    .foregroundColor(.secondary)
-                    .font(.subheadline)
-                Link("Mehr auf Yelp", destination: yelpURL)
-                    .font(.subheadline.bold())
-            }
+            Text(.init(text))
+                .foregroundColor(.secondary)
+                .font(.subheadline)
         }
     }
 }
