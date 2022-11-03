@@ -21,7 +21,7 @@ class RestaurantRepo: ObservableObject {
     private var lastCoordinateUpdate: CLLocationCoordinate2D?
     
     var searchedRestaurants: [YelpRestaurantDetail] {
-        yelpRestaurants.filter { $0.name.lowercased().hasPrefix(searchText.lowercased()) }
+        yelpRestaurants.filter { $0.name.lowercased().contains(searchText.lowercased()) }
             .sorted(by: { $0.name < $1.name })
     }
     
