@@ -100,7 +100,7 @@ struct NewReservationView: View {
                                     viewModel: viewModel
                                 )
                             }
-                            .disabled(!viewModel.reservationInfosAreValid || !viewModel.reservationTimeIsPossible)
+                            .disabled(!viewModel.reservationInfosAreValid || !viewModel.reservationTimeIsPossible || !viewModel.noUserReservationOnTime)
                         }
                     }
             }
