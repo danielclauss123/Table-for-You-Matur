@@ -59,6 +59,23 @@ extension YelpRestaurantDetail {
     static let examples = [fullExample1, lackingExample, fullExample2]
     
     static let fullExample1 = YelpRestaurantDetail(
+        id: "az5EAlpVe5ZdGZjRAbD8_Q",
+        name: "Chickeria",
+        imageUrl: "https://s3-media2.fl.yelpcdn.com/bphoto/NqJm3FHLbn75VfwSA5usGQ/o.jpg",
+        isClosed: Optional(false),
+        url: "https://www.yelp.com/biz/chickeria-winterthur?adjust_creative=7tlFxNcWTnCCe1hpkqPGpA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_lookup&utm_source=7tlFxNcWTnCCe1hpkqPGpA",
+        phone: Optional("+41523034690"),
+        displayPhone: Optional("+41 52 303 46 90"),
+        reviewCount: Optional(2),
+        rating: Optional(3.5),
+        location: Optional(Table_for_You.YelpLocation(address1: Optional("Unterer Graben 33"), city: Optional("Winterthur"), zipCode: Optional("8400"), state: Optional("ZH"), displayAddress: Optional(["Unterer Graben 33", "8400 Winterthur", "Switzerland"]))), coordinates: Table_for_You.Coordinate(latitude: 47.499836086969, longitude: 8.73099441918197),
+        photos: Optional(["https://s3-media2.fl.yelpcdn.com/bphoto/NqJm3FHLbn75VfwSA5usGQ/o.jpg", "https://s3-media3.fl.yelpcdn.com/bphoto/MNaoNFNI3iyZJlPuhvyW1Q/o.jpg", "https://s3-media2.fl.yelpcdn.com/bphoto/ARwV07bImCW6SCQrTkcI2g/o.jpg"]),
+        price: nil,
+        hours: Optional([Table_for_You.OpeningHours(isOpenNow: true, open: [Table_for_You.DayHours(isOvernight: false, start: "1000", end: "2100", day: 0), Table_for_You.DayHours(isOvernight: false, start: "1000", end: "2100", day: 1), Table_for_You.DayHours(isOvernight: false, start: "1000", end: "2100", day: 2), Table_for_You.DayHours(isOvernight: false, start: "1000", end: "2100", day: 3), Table_for_You.DayHours(isOvernight: false, start: "1000", end: "2100", day: 4), Table_for_You.DayHours(isOvernight: false, start: "1000", end: "2100", day: 5), Table_for_You.DayHours(isOvernight: false, start: "1100", end: "2000", day: 6)])]),
+        specialHours: nil
+    )
+    
+    static let fullExample2 = YelpRestaurantDetail(
         id: "h2eeVnhUL8zEbTnUrjJomw",
         name: "Restaurant Hirschli",
         imageUrl: "https://s3-media2.fl.yelpcdn.com/bphoto/3z8n_I2Jw9acNH9GVDWpDQ/o.jpg",
@@ -76,7 +93,7 @@ extension YelpRestaurantDetail {
         specialHours: []
     )
     
-    static let fullExample2 = YelpRestaurantDetail(
+    static let fullExample3 = YelpRestaurantDetail(
         id: UUID().uuidString,
         name: "Kafisatz",
         imageUrl: "https://s3-media0.fl.yelpcdn.com/bphoto/b65JHPl73YODrcKlGxvPRg/o.jpg",
