@@ -15,6 +15,8 @@ struct Reservation: Identifiable, Codable, Hashable {
     var tableId: String
     
     var date: Date
+    
+    
 }
 
 // MARK: - Computed Properties
