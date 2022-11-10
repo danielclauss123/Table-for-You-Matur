@@ -18,6 +18,7 @@
 		7E537C7A2901E08900314FF5 /* RoomReservedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E537C792901E08900314FF5 /* RoomReservedTableView.swift */; };
 		7E5B861328FE9C04000FC7BF /* ReservationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5B861228FE9C04000FC7BF /* ReservationDetailView.swift */; };
 		7E5EBD6328BA658200D9C213 /* AllOpeningHoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E5EBD6228BA658200D9C213 /* AllOpeningHoursView.swift */; };
+		7E7CAD92291D72E400D3A7AE /* TestFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E7CAD91291D72E400D3A7AE /* TestFile.swift */; };
 		7E819AA0289FDE8200B67BAA /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 7E819A9F289FDE8200B67BAA /* Algorithms */; };
 		7E819AA3289FE33900B67BAA /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 7E819AA2289FE33900B67BAA /* FirebaseAnalytics */; };
 		7E819AA5289FE33900B67BAA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7E819AA4289FE33900B67BAA /* FirebaseAuth */; };
@@ -115,6 +116,7 @@
 		7E537C792901E08900314FF5 /* RoomReservedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomReservedTableView.swift; sourceTree = "<group>"; };
 		7E5B861228FE9C04000FC7BF /* ReservationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDetailView.swift; sourceTree = "<group>"; };
 		7E5EBD6228BA658200D9C213 /* AllOpeningHoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllOpeningHoursView.swift; sourceTree = "<group>"; };
+		7E7CAD91291D72E400D3A7AE /* TestFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFile.swift; sourceTree = "<group>"; };
 		7E819AAA289FE51B00B67BAA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7E819AAF28A187D100B67BAA /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		7E819AB128A187D100B67BAA /* TableUIFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableUIFunctions.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			children = (
 				7E819ACA28A187D100B67BAA /* Restaurant.swift */,
 				7E819AC928A187D100B67BAA /* Reservation.swift */,
+				7E7CAD91291D72E400D3A7AE /* TestFile.swift */,
 				7E819AAE28A187D100B67BAA /* Room */,
 				7E819AB328A187D100B67BAA /* Yelp */,
 				7E819ABB28A187D100B67BAA /* Location */,
@@ -696,6 +699,7 @@
 				7E537C7A2901E08900314FF5 /* RoomReservedTableView.swift in Sources */,
 				7E819B3028A188EE00B67BAA /* RestaurantAnnotationViews.swift in Sources */,
 				7E819ADB28A187D100B67BAA /* String.swift in Sources */,
+				7E7CAD92291D72E400D3A7AE /* TestFile.swift in Sources */,
 				7E09125028DF79930062152F /* RestaurantsMapView.swift in Sources */,
 				7E819AD228A187D100B67BAA /* YelpRestaurants.swift in Sources */,
 				7E819AD728A187D100B67BAA /* Date.swift in Sources */,
