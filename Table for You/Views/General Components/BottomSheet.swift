@@ -26,7 +26,7 @@ struct BottomSheet<Background: ShapeStyle, Header: View, Content: View>: View {
     @ViewBuilder var header: () -> Header
     @ViewBuilder var content: () -> Content
     
-    @State private var minHeight = 100.0
+    @State private var minHeight = 0.0
     @GestureState private var translation = 0.0
     
     // MARK: - Body
@@ -58,8 +58,6 @@ struct BottomSheet<Background: ShapeStyle, Header: View, Content: View>: View {
                     Spacer()
                         .frame(height: min(currentStatusOffset(in: geometry), geometry.size.height - minHeight))
                 }
-                
-                Spacer()
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
             .background {
@@ -68,7 +66,7 @@ struct BottomSheet<Background: ShapeStyle, Header: View, Content: View>: View {
                     .ignoresSafeArea(.all, edges: .bottom)
                     .shadow(radius: sheetStatus == .hidden ? 0 : 2)
             }
-            .offset(y: max(currentStatusOffset(in: geometry) + translation, 0))
+            .offset(y: currentStatusOffset(in: geometry))
             .animation(.bottomSheet, value: translation)
             .animation(.bottomSheet, value: sheetStatus)
             .gesture(
@@ -128,7 +126,7 @@ struct BottomSheet<Background: ShapeStyle, Header: View, Content: View>: View {
     func statusOffset(_ status: BottomSheetStatus, in geometry: GeometryProxy) -> Double {
         switch status {
             case .up:
-                return 10
+            return min(10, geometry.size.height - minHeight)
             case .middle:
                 return min(geometry.size.height * 0.6, geometry.size.height - minHeight)
             case .down:
@@ -139,7 +137,7 @@ struct BottomSheet<Background: ShapeStyle, Header: View, Content: View>: View {
     }
     
     func currentStatusOffset(in geometry: GeometryProxy) -> Double {
-        statusOffset(sheetStatus, in: geometry)
+        max(statusOffset(sheetStatus, in: geometry) + translation, 0)
     }
     
     func callHeightsAfterStatusUpdate(in geometry: GeometryProxy) {

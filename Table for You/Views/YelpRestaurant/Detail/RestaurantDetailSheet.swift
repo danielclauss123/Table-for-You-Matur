@@ -17,8 +17,6 @@ struct RestaurantDetailSheet: View {
                 content(restaurant: selectedRestaurant)
             }
         }
-        .navigationTitle(selectedRestaurant?.name ?? "")
-        .navigationBarHidden(true)
     }
     
     // MARK: - Header
@@ -55,39 +53,42 @@ struct RestaurantDetailSheet: View {
     func content(restaurant: YelpRestaurantDetail) -> some View {
         ScrollView {
             ScrollViewReader { proxy in
-                PhotosView(photoURLs: restaurant.photos ?? [])
-                
-                OverviewRowView(restaurant: restaurant, distance: distance) { type in
-                    withAnimation {
-                        proxy.scrollTo(type)
-                    }
-                }
-                
-                VStack(alignment: .leading, spacing: 20) {
-                    ReserveButton(yelpRestaurant: restaurant, restaurant: restaurantRepo.restaurant(forYelpId: restaurant.id))
+                VStack(spacing: 0) {
+                    PhotosView(photoURLs: restaurant.photos ?? [])
                     
-                    if let openingHours = restaurant.openingHours {
-                        InsetScrollViewSection(title: "Öffnungszeiten") {
-                            OpeningHoursView(openingHours: openingHours)
+                    OverviewRowView(restaurant: restaurant, distance: distance) { type in
+                        withAnimation {
+                            proxy.scrollTo(type)
                         }
-                        .id(OverviewRowView.InformationType.openingHours)
                     }
+                    .padding(.top)
                     
-                    if let rating = restaurant.rating, let reviewCount = restaurant.reviewCount {
-                        RatingView(rating: rating, reviewCount: reviewCount, yelpURL: restaurant.yelpURL)
-                            .id(OverviewRowView.InformationType.rating)
+                    VStack(alignment: .leading, spacing: 20) {
+                        ReserveButton(yelpRestaurant: restaurant, restaurant: restaurantRepo.restaurant(forYelpId: restaurant.id))
+                        
+                        if let openingHours = restaurant.openingHours {
+                            InsetScrollViewSection(title: "Öffnungszeiten") {
+                                OpeningHoursView(openingHours: openingHours)
+                            }
+                            .id(OverviewRowView.InformationType.openingHours)
+                        }
+                        
+                        if let rating = restaurant.rating, let reviewCount = restaurant.reviewCount {
+                            RatingView(rating: rating, reviewCount: reviewCount, yelpURL: restaurant.yelpURL)
+                                .id(OverviewRowView.InformationType.rating)
+                        }
+                        
+                        MapAndAddressView(restaurant: restaurant, distance: $distance)
+                            .id(OverviewRowView.InformationType.distance)
+                        
+                        if let displayPhone = restaurant.displayPhone, let phone = restaurant.phone {
+                            ContactView(phone: phone, displayPhone: displayPhone)
+                        }
+                        
+                        CreditView(yelpURL: restaurant.yelpURL)
                     }
-                    
-                    MapAndAddressView(restaurant: restaurant, distance: $distance)
-                        .id(OverviewRowView.InformationType.distance)
-                    
-                    if let displayPhone = restaurant.displayPhone, let phone = restaurant.phone {
-                        ContactView(phone: phone, displayPhone: displayPhone)
-                    }
-                    
-                    CreditView(yelpURL: restaurant.yelpURL)
+                    .padding()
                 }
-                .padding([.horizontal, .bottom])
             }
         }
     }
