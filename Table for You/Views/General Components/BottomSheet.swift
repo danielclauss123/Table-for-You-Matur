@@ -42,12 +42,22 @@ struct BottomSheet<Background: ShapeStyle, Header: View, Content: View>: View {
                     
                     Divider()
                 }
-                .anchorPreference(key: HeaderPreferenceKey.self, value: .bounds) { [HeaderPreferenceData(bounds: $0)]
+                .anchorPreference(key: HeaderPreferenceKey.self, value: .bounds) {
+                    [HeaderPreferenceData(bounds: $0)]
                 }
                 
-                content()
-                    .clipped()
-                    //.disabled(sheetStatus == .middle || sheetStatus == .down)
+                VStack(spacing: 0) {
+                    // The overlay is necessary, so that the Spacer always gets his space. Otherwise, Views like Text  didn't "shrunk", because they had a fixed size. This lead to unwanted, ugly UI.
+                    Color.clear
+                        .overlay {
+                            content()
+                        }
+                        .frame(maxHeight: .infinity)
+                        .clipped()
+                    
+                    Spacer()
+                        .frame(height: min(currentStatusOffset(in: geometry), geometry.size.height - minHeight))
+                }
                 
                 Spacer()
             }
@@ -70,26 +80,26 @@ struct BottomSheet<Background: ShapeStyle, Header: View, Content: View>: View {
                         let translation = value.translation.height
                         
                         switch sheetStatus {
-                            case .up:
-                                if translation > statusOffset(.middle, in: geometry) - 50 {
-                                    sheetStatus = .down
-                                } else if translation > 50 {
-                                    sheetStatus = .middle
-                                }
-                            case .middle:
-                                if translation > 50 {
-                                    sheetStatus = .down
-                                } else if translation < -50 {
-                                    sheetStatus = .up
-                                }
-                            case .down:
-                                if translation < statusOffset(.middle, in: geometry) - geometry.size.height + 50 {
-                                    sheetStatus = .up
-                                } else if translation < -50 {
-                                    sheetStatus = .middle
-                                }
-                            case .hidden:
-                                sheetStatus = .hidden // This case should not be possible.
+                        case .up:
+                            if translation > statusOffset(.middle, in: geometry) + 10 {
+                                sheetStatus = .down
+                            } else if translation > 50 {
+                                sheetStatus = .middle
+                            }
+                        case .middle:
+                            if translation > 50 {
+                                sheetStatus = .down
+                            } else if translation < -50 {
+                                sheetStatus = .up
+                            }
+                        case .down:
+                            if translation < statusOffset(.middle, in: geometry) - geometry.size.height - 10 {
+                                sheetStatus = .up
+                            } else if translation < -50 {
+                                sheetStatus = .middle
+                            }
+                        default:
+                            sheetStatus = .hidden
                         }
                     }
             )

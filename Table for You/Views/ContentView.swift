@@ -6,10 +6,22 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            RestaurantSearchView()
-                .tabItem {
-                    Label("Suchen", systemImage: "magnifyingglass")
+            GeometryReader { geometry in
+                VStack(spacing: 0) {
+                    RestaurantSearchView()
+                    
+                    VStack(spacing: 0) {
+                        Divider()
+                        
+                        Rectangle().fill(.regularMaterial)
+                    }
+                    .frame(height: geometry.safeAreaInsets.bottom)
                 }
+                .ignoresSafeArea(edges: .bottom)
+            }
+            .tabItem {
+                Label("Suchen", systemImage: "magnifyingglass")
+            }
             
             UserReservationsView()
                 .tabItem {
