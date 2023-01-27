@@ -97,13 +97,21 @@ extension RestaurantsMapView {
         
         func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
             if let annotation = view.annotation as? RestaurantAnnotation {
-                parent.selectedRestaurant = annotation.restaurant
+                Task {
+                    await MainActor.run {
+                        parent.selectedRestaurant = annotation.restaurant
+                    }
+                }
             }
         }
         
         func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
             if (view.annotation as? RestaurantAnnotation)?.restaurant == parent.selectedRestaurant {
-                parent.selectedRestaurant = nil
+                Task {
+                    await MainActor.run {
+                        parent.selectedRestaurant = nil
+                    }
+                }
             }
         }
         
